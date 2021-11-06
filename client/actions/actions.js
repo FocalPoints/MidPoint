@@ -7,9 +7,9 @@ import * as types from '../constants/actionTypes';
 //   payload: {user,pass)
 // });
 
-export const logIn = data => ({
+export const logIn = (user, pass) => ({
   type: types.LOG_IN,
-  payload: data,
+  payload: {user, pass},
 });
 
 export const signUp = () => ({
