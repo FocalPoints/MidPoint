@@ -2,26 +2,37 @@ const express = require('express');
 const databaseController = require('../controllers/databaseController');
 const router = express.Router();
 
-// get list of all users
-router.get('/', databaseController.getAllOtherUsers, (req, res) => {
-  return res.status(200).json(res.locals.users);
-})
-
-// post a new user (encrypt password)
-router.post('/', databaseController.addUser, (req, res) => {
+// get/verify current  user
+router.get('/', dbController.verifyUser, (req, res) => {
   return res.status(200).json(res.locals.user);
 });
 
-// verify a single user
-router.get('/', databaseController.verifyUser, (req, res) => {
-  return res.status(200).json(res.locals.user)
+// post/create a new user (encrypt password)
+router.post('/', dbController.addUser, (req, res) => {
+  return res.status(200).json(res.locals.user);
+});
+
+// put/update current user's data (location, interests)
+router.put('/', dbController.updateUser, (req, res) => {
+  return res.status(200).json(res.locals.user);
 })
-// update a user
 
-// get a list of all friends of one user
+// list of current user's friends
+router.get('/', dbController.getList, (req, res) => {
+  return res.status(200).json(res.locals.users);
+})
 
-// get a pair of users and their coordinates
+// get a user from list of friends
+router.get('/', dbController.getFriend, (req, res) => {
+  return res.status(200).json(res.locals.user);
+})
 
-// post to friends table with user1_id: current user, user2_id, selected user
+// TODOS //
+
+// add/get/post user to friend list
+
+// delete/remove user from friend list
+
+// ???? post to friends table with user1_id: current user, user2_id, selected user
 
 module.exports = router;
