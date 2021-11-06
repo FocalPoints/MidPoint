@@ -16,6 +16,11 @@ export const signUp = () => ({
   type: types.SIGN_UP,
 });
 
+export const signUpUser = (user,pass,lat,lng) => ({
+  type: types.SIGN_UP_USER,
+  payload: {user, pass, lat, lng},
+});
+
 export const signUpCancel = () => ({
     type: types.SIGN_UP_CANCEL,
   });

@@ -2,39 +2,47 @@ import React, { Component, useState } from 'react';
 import { BrowserRouter as Router, Route, Routes as Switch } from 'react-router-dom'
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import * as bootstrap from 'bootstrap';
 import * as actions from '../actions/actions';
-import Main from './Main'
+import Main from './Main';
 
 const mapStateToProps = ({
-   mainPage: { pageToDisplay , loggedIn } 
+   mainPage: { pageToDisplay , loggedIn , selfInfo} 
   }) => ({
   pageToDisplay,
-  loggedIn
+  loggedIn,
+  selfInfo,
 });
 
 const mapDispatchToProps = dispatch => ({
   signUp: () => dispatch(actions.signUp()),
   signUpCancel: () => dispatch(actions.signUpCancel()),
   logIn: (user,pass) => dispatch(actions.logIn(user,pass)),
+  signUpUser: (user,pass,lat,lng) => dispatch(actions.signUpUser(user,pass,lat,lng)),
 });
 
 
-const Access = ({pageToDisplay, loggedIn, signUp, signUpCancel, logIn}) => {
+const Access = ({pageToDisplay, loggedIn, signUp, signUpCancel, logIn, signUpUser, selfInfo}) => {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [lat, setLat] = useState('');
+  const [lng, setLng] = useState('');
+
 
   function onChangeHandler(event) {
       const { name, value } = event.currentTarget;
       if(name === "username") {
-          setUsername(value);
+        setUsername(value);
       } else if(name === 'password') {
-          setPassword(value);
+        setPassword(value);
+      } else if(name === 'lat') {
+        setLat(value);
+      } else if(name === 'lng') {
+        setLng(value);
       }
   }
 
-   // Logged In 
+    //  Logged In 
    if (loggedIn) {
       //<Link to="main">My Profile</Link>
     // <div id="access">>    
@@ -44,7 +52,7 @@ const Access = ({pageToDisplay, loggedIn, signUp, signUpCancel, logIn}) => {
     //         </Switch>
     //     </Router>
     // </div>
-    return (<Main />)
+    return (<Main {...selfInfo}/>)
   }
 
   // Log In Page
@@ -76,24 +84,20 @@ const Access = ({pageToDisplay, loggedIn, signUp, signUpCancel, logIn}) => {
   // Sign Up Page
   return (
     <div>
+
       <h1>sign-in Page</h1>
-        <input 
-          name="user" id="user"
-          value={username} 
-          //  onChange={(event) => onChangeHandler(event)} 
-          type="text" 
-          placeholder="Username">
-        </input> 
-        <input name="password" id="password" value={password} type="password" placeholder="Password"></input>
+
         
-        <button>Sign Up</button>
-        <button onClick={signUpCancel}>Cancel</button>
+        <input name="user" id="user" value={username} type="text" placeholder="Username" onChange={(event) => onChangeHandler(event)}></input> 
+        <input name="password" id="password" value={password} type="password" placeholder="Password" onChange={(event) => onChangeHandler(event)}></input>
+        <input name="lat" id="lat" value={lat} type="text" placeholder="40" onChange={(event) => onChangeHandler(event)}></input>
+        <input name="lng" id="lng" value={lng} type="text" placeholder="-74" onChange={(event) => onChangeHandler(event)}></input>
+
+        <button onClick={() => signUpUser(username,password,lat,lng)}>Create an account</button>
+        <button onClick={signUpCancel}>Cancel</button>  
     </div>
   );
 
-  
-    
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Access);
-

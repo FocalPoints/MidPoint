@@ -4,9 +4,8 @@ import Sidebar from './Sidebar'
 
 const Main = (props) => {
     return(
-      <div>
-        Logged in
-        <Sidebar />
+      <div style={{display: 'flex', flexDirection: 'row'}}>
+        <Sidebar {...props}/>
         <Map />
       </div>
     )
