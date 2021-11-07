@@ -9,7 +9,7 @@ router.get('/', dbController.verifyUser, (req, res) => {
 
 // post/create a new user (encrypt password)
 router.post('/', dbController.addUser, (req, res) => {
-  return res.status(200).json(res.locals.user);
+  return res.status(200).json(res.locals.user); //should it be 201?
 });
 
 // put/update current user's data (location, interests)

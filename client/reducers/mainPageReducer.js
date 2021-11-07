@@ -27,12 +27,26 @@ const mainPageReducer = (state = initialState, action) => {
       };
 
     case types.LOG_IN:
-      console.log("Login action type has been triggered")
-      // const body = {
-      //   path: '/login',
-      //   method: GET,
-      //   body: action.payload, // {user,pass}
-      // }
+
+    /*
+      Expects: req.body = {username, password}
+      Returns: {verified: bool, message: string, user: userObject}
+      User Object: {
+        user_id: int,
+        username: string,
+        password: string,
+        created_on: timestamp,
+        coordinate: {
+          lat: num,
+          lng: num
+        }
+      }
+    */
+      const body = {
+        path: '/database/login',
+        method: GET,
+        body: action.payload, // {user,pass}
+      }
 
       // axios.get(/(server endpoint), body).then(data => {})
 
@@ -73,7 +87,7 @@ const mainPageReducer = (state = initialState, action) => {
           selfInfo: tempObj,
         }
         
-        case types.GET_MIDPOINT:
+      case types.GET_MIDPOINT:
           console.log("midpoint case triggered")
 
         return {

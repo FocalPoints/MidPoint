@@ -1,9 +1,6 @@
 import * as types from '../constants/actionTypes';
+import axios from 'axios';
 
-export const logIn = (user, pass) => ({
-  type: types.LOG_IN,
-  payload: {user, pass},
-});
 
 export const signUp = () => ({
   type: types.SIGN_UP,
@@ -33,3 +30,44 @@ export const getMidpoint = (user, friendUser) => ({
 //     dispatch({ type: types.DELETE_CARD, payload: id });
 //   }
 // };
+
+
+export const logIn = (user, pass) => (dispatch) => {
+  const username = user;
+  const password = pass;
+  
+  const request = {
+    method: 'GET',
+    url: '/database/login',
+    data: {username, password}
+  }
+
+  axios.request(request).then((response) => {
+    if(response.status = 200) dispatch({
+      type: types.BUY_STOCK,
+      payload: response.data,
+    });
+  }).catch(console.error);
+};
+
+export const buyStock = () => (dispatch, getState) => {
+  // grab the symbol from state
+  const sym = getState().stocks.searchBar;
+  const user_id = getState().stocks.user_id;
+  // hit API to get current price of stock
+  const options = {
+    method: 'POST',
+    url: '/transaction',
+    data: {user_id},
+    params: {region: 'US', symbols: sym}
+  }
+  // make a post to the stocks database adding the stock name and current price
+  // make a post to the transactions database with the current user and the stock ID and time, sold price/sold time null
+  axios.request(options).then((response) => {
+    if(response.status = 201) dispatch({
+      type: types.BUY_STOCK,
+      payload: response.data,
+    });
+  }).catch(console.error);
+  // hit reducer to update state with the new query of all transactions...
+};
