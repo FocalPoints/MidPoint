@@ -1,5 +1,5 @@
 const db = require('../models/model');
-
+const bcrypt = require('bcryptjs');
 const dbController = {};
 
 // get / verify current user
@@ -34,8 +34,8 @@ dbController.verifyUser = async (req, res, next) => {
       return next();
     }
     const user = response.rows[0];
-    const resPW = user.password;
-    if (resPW !== password) {
+    const valid = await bcrypt.compare(password, user.password);
+    if (!valid) {
       res.status(401).send({
         verified: false,
         message: 'Invalid password!',
@@ -57,12 +57,24 @@ dbController.verifyUser = async (req, res, next) => {
 }
 
 // post/create a new user (encrypt password)
+/* 
+Expects: req.body: { username, password, coordinates }
+Returns: [{ user_id: int,
+  username: string,
+  password: string,
+  created_on: timestamp,
+  coordinate: {
+    lat: num,
+    lng: num }]
+*/
 dbController.addUser = async (req, res, next) => {
-  // declare a new user object with name, password, coords
-  const { username, password, coordinates } = req.body;
-  const query = `INSERT INTO users(username, password, coordinates) VALUES($1, $2, $3) RETURNING *`;
-  const values = [username, password, JSON.stringify(coordinates)];
   try {
+    // declare a new user object with name, password, coords
+  const { username, password, coordinates } = req.body;
+  const encrypted = await bcrypt.hash(password, 10);
+  console.log(encrypted);
+  const query = `INSERT INTO users(username, password, coordinates) VALUES($1, $2, $3) RETURNING *`;
+  const values = [username, encrypted, JSON.stringify(coordinates)];
     const response = await db.query(query, values);
     res.locals.user = response.rows;
     next();
@@ -70,6 +82,7 @@ dbController.addUser = async (req, res, next) => {
     return next(err);
   }
 }
+
 
 // TODO! FINISH THIS METHOD
 // PUT / update a user's data
@@ -135,5 +148,7 @@ dbController.getFriend = async (req, res, next) => {
 
 //   }
 // }
+
+
 
 module.exports = dbController;

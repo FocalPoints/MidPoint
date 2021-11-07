@@ -3,7 +3,7 @@ const dbController = require('../controllers/databaseController');
 const router = express.Router();
 
 // get/verify current  user
-router.get('/', dbController.verifyUser, (req, res) => {
+router.get('/login', dbController.verifyUser, (req, res) => {
   return res.status(201).json(res.locals.userObj);
 });
 
