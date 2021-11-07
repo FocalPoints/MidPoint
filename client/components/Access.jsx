@@ -1,27 +1,33 @@
-import React, { Component, useState } from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes as Switch } from 'react-router-dom'
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../actions/actions';
 import Main from './Main';
 
+// add friends list here
 const mapStateToProps = ({
-   mainPage: { pageToDisplay , loggedIn , selfInfo} 
+   mainPage: { pageToDisplay , loggedIn , selfInfo, friendsList, midpoint } 
   }) => ({
   pageToDisplay,
   loggedIn,
   selfInfo,
+  friendsList,
+  midpoint
 });
 
+// add change location button here
 const mapDispatchToProps = dispatch => ({
   signUp: () => dispatch(actions.signUp()),
   signUpCancel: () => dispatch(actions.signUpCancel()),
   logIn: (user,pass) => dispatch(actions.logIn(user,pass)),
   signUpUser: (user,pass,lat,lng) => dispatch(actions.signUpUser(user,pass,lat,lng)),
+  updateLocation: (address) => dispatch(actions.updateLocation(address)),
+  getMidpoint: (user, friendUser) => dispatch(actions.getMidpoint(user, friendUser))
 });
 
 
-const Access = ({pageToDisplay, loggedIn, signUp, signUpCancel, logIn, signUpUser, selfInfo}) => {
+const Access = ({pageToDisplay, loggedIn, signUp, signUpCancel, logIn, signUpUser, selfInfo, updateLocation, friendsList, getMidpoint, midpoint}) => {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -52,7 +58,7 @@ const Access = ({pageToDisplay, loggedIn, signUp, signUpCancel, logIn, signUpUse
     //         </Switch>
     //     </Router>
     // </div>
-    return (<Main {...selfInfo}/>)
+    return (<Main {...selfInfo} updateLocation={updateLocation} friendsList={friendsList} getMidpoint={getMidpoint} midpoint={midpoint}/>)
   }
 
   // Log In Page
