@@ -1,28 +1,28 @@
 const express = require('express');
-const databaseController = require('../controllers/databaseController');
+const dbController = require('../controllers/databaseController');
 const router = express.Router();
 
 // get/verify current  user
 router.get('/', dbController.verifyUser, (req, res) => {
-  return res.status(200).json(res.locals.user);
+  return res.status(201).json(res.locals.userObj);
 });
 
 // post/create a new user (encrypt password)
 router.post('/', dbController.addUser, (req, res) => {
-  return res.status(200).json(res.locals.user);
+  return res.status(201).json(res.locals.user);
 });
 
 // put/update current user's data (location, interests)
-router.put('/', dbController.updateUser, (req, res) => {
-  return res.status(200).json(res.locals.user);
-})
+// router.put('/', dbController.updateUser, (req, res) => {
+//   return res.status(201).json(res.locals.user);
+// })
 
 // list of current user's friends
-router.get('/', dbController.getList, (req, res) => {
+router.get('/friends', dbController.getList, (req, res) => {
   return res.status(200).json(res.locals.users);
 })
 
-// get a user from list of friends
+// get a pair of users from list of friends
 router.get('/', dbController.getFriend, (req, res) => {
   return res.status(200).json(res.locals.user);
 })
