@@ -42,24 +42,16 @@ const mainPageReducer = (state = initialState, action) => {
         }
       }
     */
-      const body = {
-        path: '/database/login',
-        method: GET,
-        body: action.payload, // {user,pass}
-      }
+      console.log('Login action type has been triggered')
+      console.log(action.payload)
 
-      // axios.get(/(server endpoint), body).then(data => {})
-
-      // DB res back with all of data, use the data to change the state.
-      // return statement should go inside the .then
-      //server will res back with an object that has a boolean value and a msg
       return {
         ...state,
         loggedIn: true, // obj.booleanValue
       };
 
       case types.SIGN_UP_USER:
-        console.log("Login action type has been triggered")
+        console.log("SIGN_UP_USER action type has been triggered")
       // const body = {
       //   path: '/signup',
       //   method: POST,

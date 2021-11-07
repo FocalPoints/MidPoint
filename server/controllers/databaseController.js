@@ -18,10 +18,13 @@ User Object: {
 }
 */
 dbController.verifyUser = async (req, res, next) => {
-  const { username, password } = req.body;
+  const { username, password } = req.query;
   // if username / password is empty string / not a string throw error
   const query = `SELECT * FROM users WHERE users.username = $1`
   const values = [username];
+
+  console.log('Query', req.query);
+
   try {
     // send data via res locals
     const response = await db.query(query, values);
