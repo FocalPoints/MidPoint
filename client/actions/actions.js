@@ -1,16 +1,43 @@
 import * as types from '../constants/actionTypes';
 import axios from 'axios';
 
+export const logIn = (username, password) => (dispatch) => {
 
+  const request = {
+    method: 'GET',
+    url: '/database/login',
+    params: {username, password}
+  }
+ 
+  axios.request(request).then((response) => {
+    if(response.status = 201) dispatch({
+      type: types.LOG_IN,
+      payload: response.data,
+    });
+  }).catch(console.error);
+};
 
-export const signUp = () => ({
-  type: types.SIGN_UP,
+export const pageToSignup = () => ({
+  type: types.PAGE_TO_SIGN_UP,
 });
 
-export const signUpUser = (user,pass,lat,lng) => ({
-  type: types.SIGN_UP_USER,
-  payload: {user, pass, lat, lng},
-});
+export const signUpUser = (username, password, lat,lng) => (dispatch) => {
+  const coordinates = {lat, lng}  
+  
+  const request = {
+      method: 'POST',
+      url: '/database/signup',
+      params: {username, password, coordinates}
+    }
+   
+    axios.request(request).then((response) => {
+      if(response.status = 201) dispatch({
+        type: types.SIGN_UP_USER,
+        payload: response.data,
+      });
+    }).catch(console.error);
+};
+
 
 export const signUpCancel = () => ({
   type: types.SIGN_UP_CANCEL,
@@ -33,21 +60,7 @@ export const getMidpoint = (user, friendUser) => ({
 // };
 
 
-export const logIn = (username, password) => (dispatch) => {
-  
-  const request = {
-    method: 'GET',
-    url: '/database/login',
-    params: {username, password}
-  }
- 
-  axios.request(request).then((response) => {
-    if(response.status = 201) dispatch({
-      type: types.LOG_IN,
-      payload: response.data,
-    });
-  }).catch(console.error);
-};
+
 
 // export const buyStock = () => (dispatch, getState) => {
 //   // grab the symbol from state

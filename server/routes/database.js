@@ -4,12 +4,12 @@ const router = express.Router();
 
 // get/verify current  user
 router.get('/login', dbController.verifyUser, (req, res) => {
-  return res.status(201).json(res.locals.userObj);
+  return res.status(200).json(res.locals.userObj);
 });
 
 // post/create a new user (encrypt password)
-router.post('/', dbController.addUser, (req, res) => {
-  return res.status(201).json(res.locals.user);
+router.post('/signup', dbController.addUser, (req, res) => {
+  return res.status(201).json(res.locals.userObj);
 });
 
 // put/update current user's data (location, interests)
