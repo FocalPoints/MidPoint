@@ -1,10 +1,16 @@
 import React from 'react';
+import GoogleMapReact from 'google-map-react';
 
-const Map = (props) => {
+const Map = ({midpoint}) => {
     return(
+      
         <div id="right-side-content" style={{display: 'flex', flexDirection: 'column', margin: '0px 0px 0px 20px'}}>
+          {console.log(midpoint.lat, midpoint.lng)}
           <div id="map-container" style={styles}>
-            I'm the map, I'm the map, I'm the MAP
+            <GoogleMapReact 
+              bootstrapURLKeys={{key: "KEY GOES HERE"}}
+              defaultCenter={midpoint}
+              defaultZoom={10} />
           </div>
           <div>
             I'll be recommendations one day

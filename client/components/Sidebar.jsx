@@ -44,7 +44,7 @@ const Sidebar = (props) => {
         <button onClick={() => props.getMidpoint("user", "friendUser")}>
           Get midpoint!
         </button>
-        <p>midpoint: {props.midpoint}</p>
+        <p>midpoint: {JSON.stringify(props.midpoint)}</p>
       </div>
       <div id="add-friend">
         <br/>

@@ -9,7 +9,7 @@ const initialState = {
   loggedIn: false,
   selfInfo: {avatar: 'https://randomuser.me/api/portraits/lego/1.jpg', name: 'Lego', address: 'Legoland'},
   friendsList: ['john','yogi','cece','james','johnny'],
-  midpoint: 123
+  midpoint: {lat: 59.955413, lng: 30.337844}
 };
 
 const mainPageReducer = (state = initialState, action) => {
