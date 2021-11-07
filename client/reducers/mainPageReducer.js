@@ -1,13 +1,15 @@
 import * as types from '../constants/actionTypes';
 import axios from 'axios';
+import { updateLocation } from '../actions/actions';
 
 
 const initialState = {
   pageToDisplay: 'login',
   currentUserID: '', // this is primary key for the username, should be a number.
   loggedIn: false,
-  selfInfo: {avatar: 'https://randomuser.me/api/portraits/lego/1.jpg',name: 'Lego', address: 'Legoland'},
-  friendInfo: {},
+  selfInfo: {avatar: 'https://randomuser.me/api/portraits/lego/1.jpg', name: 'Lego', address: 'Legoland'},
+  friendsList: ['john','yogi','cece','james','johnny'],
+  midpoint: 123
 };
 
 const mainPageReducer = (state = initialState, action) => {
@@ -25,12 +27,26 @@ const mainPageReducer = (state = initialState, action) => {
       };
 
     case types.LOG_IN:
-      console.log("Login action type has been trigger")
-      // const body = {
-      //   path: '/login',
-      //   method: GET,
-      //   body: action.payload, // {user,pass}
-      // }
+
+    /*
+      Expects: req.body = {username, password}
+      Returns: {verified: bool, message: string, user: userObject}
+      User Object: {
+        user_id: int,
+        username: string,
+        password: string,
+        created_on: timestamp,
+        coordinate: {
+          lat: num,
+          lng: num
+        }
+      }
+    */
+      const body = {
+        path: '/database/login',
+        method: GET,
+        body: action.payload, // {user,pass}
+      }
 
       // axios.get(/(server endpoint), body).then(data => {})
 
@@ -43,9 +59,9 @@ const mainPageReducer = (state = initialState, action) => {
       };
 
       case types.SIGN_UP_USER:
-        console.log("Login action type has been trigger")
+        console.log("Login action type has been triggered")
       // const body = {
-      //   path: '/login',
+      //   path: '/signup',
       //   method: POST,
       //   body: action.payload, // {user,pass, {lat,lng}}
       // }
@@ -58,6 +74,26 @@ const mainPageReducer = (state = initialState, action) => {
         ...state,
         pageToDisplay: 'login',
       };
+      
+      case types.UPDATE_LOCATION:
+        console.log("Update location case triggered")
+        // add a update request to update location in db
+
+        const tempObj = Object.assign({}, state.selfInfo);
+        tempObj.address = action.payload.address;
+
+        return {
+          ...state,
+          selfInfo: tempObj,
+        }
+        
+      case types.GET_MIDPOINT:
+          console.log("midpoint case triggered")
+
+        return {
+          ...state,
+          midpoint: 321
+        }
 
       //update location needs ID
 
