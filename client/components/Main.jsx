@@ -6,7 +6,7 @@ const Main = (props) => {
     return(
       <div style={{display: 'flex', flexDirection: 'row'}}>
         <Sidebar {...props}/>
-        <Map />
+        <Map {...props}/>
       </div>
     )
 }

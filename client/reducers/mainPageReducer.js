@@ -9,12 +9,12 @@ const initialState = {
   loggedIn: false,
   selfInfo: {avatar: 'https://randomuser.me/api/portraits/lego/1.jpg', name: 'Lego', address: 'Legoland'},
   friendsList: ['john','yogi','cece','james','johnny'],
-  midpoint: 123
+  midpoint: {lat: 59.955413, lng: 30.337844}
 };
 
 const mainPageReducer = (state = initialState, action) => {
   switch (action.type) {
-    case types.SIGN_UP:
+    case types.PAGE_TO_SIGN_UP:
       return {
         ...state,
         pageToDisplay: 'signup',
@@ -42,38 +42,30 @@ const mainPageReducer = (state = initialState, action) => {
         }
       }
     */
-      const body = {
-        path: '/database/login',
-        method: GET,
-        body: action.payload, // {user,pass}
-      }
+      console.log('Login action type has been triggered')
+      console.log(action.payload)
 
-      // axios.get(/(server endpoint), body).then(data => {})
-
-      // DB res back with all of data, use the data to change the state.
-      // return statement should go inside the .then
-      //server will res back with an object that has a boolean value and a msg
       return {
         ...state,
         loggedIn: true, // obj.booleanValue
       };
 
       case types.SIGN_UP_USER:
-        console.log("Login action type has been triggered")
-      // const body = {
-      //   path: '/signup',
-      //   method: POST,
-      //   body: action.payload, // {user,pass, {lat,lng}}
-      // }
-      // axios.post(/(server endpoint), body).then(data => {})
+        console.log("SIGN_UP_USER action type has been triggered")
+        console.log('action pay', action.payload)
 
-      // DB res back with all of data, use the data to change the state.
-      // return statement should go inside the .then
-      //server will res back with an object that has a boolean value and a msg
-      return {
-        ...state,
-        pageToDisplay: 'login',
-      };
+        if(action.payload.verified === true){
+          return {
+            ...state,
+            loggedIn: true,
+            pageToDisplay: 'login',
+          };
+        }
+        return {
+          ...state,
+          pageToDisplay: 'signup',
+        };
+  
       
       case types.UPDATE_LOCATION:
         console.log("Update location case triggered")

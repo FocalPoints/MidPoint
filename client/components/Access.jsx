@@ -18,7 +18,7 @@ const mapStateToProps = ({
 
 // add change location button here
 const mapDispatchToProps = dispatch => ({
-  signUp: () => dispatch(actions.signUp()),
+  pageToSignup: () => dispatch(actions.pageToSignup()),
   signUpCancel: () => dispatch(actions.signUpCancel()),
   logIn: (user,pass) => dispatch(actions.logIn(user,pass)),
   signUpUser: (user,pass,lat,lng) => dispatch(actions.signUpUser(user,pass,lat,lng)),
@@ -27,7 +27,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 
-const Access = ({pageToDisplay, loggedIn, signUp, signUpCancel, logIn, signUpUser, selfInfo, updateLocation, friendsList, getMidpoint, midpoint}) => {
+const Access = ({pageToDisplay, loggedIn, pageToSignup, signUpCancel, logIn, signUpUser, selfInfo, updateLocation, friendsList, getMidpoint, midpoint}) => {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -64,7 +64,7 @@ const Access = ({pageToDisplay, loggedIn, signUp, signUpCancel, logIn, signUpUse
   // Log In Page
   if (pageToDisplay === 'login') return (
     <div>
-      <h1>login Page</h1>
+      <h1>Login Page</h1>
       <input 
         name="username"
         type="text"
@@ -80,7 +80,7 @@ const Access = ({pageToDisplay, loggedIn, signUp, signUpCancel, logIn, signUpUse
         onChange={(event) => onChangeHandler(event)}
         />
       <button onClick={() => logIn(username,password)}>Login</button> 
-      <button onClick={signUp}>Sign-up</button>
+      <button onClick={pageToSignup}>Sign-up</button>
         
     </div>
   );
@@ -91,15 +91,15 @@ const Access = ({pageToDisplay, loggedIn, signUp, signUpCancel, logIn, signUpUse
   return (
     <div>
 
-      <h1>sign-in Page</h1>
+      <h1>Sign-up Page</h1>
 
         
-        <input name="user" id="user" value={username} type="text" placeholder="Username" onChange={(event) => onChangeHandler(event)}></input> 
+        <input name="username" id="username" value={username} type="text" placeholder="Username" onChange={(event) => onChangeHandler(event)}></input> 
         <input name="password" id="password" value={password} type="password" placeholder="Password" onChange={(event) => onChangeHandler(event)}></input>
         <input name="lat" id="lat" value={lat} type="text" placeholder="40" onChange={(event) => onChangeHandler(event)}></input>
         <input name="lng" id="lng" value={lng} type="text" placeholder="-74" onChange={(event) => onChangeHandler(event)}></input>
 
-        <button onClick={() => signUpUser(username,password,lat,lng)}>Create an account</button>
+        <button onClick={() => {if((username || password || lat || lng) !== '') signUpUser(username,password,lat,lng)}}>Create an account</button>
         <button onClick={signUpCancel}>Cancel</button>  
     </div>
   );
