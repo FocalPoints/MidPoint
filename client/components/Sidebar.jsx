@@ -60,7 +60,7 @@ const Sidebar = (props) => {
       </div>
         {/* eventual functionality to add a friend to user's friend list by name search */}
       <div id="add-friend">
-        <select style={inputStyles}>{props.notFriendsList.map(notFriend => {return(<option key={notFriend} value={notFriend}> {notFriend} </option>)})}</select>
+        <select className="inputStyles">{props.notFriendsList.map(notFriend => {return(<option key={notFriend} value={notFriend}> {notFriend} </option>)})}</select>
 
         {/* when clicked, triggers action to add friend to friendList */}
         <button >

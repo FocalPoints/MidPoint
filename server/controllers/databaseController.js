@@ -36,32 +36,23 @@ dbController.verifyUser = async (req, res, next) => {
     const response = await db.query(query, values);
     // send error if user not found
     if (!response.rows.length) {
+      // TODO! - make this an error
       res.status(404);
       res.locals.verified = false;
       res.locals.message = 'No user found!';
       res.locals.user = {};
-      // res.locals.friends = [];
-      // .send({
-      //   verified: false,
-      //   message: 'User not found!',
-      //   user: {},
-      // })
       return next();
     }
     const user = response.rows[0];
     const valid = await bcrypt.compare(password, user.password);
     // send error if passwords don't match
     if (!valid) {
+      // TODO! - make this an error
       res.status(401);
       res.locals.verified = false;
       res.locals.message = 'Invalid password';
       res.locals.user = {};
       res.locals.friends = [];
-      // res.status(401).send({
-      //   verified: false,
-      //   message: 'Invalid password!',
-      //   user: {},
-      // })
       return next();
     }
     // send object upon successful log-in
@@ -70,12 +61,6 @@ dbController.verifyUser = async (req, res, next) => {
       res.locals.verified = true;
       res.locals.message = 'User verified!';
       res.locals.user = user;
-      // res.locals.friends = [];
-      // res.locals.userObj = {
-      //   verified: true,
-      //   message: 'User verified!',
-      //   user: user,
-      // };
       return next();
     }
   } catch (err) {
@@ -97,24 +82,22 @@ Returns: [{ user_id: int,
 dbController.addUser = async (req, res, next) => {
   try {
     // declare a new user object with name, password, coords
-  const { username, password, address } = req.body;
-  const geoData = await geocoder.geocode(address);
-  const coordinates = {lat: geoData[0].latitude, lng: geoData[0].longitude};
-  console.log(coordinates);
-  if (typeof username === 'string' && typeof password === 'string') {
-    const encrypted = await bcrypt.hash(password, 10);
-    console.log(encrypted);
-    const query = `INSERT INTO users(username, password, coordinates) VALUES($1, $2, $3) RETURNING *`;
-    const values = [username, encrypted, JSON.stringify(coordinates)];
-    const response = await db.query(query, values);
-    const user = response.rows[0];
-    // res.locals.user = response.rows;
-    res.locals.userObj = {
-      verified: true,
-      message: 'User created!',
-      user: user,
-    }
-    return next();
+    const { username, password, address } = req.body;
+    const geoData = await geocoder.geocode(address);
+    const coordinates = { lat: geoData[0].latitude, lng: geoData[0].longitude };
+    console.log(coordinates);
+    if (typeof username === 'string' && typeof password === 'string') {
+      const encrypted = await bcrypt.hash(password, 10);
+      console.log(encrypted);
+      const query = `INSERT INTO users(username, password, coordinates) VALUES($1, $2, $3) RETURNING *`;
+      const values = [username, encrypted, JSON.stringify(coordinates)];
+      const response = await db.query(query, values);
+      const user = response.rows[0];
+      
+      res.locals.verified = true;
+      res.locals.message = 'User created!'
+      res.locals.user = user;
+      return next();
     } else {
       res.status(401).send({
         verified: false,
@@ -144,16 +127,45 @@ dbController.updateUser = async (req, res, next) => {
 }
 
 // get list of all users EXCEPT current user
-dbController.getList = async (req, res, next) => {
+dbController.getFriendList = async (req, res, next) => {
   // declare a var to store our search query
   // not equal ->  <> OR !=
-  const { username } = req.query;
-  const query = `SELECT * FROM users WHERE users.username != $1`;
-  const values = [username];
+  const { user_id } = res.locals.user;
+  const query = `
+    SELECT u2.user_id, u2.username, u2.coordinates 
+    FROM users u1 JOIN friends 
+    ON u1.user_id = friends.user1_id
+    JOIN users u2
+    ON u2.user_id = friends.user2_id
+    WHERE u1.user_id = $1
+  `;
+  const values = [user_id];
   try {
     // send data via res locals
     const response = await db.query(query, values);
-    res.locals.friends = response.rows;
+    res.locals.friendList = response.rows;
+    return next();
+  } catch (err) {
+    return next(err);
+  }
+}
+
+// get list of all users not on current user's friends list
+dbController.getNotFriendList = async (req, res, next) => {
+  // declare a var to store our search query
+  // not equal ->  <> OR !=
+  const { user_id } = res.locals.user;
+  const query = `
+    SELECT * FROM users WHERE
+    user_id != $1 AND
+    user_id NOT IN (SELECT user2_id from users JOIN friends ON users.user_id = friends.user1_id
+    WHERE users.user_id = 1)
+  `;
+  const values = [user_id];
+  try {
+    // send data via res locals
+    const response = await db.query(query, values);
+    res.locals.notFriendList = response.rows;
     return next();
   } catch (err) {
     return next(err);
@@ -178,13 +190,13 @@ dbController.getFriend = async (req, res, next) => {
 
 dbController.getCoords = async (req, res, next) => {
   try {
-    const {address} = req.body
+    const { address } = req.body
     const geoData = await geocoder.geocode(address);
-    const coordinates = {lat: geoData[0].latitude, lng: geoData[0].longitude};
+    const coordinates = { lat: geoData[0].latitude, lng: geoData[0].longitude };
     res.locals.coords = coordinates;
     return next();
   }
-  catch(err) {
+  catch (err) {
     return next(err)
   }
 }
