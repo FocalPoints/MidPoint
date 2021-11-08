@@ -7,10 +7,10 @@ const initialState = {
   pageToDisplay: 'login',
   currentUserID: '', // this is primary key for the username, should be a number.
   loggedIn: false,
-  selfInfo: {avatar: 'https://www.mindenpictures.com/cache/pcache2/90392052.jpg', name: 'Wunderpus Photogenicus', address: "{lat: 40, lng: -74}"},
+  selfInfo: {avatar: 'https://www.mindenpictures.com/cache/pcache2/90392052.jpg', name: 'Wunderpus Photogenicus', address: {lat: 40, lng: -74}},
   friendsList: [],
   notFriendsList: [],
-  midpoint: {lat: 59.955413, lng: 30.337844}
+  midpoint: {lat: 59.955413, lng: 30.337844},
 };
 
 const mainPageReducer = (state = initialState, action) => {
@@ -52,19 +52,15 @@ const mainPageReducer = (state = initialState, action) => {
       if (action.payload.verified) {
         const tempObj = {...state.selfInfo};
         tempObj.name = action.payload.user.username;
-        tempObj.address = `{lat: ${action.payload.user.coordinates.lat}, lng: ${action.payload.user.coordinates.lng}}`;
+        tempObj.address = {lat: Number(action.payload.user.coordinates.lat), lng: Number(action.payload.user.coordinates.lng)};
 
         //this will be replaced with friendList from backend
         const actionPayloadFriends =  [ { user_id: 1, username: 'Eddy', password: '123', created_on: 'right now', coordinates: {lat: 1, lng: -1 } }, { user_id: 2, username: 'Adam', password: '123', created_on: 'right now', coordinates: {lat: 2, lng: -2 } }, { user_id: 3, username: 'Chang', password: '123', created_on: 'right now', coordinates: {lat: 3, lng: -3} }] //this will become action.payload.(friends)? extract names and put into list
-        const newFriendList = actionPayloadFriends.map(obj => {
-          return obj.username;
-        })
+        const newFriendList = actionPayloadFriends.map(obj => ({'user_id': obj.user_id, 'username': obj.username, 'coordinates': obj.coordinates}))
 
         //this will be replaced with notFriendList from backend
         const actionPayloadNotFriends =  [ { user_id: 1, username: 'John', password: '123', created_on: 'right now', coordinates: {lat: 1, lng: -1 } }, { user_id: 2, username: 'Yogi', password: '123', created_on: 'right now', coordinates: {lat: 2, lng: -2 } }, { user_id: 3, username: 'Johnny', password: '123', created_on: 'right now', coordinates: {lat: 3, lng: -3} }] //this will become action.payload.(friends)? extract names and put into list
-        const newNotFriends = actionPayloadNotFriends.map(obj => {
-          return obj.username;
-        })
+        const newNotFriends = actionPayloadNotFriends.map(obj => obj.username)
         
         return {
           ...state,
@@ -116,11 +112,11 @@ const mainPageReducer = (state = initialState, action) => {
         }
         
       case types.GET_MIDPOINT:
-          console.log("midpoint case triggered")
+        console.log("midpoint case triggered")
 
         return {
           ...state,
-          midpoint: 321
+          midpoint: action.payload
         }
 
       //update location needs ID

@@ -27,7 +27,7 @@ const Sidebar = (props) => {
 
           {/* shows location icon and user location */}
           <img src={imgUrl}  className='picStyles'/> 
-          <p  className='pStyles'>{props.address}</p>
+          <p  className='pStyles'>{JSON.stringify(props.address)}</p>
 
         </div>
         <div>
@@ -50,12 +50,13 @@ const Sidebar = (props) => {
       </div>
       <div id="friend-list">
         {/* dropdown populated with users from friends list */}
-        <select  className='inputStyles'>{props.friendsList.map(friend => {return(<option key={friend} value={friend}> {friend} </option>)})}</select>
+        {console.log('Props friends list', props.friendsList)} {/* array of objects with user_id, username, and coordinates properties*/}
+        <div className='inputStyles'>{props.friendsList.map((friend, i ) => {return(<div id={friend.user_id} key={friend.username} value={friend.username}> <button onClick={() => props.getMidpoint(props.address, props.friendsList[i].coordinates)}>
+          Meet in the Middle
+        </button> {friend.username} </div>)})}</div>
 
         {/* when clicked, triggers action to get that friend's location and use it to find the midpoint */}
-        <button onClick={() => props.getMidpoint("user", "friendUser")}>
-          Meet in the Middle
-        </button>
+
         <p>Midpoint: {JSON.stringify(props.midpoint)}</p>
       </div>
         {/* eventual functionality to add a friend to user's friend list by name search */}
