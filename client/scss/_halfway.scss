@@ -79,7 +79,7 @@
   align-content: center;
   background-color: $Olive;
   width: 21%;
-  height: 600px;
+  height: 800px;
   border: 1px solid black;
   border-radius: 6px;
   margin: 10px 0px 0px 6px;
@@ -112,6 +112,11 @@
       border: 3px solid;
     }
   }
+}
+
+.scrollContainer {
+  overflow: scroll;
+  height: 350px;
 }
 
 .center {

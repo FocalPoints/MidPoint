@@ -22,7 +22,7 @@ const mapDispatchToProps = dispatch => ({
   pageToSignup: () => dispatch(actions.pageToSignup()),
   signUpCancel: () => dispatch(actions.signUpCancel()),
   logIn: (user,pass) => dispatch(actions.logIn(user,pass)),
-  signUpUser: (user,pass,lat,lng) => dispatch(actions.signUpUser(user,pass,lat,lng)),
+  signUpUser: (user,pass,address) => dispatch(actions.signUpUser(user,pass,address)),
   updateLocation: (address) => dispatch(actions.updateLocation(address)),
   getMidpoint: (user, friendUser) => dispatch(actions.getMidpoint(user, friendUser))
 });
@@ -32,8 +32,8 @@ const Access = ({pageToDisplay, loggedIn, pageToSignup, signUpCancel, logIn, sig
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [lat, setLat] = useState('');
-  const [lng, setLng] = useState('');
+  const [address, setAddress] = useState('');
+
 
 
   function onChangeHandler(event) {
@@ -42,11 +42,9 @@ const Access = ({pageToDisplay, loggedIn, pageToSignup, signUpCancel, logIn, sig
         setUsername(value);
       } else if(name === 'password') {
         setPassword(value);
-      } else if(name === 'lat') {
-        setLat(value);
-      } else if(name === 'lng') {
-        setLng(value);
-      }
+      } else if(name === 'address') {
+        setAddress(value);
+      } 
   }
 
     //  Logged In 
@@ -91,10 +89,9 @@ const Access = ({pageToDisplay, loggedIn, pageToSignup, signUpCancel, logIn, sig
         
         <input name="username" id="username" value={username} type="text" placeholder="Username" onChange={(event) => onChangeHandler(event)}></input> 
         <input name="password" id="password" value={password} type="password" placeholder="Password" onChange={(event) => onChangeHandler(event)}></input>
-        <input name="lat" id="lat" value={lat} type="text" placeholder="40" onChange={(event) => onChangeHandler(event)}></input>
-        <input name="lng" id="lng" value={lng} type="text" placeholder="-74" onChange={(event) => onChangeHandler(event)}></input>
+        <input name="address" id="address" value={address} type="text" placeholder="45 main street" onChange={(event) => onChangeHandler(event)}></input>
 
-        <button onClick={() => {if((username || password || lat || lng) !== '') signUpUser(username,password,lat,lng)}}>Create an account</button>
+        <button onClick={() => {if((username || password || address) !== '') signUpUser(username,password,address)}}>Create an account</button>
         <button onClick={signUpCancel}>Cancel</button>  
     </div>
   );

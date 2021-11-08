@@ -25,13 +25,13 @@ export const pageToSignup = () => ({
   type: types.PAGE_TO_SIGN_UP,
 });
 
-export const signUpUser = (username, password, lat,lng) => (dispatch) => {
-  const coordinates = {lat, lng}  
+export const signUpUser = (username, password, address) => (dispatch) => {
+  // const coordinates = {lat, lng}  
   
   const request = {
       method: 'POST',
       url: '/database/signup',
-      data: {username, password, coordinates}
+      data: {username, password, address}
     }
    
     axios.request(request).then((response) => {
