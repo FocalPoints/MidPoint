@@ -198,6 +198,7 @@ dbController.addFriend = async (req, res, next) => {
     const query = `
       INSERT INTO friends (user1_id, user2_id) VALUES($1, $2)
     `;
+    await db.query(query, values);
     return next();
   }
   catch(err) {

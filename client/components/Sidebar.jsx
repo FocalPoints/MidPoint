@@ -49,14 +49,29 @@ const Sidebar = (props) => {
       <p>Friends:</p>
         {/* dropdown populated with users from friends list */}
         {console.log('Props friends list', props.friendsList)} {/* array of objects with user_id, username, and coordinates properties*/}
-        <div>{props.friendsList.map((friend, i ) => {return(<div className='center' id={friend.user_id} key={friend.username} value={friend.username}> <button onClick={() => props.getMidpoint(props.address, props.friendsList[i].coordinates)}>
-          Meet with {friend.username}
-        </button>  </div>)})}</div>
+
+
+        <div className='inputStyles'>{props.friendsList.map((friend) => {return(<div id={friend.user_id} key={friend.user_id} value={friend.username}> 
+        <button onClick={() => props.getMidpoint(props.address, friend.coordinates)}>
+          Meet in the Middle
+        </button> {friend.username} </div>)})}</div>
+
+        {/* when clicked, triggers action to get that friend's location and use it to find the midpoint */}
+
+        <p>Midpoint: {JSON.stringify(props.midpoint)}</p>
       </div>
         {/* eventual functionality to add a friend to user's friend list by name search */}
-      <div id="add-friend">
-        <p>Add a friends:</p>
-        <select className="inputStyles">{props.notFriendsList.map(notFriend => {return(<option key={notFriend} value={notFriend}> {notFriend} </option>)})}</select>
+      <div id="add-friend"  >
+
+        <div className='inputStyles' className='center'>{props.notFriendsList.map((notFriend, i ) => {return(<div id={notFriend.user_id} key={notFriend.user_id} value={notFriend.username}> 
+        <button onClick={() => props.getMidpoint(props.address, props.friendsList[i].coordinates)}>
+          Add Friend
+        </button> {notFriend.username} </div>)})}
+
+        </div>
+        {/* <select className="inputStyles">{props.notFriendsList.map(notFriend => {return(<option key={notFriend} value={notFriend}> {notFriend} </option>)})}</select> */}
+
+
         {/* when clicked, triggers action to add friend to friendList */}
         <button >
           Add Friend
