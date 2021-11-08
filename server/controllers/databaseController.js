@@ -74,7 +74,7 @@ Returns: [{ user_id: int,
 dbController.addUser = async (req, res, next) => {
   try {
     // declare a new user object with name, password, coords
-  const { username, password, coordinates } = req.query;
+  const { username, password, coordinates } = req.body;
   if (typeof username === 'string' && typeof password === 'string') {
     const encrypted = await bcrypt.hash(password, 10);
     console.log(encrypted);
@@ -106,7 +106,7 @@ dbController.addUser = async (req, res, next) => {
 // TODO! FINISH THIS METHOD
 // PUT / update a user's data
 dbController.updateUser = async (req, res, next) => {
-  const { userID, newCoordinates } = req.query;
+  const { userID, newCoordinates } = req.body;
   const query = `UPDATE users SET user.coordinates = $2 WHERE user.user_id = $1`
   const values = [newCoordinates];
   try {

@@ -27,7 +27,7 @@ export const signUpUser = (username, password, lat,lng) => (dispatch) => {
   const request = {
       method: 'POST',
       url: '/database/signup',
-      params: {username, password, coordinates}
+      data: {username, password, coordinates}
     }
    
     axios.request(request).then((response) => {
