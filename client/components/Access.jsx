@@ -7,12 +7,13 @@ import Main from './Main';
 
 // add friends list here
 const mapStateToProps = ({
-   mainPage: { pageToDisplay , loggedIn , selfInfo, friendsList, midpoint } 
+   mainPage: { pageToDisplay , loggedIn , selfInfo, friendsList, notFriendsList, midpoint } 
   }) => ({
   pageToDisplay,
   loggedIn,
   selfInfo,
   friendsList,
+  notFriendsList,
   midpoint
 });
 
@@ -27,7 +28,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 
-const Access = ({pageToDisplay, loggedIn, pageToSignup, signUpCancel, logIn, signUpUser, selfInfo, updateLocation, friendsList, getMidpoint, midpoint}) => {
+const Access = ({pageToDisplay, loggedIn, pageToSignup, signUpCancel, logIn, signUpUser, selfInfo, updateLocation, friendsList, notFriendsList, getMidpoint, midpoint}) => {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -50,15 +51,7 @@ const Access = ({pageToDisplay, loggedIn, pageToSignup, signUpCancel, logIn, sig
 
     //  Logged In 
    if (loggedIn) {
-      //<Link to="main">My Profile</Link>
-    // <div id="access">>    
-    //     <Router>
-    //         <Switch>
-    //             <Route path='/' element={<Main />} />
-    //         </Switch>
-    //     </Router>
-    // </div>
-    return (<Main {...selfInfo} updateLocation={updateLocation} friendsList={friendsList} getMidpoint={getMidpoint} midpoint={midpoint}/>)
+    return (<Main {...selfInfo} updateLocation={updateLocation} friendsList={friendsList} notFriendsList={notFriendsList} getMidpoint={getMidpoint} midpoint={midpoint}/>)
   }
 
   // Log In Page

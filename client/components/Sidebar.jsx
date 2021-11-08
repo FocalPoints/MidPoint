@@ -35,7 +35,7 @@ const Sidebar = (props) => {
           {/* input field where users can elect to update their current location */}
           Update your address: <input className='inputStyles'
           name="address" type="text"
-          placeholder="newAddress"
+          placeholder="lat/lng"
           value={address}
           onChange={(event) => onChangeHandler(event)}>
           </input>
@@ -60,8 +60,12 @@ const Sidebar = (props) => {
       </div>
         {/* eventual functionality to add a friend to user's friend list by name search */}
       <div id="add-friend">
-        <br/>
-        Add friend:
+        <select style={inputStyles}>{props.notFriendsList.map(notFriend => {return(<option key={notFriend} value={notFriend}> {notFriend} </option>)})}</select>
+
+        {/* when clicked, triggers action to add friend to friendList */}
+        <button >
+          Add Friend
+        </button>
       </div>
     </div>
   )
