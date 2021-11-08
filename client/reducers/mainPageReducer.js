@@ -7,7 +7,7 @@ const initialState = {
   pageToDisplay: 'login',
   currentUserID: '', // this is primary key for the username, should be a number.
   loggedIn: false,
-  selfInfo: {avatar: 'https://randomuser.me/api/portraits/lego/1.jpg', name: 'LegoMan', address: 'LegoLand'},
+  selfInfo: {avatar: 'https://randomuser.me/api/portraits/lego/1.jpg', name: 'LegoMan', address: "{lat: 40, lng: -74}"},
   friendsList: ['john','yogi','cece','james','johnny'],
   midpoint: {lat: 59.955413, lng: 30.337844}
 };
@@ -44,11 +44,21 @@ const mainPageReducer = (state = initialState, action) => {
     */
       console.log('Login action type has been triggered')
       console.log(action.payload)
+      console.log(action.payload.user.user_id)
 
-      return {
-        ...state,
-        loggedIn: true, // obj.booleanValue
-      };
+
+      if (action.payload.verified) {
+        const tempObj = {...state.selfInfo};
+        tempObj.name = action.payload.user.username;
+        tempObj.address = `{lat: ${action.payload.user.coordinates.lat}, lng: ${action.payload.user.coordinates.lng}}`;
+        return {
+          ...state,
+          currentUserID: action.payload.user.user_id,
+          selfInfo: tempObj,
+          loggedIn: true, // obj.booleanValue
+        };
+      }
+
 
       case types.SIGN_UP_USER:
         console.log("SIGN_UP_USER action type has been triggered")
