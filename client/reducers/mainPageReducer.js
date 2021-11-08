@@ -54,13 +54,13 @@ const mainPageReducer = (state = initialState, action) => {
         tempObj.name = action.payload.user.username;
         tempObj.address = `{lat: ${action.payload.user.coordinates.lat}, lng: ${action.payload.user.coordinates.lng}}`;
 
-        //this will be replaced with friendsList from backend
+        //this will be replaced with friendList from backend
         const actionPayloadFriends =  [ { user_id: 1, username: 'Eddy', password: '123', created_on: 'right now', coordinates: {lat: 1, lng: -1 } }, { user_id: 2, username: 'Adam', password: '123', created_on: 'right now', coordinates: {lat: 2, lng: -2 } }, { user_id: 3, username: 'Chang', password: '123', created_on: 'right now', coordinates: {lat: 3, lng: -3} }] //this will become action.payload.(friends)? extract names and put into list
         const newFriendList = actionPayloadFriends.map(obj => {
           return obj.username;
         })
 
-        //this will be replaced with notFriendsList from backend
+        //this will be replaced with notFriendList from backend
         const actionPayloadNotFriends =  [ { user_id: 1, username: 'John', password: '123', created_on: 'right now', coordinates: {lat: 1, lng: -1 } }, { user_id: 2, username: 'Yogi', password: '123', created_on: 'right now', coordinates: {lat: 2, lng: -2 } }, { user_id: 3, username: 'Johnny', password: '123', created_on: 'right now', coordinates: {lat: 3, lng: -3} }] //this will become action.payload.(friends)? extract names and put into list
         const newNotFriends = actionPayloadNotFriends.map(obj => {
           return obj.username;
