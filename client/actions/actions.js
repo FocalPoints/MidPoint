@@ -12,10 +12,14 @@ export const logIn = (username, password) => (dispatch) => {
   axios.request(request).then((response) => {
     if(response.status = 201) dispatch({
       type: types.LOG_IN,
-      payload: response.data,
+      payload: response.data, //will hold the user object
     });
   }).catch(console.error);
 };
+
+
+
+
 
 export const pageToSignup = () => ({
   type: types.PAGE_TO_SIGN_UP,
