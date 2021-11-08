@@ -63,8 +63,10 @@ const Access = ({pageToDisplay, loggedIn, pageToSignup, signUpCancel, logIn, sig
 
   // Log In Page
   if (pageToDisplay === 'login') return (
-    <div>
+    <div className='loginStyles'>
+      
       <h1>Login Page</h1>
+      <img src='https://i.imgur.com/YQ3shad.png'/>
       <input 
         name="username"
         type="text"
@@ -89,10 +91,10 @@ const Access = ({pageToDisplay, loggedIn, pageToSignup, signUpCancel, logIn, sig
 
   // Sign Up Page
   return (
-    <div>
+    <div className='loginStyles'>
 
       <h1>Sign-up Page</h1>
-
+      <img src='https://i.imgur.com/YQ3shad.png'/>
         
         <input name="username" id="username" value={username} type="text" placeholder="Username" onChange={(event) => onChangeHandler(event)}></input> 
         <input name="password" id="password" value={password} type="password" placeholder="Password" onChange={(event) => onChangeHandler(event)}></input>
