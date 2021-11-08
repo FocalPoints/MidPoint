@@ -1,7 +1,15 @@
 const db = require('../models/model');
 const bcrypt = require('bcryptjs');
+const NodeGeocoder = require('node-geocoder');
+
 const dbController = {};
 
+const options = {
+  provider: 'google',
+  apiKey: 'AIzaSyAG8pD29eYb7EnZNrNFinFbmMtJiqqnzKI',
+}
+
+const geocoder = NodeGeocoder(options);
 // get / verify current user
 /*
 Expects: req.body = {username, password}
@@ -28,31 +36,46 @@ dbController.verifyUser = async (req, res, next) => {
     const response = await db.query(query, values);
     // send error if user not found
     if (!response.rows.length) {
-      res.status(404).send({
-        verified: false,
-        message: 'User not found!',
-        user: {},
-      })
+      res.status(404);
+      res.locals.verified = false;
+      res.locals.message = 'No user found!';
+      res.locals.user = {};
+      // res.locals.friends = [];
+      // .send({
+      //   verified: false,
+      //   message: 'User not found!',
+      //   user: {},
+      // })
       return next();
     }
     const user = response.rows[0];
     const valid = await bcrypt.compare(password, user.password);
     // send error if passwords don't match
     if (!valid) {
-      res.status(401).send({
-        verified: false,
-        message: 'Invalid password!',
-        user: {},
-      })
+      res.status(401);
+      res.locals.verified = false;
+      res.locals.message = 'Invalid password';
+      res.locals.user = {};
+      res.locals.friends = [];
+      // res.status(401).send({
+      //   verified: false,
+      //   message: 'Invalid password!',
+      //   user: {},
+      // })
       return next();
     }
     // send object upon successful log-in
     else {
-      res.locals.userObj = {
-        verified: true,
-        message: 'User verified!',
-        user: user,
-      };
+      res.status(200);
+      res.locals.verified = true;
+      res.locals.message = 'User verified!';
+      res.locals.user = user;
+      // res.locals.friends = [];
+      // res.locals.userObj = {
+      //   verified: true,
+      //   message: 'User verified!',
+      //   user: user,
+      // };
       return next();
     }
   } catch (err) {
@@ -74,7 +97,10 @@ Returns: [{ user_id: int,
 dbController.addUser = async (req, res, next) => {
   try {
     // declare a new user object with name, password, coords
-  const { username, password, coordinates } = req.body;
+  const { username, password, address } = req.body;
+  const geoData = await geocoder.geocode(address);
+  const coordinates = {lat: geoData[0].latitude, lng: geoData[0].longitude};
+  console.log(coordinates);
   if (typeof username === 'string' && typeof password === 'string') {
     const encrypted = await bcrypt.hash(password, 10);
     console.log(encrypted);
@@ -88,14 +114,14 @@ dbController.addUser = async (req, res, next) => {
       message: 'User created!',
       user: user,
     }
-    next();
+    return next();
     } else {
       res.status(401).send({
         verified: false,
         message: 'Invalid username and/or password!',
         user: {},
       })
-      next();
+      return next();
     }
   } catch (err) {
     return next(err);
@@ -121,13 +147,13 @@ dbController.updateUser = async (req, res, next) => {
 dbController.getList = async (req, res, next) => {
   // declare a var to store our search query
   // not equal ->  <> OR !=
-  const { userID } = req.query;
-  const query = `SELECT * FROM users WHERE users.user_id != $1`;
-  const values = [userID];
+  const { username } = req.query;
+  const query = `SELECT * FROM users WHERE users.username != $1`;
+  const values = [username];
   try {
     // send data via res locals
     const response = await db.query(query, values);
-    res.locals.users = response.rows;
+    res.locals.friends = response.rows;
     return next();
   } catch (err) {
     return next(err);
@@ -147,6 +173,19 @@ dbController.getFriend = async (req, res, next) => {
   }
   catch (err) {
     return next(err);
+  }
+}
+
+dbController.getCoords = async (req, res, next) => {
+  try {
+    const {address} = req.body
+    const geoData = await geocoder.geocode(address);
+    const coordinates = {lat: geoData[0].latitude, lng: geoData[0].longitude};
+    res.locals.coords = coordinates;
+    return next();
+  }
+  catch(err) {
+    return next(err)
   }
 }
 

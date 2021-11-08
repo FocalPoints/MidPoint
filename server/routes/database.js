@@ -3,8 +3,13 @@ const dbController = require('../controllers/databaseController');
 const router = express.Router();
 
 // get/verify current  user
-router.get('/login', dbController.verifyUser, (req, res) => {
-  return res.status(200).json(res.locals.userObj);
+router.get('/login', dbController.verifyUser, dbController.getList, (req, res) => {
+  // status
+  // verified
+  // message
+  // user
+  // friends
+  return res.json(res.locals);
 });
 
 // post/create a new user (encrypt password)
@@ -19,7 +24,7 @@ router.post('/signup', dbController.addUser, (req, res) => {
 
 // list of current user's friends
 router.get('/friends', dbController.getList, (req, res) => {
-  return res.status(200).json(res.locals.users);
+  return res.status(200).json(res.locals.friends);
 })
 
 // get a pair of users from list of friends
@@ -27,6 +32,9 @@ router.get('/', dbController.getFriend, (req, res) => {
   return res.status(200).json(res.locals.user);
 })
 
+router.get('/coordinates', dbController.getCoords, (req, res) => {
+  return res.status(200).json(res.locals.coords);
+})
 // TODOS //
 
 // add/get/post user to friend list
