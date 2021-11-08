@@ -52,10 +52,18 @@ export const updateLocation = (address) => ({
   payload: {address},
 })
 
-export const getMidpoint = (user, friendUser) => ({
-  type: types.GET_MIDPOINT,
-  payload: {user, friendUser}
-})
+export const getMidpoint = (userCoords, friendCoords) => {
+
+  const lat = (userCoords.lat + friendCoords.lat) / 2;
+  const lng = (userCoords.lng + friendCoords.lng) / 2;
+  
+  return ({
+    type: types.GET_MIDPOINT,
+    payload:  {'lat': lat, 'lng': lng}
+  })
+}
+
+
 
 // export const deleteCard = id => (dispatch, getState) => {
 //   if (getState().markets.marketList[id].cards > 0) {
