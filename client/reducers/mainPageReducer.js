@@ -64,9 +64,17 @@ const mainPageReducer = (state = initialState, action) => {
         console.log("SIGN_UP_USER action type has been triggered")
         console.log('action pay', action.payload)
 
-        if(action.payload.verified === true){
+        
+
+        if(action.payload.verified === true) {
+          const tempObj = {...state.selfInfo};
+          tempObj.name = action.payload.user.username;
+          tempObj.address = `{lat: ${action.payload.user.coordinates.lat}, lng: ${action.payload.user.coordinates.lng}}`;
+
           return {
             ...state,
+            currentUserID: action.payload.user.user_id,
+            selfInfo: tempObj,
             loggedIn: true,
             pageToDisplay: 'login',
           };
@@ -83,6 +91,7 @@ const mainPageReducer = (state = initialState, action) => {
 
         const tempObj = Object.assign({}, state.selfInfo);
         tempObj.address = action.payload.address;
+        
 
         return {
           ...state,
