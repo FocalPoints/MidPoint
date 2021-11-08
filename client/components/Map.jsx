@@ -10,7 +10,9 @@ const Map = ({midpoint}) => {
             <GoogleMapReact 
               bootstrapURLKeys={{key: "AIzaSyACFzUEJR-AO9s20J7aaLHZzQZeUHXgCZY"}}
               defaultCenter={midpoint}
-              defaultZoom={10} />
+              defaultZoom={10}>
+              {/* do markers go in here? */}
+            </GoogleMapReact>
           </div>
           <div>
             I'll be recommendations one day
@@ -19,11 +21,20 @@ const Map = ({midpoint}) => {
       )
 }
 
+
+
+
+
+
+
+
+
+
 const mapStyles = {
   border: '1px solid gray',
   height: '600px',
   width: '1000px',
-  margin: '20px 0px'
+  margin: '12px 0px'
 }
 
 export default Map;

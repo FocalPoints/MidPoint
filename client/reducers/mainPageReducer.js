@@ -7,7 +7,7 @@ const initialState = {
   pageToDisplay: 'login',
   currentUserID: '', // this is primary key for the username, should be a number.
   loggedIn: false,
-  selfInfo: {avatar: 'https://randomuser.me/api/portraits/lego/1.jpg', name: 'Lego', address: 'Legoland'},
+  selfInfo: {avatar: 'https://randomuser.me/api/portraits/lego/1.jpg', name: 'LegoMan', address: 'LegoLand'},
   friendsList: ['john','yogi','cece','james','johnny'],
   midpoint: {lat: 59.955413, lng: 30.337844}
 };
