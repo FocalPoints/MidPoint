@@ -172,22 +172,7 @@ dbController.getNotFriendList = async (req, res, next) => {
   }
 }
 
-// get friend from list
-dbController.getFriend = async (req, res, next) => {
-  const { userID } = req.query;
-  const query = `SELECT * FROM users WHERE users.user_id = $1`
-  const values = [userID];
-  try {
-    const response = await db.query(query, values);
-    // response.rows[0]???
-    res.locals.users = response.rows;
-    return next();
-  }
-  catch (err) {
-    return next(err);
-  }
-}
-
+// given an address as a string return the coordinates
 dbController.getCoords = async (req, res, next) => {
   try {
     const { address } = req.body
@@ -198,6 +183,25 @@ dbController.getCoords = async (req, res, next) => {
   }
   catch (err) {
     return next(err)
+  }
+}
+
+// adds a new friend to the current users friend list
+/* 
+expect:
+req.body: { user1_id, user2_id }
+*/
+dbController.addFriend = async (req, res, next) => {
+  try {
+    const { user1_id, user2_id } = req.body;
+    const values = [user1_id, user2_id];
+    const query = `
+      INSERT INTO friends (user1_id, user2_id) VALUES($1, $2)
+    `;
+    return next();
+  }
+  catch(err) {
+    return next(err);
   }
 }
 

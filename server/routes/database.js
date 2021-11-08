@@ -22,9 +22,8 @@ router.post('/signup', dbController.addUser, (req, res) => {
 //   return res.status(201).json(res.locals.user);
 // })
 
-// get a pair of users from list of friends
-router.get('/', dbController.getFriend, (req, res) => {
-  return res.status(200).json(res.locals.user);
+router.post('/friend', dbController.addFriend, dbController.getFriendList, dbController.getNotFriendList, (req, res) => {
+  return res.status(201).json(res.locals)
 })
 
 router.get('/coordinates', dbController.getCoords, (req, res) => {
