@@ -12,17 +12,17 @@ const Sidebar = (props) => {
 
   return (
     <div id="sidebar" style={sidebarStyles}>
-      <div id="user-info">
-        <div>
-          Avatar and name
-          <img src={props.avatar}/>
-          <p>{props.name}</p>
+      <div id="user-info" style={{borderBottom: '1px solid black'}}>
+        <div style={{display: 'flex'}}>
+
+          <img src={props.avatar} style={avatarStyles}/> <p>{props.name}</p>
+
         </div>
         <div>
+
           Location: {props.address}
-          {/* update user location */}
-          <br></br>
-          New Address?
+          <br/>
+          Update your address:
           <input name="address" 
           type="text"
           placeholder="newAddress"
@@ -30,7 +30,7 @@ const Sidebar = (props) => {
           onChange={(event) => onChangeHandler(event)}>
           </input>
           <button onClick={() => props.updateLocation(address)}>
-            Change Your Location
+            Change
           </button>
         </div>
       </div>
@@ -65,9 +65,19 @@ const Sidebar = (props) => {
 const sidebarStyles = {
   display: 'flex',
   flexDirection: 'column',
+  backgroundColor: '283845',
   width: '22%',
   height: '900px',
-  border: '1px solid black'
+  border: '1px solid black',
+  borderRadius: '6px',
+  margin: '10px 0px 0px 6px'
+}
+
+const avatarStyles = {
+  height: '40px',
+  width: '40px',
+  borderRadius: '50%',
+  marginRight: '20px'
 }
 
 export default Sidebar;
