@@ -30,10 +30,8 @@ const Sidebar = (props) => {
         <div>
 
           {/* input field where users can elect to update their current location */}
-          Update your address:
-          <input style={inputStyles}
-          name="address" 
-          type="text"
+          Update your address: <input style={inputStyles}
+          name="address" type="text"
           placeholder="newAddress"
           value={address}
           onChange={(event) => onChangeHandler(event)}>
