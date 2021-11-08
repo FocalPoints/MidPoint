@@ -30,7 +30,7 @@ const Sidebar = (props) => {
           <p  className='pStyles'>{JSON.stringify(props.address)}</p>
 
         </div>
-        <div>
+        <div className='center'>
 
           {/* input field where users can elect to update their current location */}
           Update your address: <input className='inputStyles'
@@ -45,24 +45,18 @@ const Sidebar = (props) => {
           </button>
         </div>
       </div>
-      <div>
-        <p>Choose which friend you'll be meeting:</p>
-      </div>
-      <div id="friend-list">
+      <div id="friend-list" className='center'>
+      <p>Friends:</p>
         {/* dropdown populated with users from friends list */}
         {console.log('Props friends list', props.friendsList)} {/* array of objects with user_id, username, and coordinates properties*/}
-        <div className='inputStyles'>{props.friendsList.map((friend, i ) => {return(<div id={friend.user_id} key={friend.username} value={friend.username}> <button onClick={() => props.getMidpoint(props.address, props.friendsList[i].coordinates)}>
-          Meet in the Middle
-        </button> {friend.username} </div>)})}</div>
-
-        {/* when clicked, triggers action to get that friend's location and use it to find the midpoint */}
-
-        <p>Midpoint: {JSON.stringify(props.midpoint)}</p>
+        <div>{props.friendsList.map((friend, i ) => {return(<div className='center' id={friend.user_id} key={friend.username} value={friend.username}> <button onClick={() => props.getMidpoint(props.address, props.friendsList[i].coordinates)}>
+          Meet with {friend.username}
+        </button>  </div>)})}</div>
       </div>
         {/* eventual functionality to add a friend to user's friend list by name search */}
       <div id="add-friend">
+        <p>Add a friends:</p>
         <select className="inputStyles">{props.notFriendsList.map(notFriend => {return(<option key={notFriend} value={notFriend}> {notFriend} </option>)})}</select>
-
         {/* when clicked, triggers action to add friend to friendList */}
         <button >
           Add Friend
