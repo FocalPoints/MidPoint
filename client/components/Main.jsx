@@ -4,19 +4,11 @@ import Sidebar from './Sidebar'
 
 const Main = (props) => {
     return(
-      <div id="main-content" style={mainStyles}>
+      <div id="main-content" className='mainStyles'>
         <Sidebar {...props}/>
         <Map {...props}/>
       </div>
     )
-}
-
-const mainStyles = {
-  display: 'flex',
-  flexDirection: 'row',
-  backgroundColor: '202C39',
-  color: 'ivory',
-  height: '100%'
 }
 
 export default Main;

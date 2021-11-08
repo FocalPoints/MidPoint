@@ -4,9 +4,9 @@ import GoogleMapReact from 'google-map-react';
 const Map = ({midpoint}) => {
     return(
       
-        <div id="right-side-content" style={{display: 'flex', flexDirection: 'column', margin: '0px 0px 0px 20px'}}>
+        <div id="right-side-content" className='mapContainer'>
           {console.log(midpoint.lat, midpoint.lng)}
-          <div id="map-container" style={mapStyles}>
+          <div id="map-container" className='mapStyles'>
             <GoogleMapReact 
               bootstrapURLKeys={{key: "AIzaSyACFzUEJR-AO9s20J7aaLHZzQZeUHXgCZY"}}
               defaultCenter={midpoint}
@@ -21,20 +21,5 @@ const Map = ({midpoint}) => {
       )
 }
 
-
-
-
-
-
-
-
-
-
-const mapStyles = {
-  border: '1px solid gray',
-  height: '600px',
-  width: '1000px',
-  margin: '12px 0px'
-}
 
 export default Map;
