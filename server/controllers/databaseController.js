@@ -6,7 +6,7 @@ const dbController = {};
 
 const options = {
   provider: 'google',
-  apiKey: 'AIzaSyAG8pD29eYb7EnZNrNFinFbmMtJiqqnzKI',
+  apiKey: 'API-KEY-HERE',
 }
 
 const geocoder = NodeGeocoder(options);
@@ -85,10 +85,8 @@ dbController.addUser = async (req, res, next) => {
     const { username, password, address } = req.body;
     const geoData = await geocoder.geocode(address);
     const coordinates = { lat: geoData[0].latitude, lng: geoData[0].longitude };
-    console.log(coordinates);
     if (typeof username === 'string' && typeof password === 'string') {
       const encrypted = await bcrypt.hash(password, 10);
-      console.log(encrypted);
       const query = `INSERT INTO users(username, password, coordinates) VALUES($1, $2, $3) RETURNING *`;
       const values = [username, encrypted, JSON.stringify(coordinates)];
       const response = await db.query(query, values);
@@ -210,17 +208,6 @@ dbController.addFriend = async (req, res, next) => {
 }
 
 // TODOS //
-
-// ADD / POST/GET? user to friend list
-// dbController.getAllFriends = async (req, res, next) => {
-//   try {
-
-//   }
-//   catch(err) {
-
-//   }
-// }
-
 // DELETE user from friend list
 
 // post to friends table with user1_id: current user, user2_id, selected user

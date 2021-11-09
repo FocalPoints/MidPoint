@@ -68,6 +68,7 @@ const Sidebar = (props) => {
             Add Friend
           </button> {notFriend.username} </div>)
       })}
+
       </div>
     </div>
   )

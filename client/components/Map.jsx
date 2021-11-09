@@ -14,15 +14,12 @@ const Map = ({midpoint}) => {
   
           <div id="map-container" className='mapStyles'>
             <GoogleMapReact 
-              bootstrapURLKeys={{key: "AIzaSyAG8pD29eYb7EnZNrNFinFbmMtJiqqnzKI"}}
+              bootstrapURLKeys={{key: 'YOUR-API-KEY-HERE'}}
               defaultCenter={midpoint}
-              defaultZoom={13}>
+              defaultZoom={12}>
               {/* do markers go in here? */}
               <Marker lat={midpoint.lat} lng = {midpoint.lng} text='midpoint' icon={imgUrl} />
             </GoogleMapReact>
-          </div>
-          <div>
-            I'll be recommendations one day
           </div>
         </div>
       )

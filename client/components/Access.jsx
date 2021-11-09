@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import * as actions from '../actions/actions';
 import Main from './Main';
 
-// add friends list here
 const mapStateToProps = ({
    mainPage: { currentUserID, pageToDisplay , loggedIn , selfInfo, friendsList, notFriendsList, midpoint } 
   }) => ({
@@ -18,7 +17,6 @@ const mapStateToProps = ({
   currentUserID,
 });
 
-// add change location button here
 const mapDispatchToProps = dispatch => ({
   pageToSignup: () => dispatch(actions.pageToSignup()),
   signUpCancel: () => dispatch(actions.signUpCancel()),
@@ -36,8 +34,6 @@ const Access = ({pageToDisplay, currentUserID, addFriend, loggedIn, pageToSignup
   const [password, setPassword] = useState('');
   const [address, setAddress] = useState('');
 
-
-
   function onChangeHandler(event) {
       const { name, value } = event.currentTarget;
       if(name === "username") {
@@ -49,7 +45,6 @@ const Access = ({pageToDisplay, currentUserID, addFriend, loggedIn, pageToSignup
       } 
   }
 
-    //  Logged In 
    if (loggedIn) {
     return (<Main {...selfInfo} updateLocation={updateLocation} friendsList={friendsList} notFriendsList={notFriendsList} getMidpoint={getMidpoint} currentUserID={currentUserID} addFriend={addFriend} midpoint={midpoint}/>)
   }
