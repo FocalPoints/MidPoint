@@ -1,4 +1,5 @@
 # MidPoint
+An app to connect friends and encourage in-person meet-ups through geocoding.
 
-Requires Google api
-Requires Postgre SQL Database
+Requires a Google Maps API Key to run.
+Requires Postgre SQL Database.
