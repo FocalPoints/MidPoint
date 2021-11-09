@@ -11,7 +11,7 @@ describe('addUser', () => {
     let user = {
       username: 'test',
       password: 'password',
-      address: '4733 49th street Flusing, NY 11377'
+      address: '4733 49th street Flushing, NY 11377'
     }
     let result = await db.addUser(user)
     expect (result).toBe(true);
@@ -24,7 +24,7 @@ describe('addUser', () => {
     let user = {
       username: 'test',
       password: 'password',
-      address: '4733 49th street Flusing, NY 11377',
+      address: '4733 49th street Flushing, NY 11377',
     }
     let result = await db.addUser(user)
     expect (result).toBe(true);
