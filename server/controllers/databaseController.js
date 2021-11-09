@@ -159,7 +159,7 @@ dbController.getNotFriendList = async (req, res, next) => {
     SELECT * FROM users WHERE
     user_id != $1 AND
     user_id NOT IN (SELECT user2_id from users JOIN friends ON users.user_id = friends.user1_id
-    WHERE users.user_id = 1)
+    WHERE users.user_id = $1)
   `;
   const values = [user_id];
   try {
@@ -194,11 +194,14 @@ req.body: { user1_id, user2_id }
 dbController.addFriend = async (req, res, next) => {
   try {
     const { user1_id, user2_id } = req.body;
+    res.locals.user = { user_id: user1_id};
     const values = [user1_id, user2_id];
     const query = `
       INSERT INTO friends (user1_id, user2_id) VALUES($1, $2)
+      RETURNING *
     `;
-    await db.query(query, values);
+    const insert = await db.query(query, values);
+    res.locals.insert = insert.rows;
     return next();
   }
   catch(err) {
