@@ -56,7 +56,6 @@ Returns: {
   friendList: [ userObj ],
   notFriendList: [ userObj ],
 }
-  
 */
 router.post('/friend', dbController.addFriend, dbController.getFriendList, dbController.getNotFriendList, (req, res) => {
   return res.status(201).json(res.locals)
