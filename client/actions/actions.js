@@ -58,6 +58,21 @@ export const getMidpoint = (userCoords, friendCoords) => {
   })
 }
 
+export const addFriend = (user1_id, user2_id) => (dispatch) => {
+  const request = {
+    method: 'POST',
+    url: 'database/friend',
+    data: {user1_id, user2_id}
+  }
+
+  axios.request(request).then((response) => {
+    if(response.status = 201) dispatch({
+      type: types.ADD_FRIEND,
+      payload: response.data,
+    });
+  }).catch(console.error);
+}
+
 
 
 // export const deleteCard = id => (dispatch, getState) => {

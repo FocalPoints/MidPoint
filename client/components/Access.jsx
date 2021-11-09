@@ -6,14 +6,15 @@ import * as actions from '../actions/actions';
 import Main from './Main';
 
 const mapStateToProps = ({
-   mainPage: { pageToDisplay , loggedIn , selfInfo, friendsList, notFriendsList, midpoint } 
+   mainPage: { currentUserID, pageToDisplay , loggedIn , selfInfo, friendsList, notFriendsList, midpoint } 
   }) => ({
   pageToDisplay,
   loggedIn,
   selfInfo,
   friendsList,
   notFriendsList,
-  midpoint
+  midpoint,
+  currentUserID,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -22,11 +23,12 @@ const mapDispatchToProps = dispatch => ({
   logIn: (user,pass) => dispatch(actions.logIn(user,pass)),
   signUpUser: (user,pass,address) => dispatch(actions.signUpUser(user,pass,address)),
   updateLocation: (address) => dispatch(actions.updateLocation(address)),
-  getMidpoint: (user, friendUser) => dispatch(actions.getMidpoint(user, friendUser))
+  getMidpoint: (user, friendUser) => dispatch(actions.getMidpoint(user, friendUser)),
+  addFriend: (user1_id, user2_id) => dispatch(actions.addFriend(user1_id, user2_id)),
 });
 
 
-const Access = ({pageToDisplay, loggedIn, pageToSignup, signUpCancel, logIn, signUpUser, selfInfo, updateLocation, friendsList, notFriendsList, getMidpoint, midpoint}) => {
+const Access = ({pageToDisplay, currentUserID, addFriend, loggedIn, pageToSignup, signUpCancel, logIn, signUpUser, selfInfo, updateLocation, friendsList, notFriendsList, getMidpoint, midpoint}) => {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -44,7 +46,7 @@ const Access = ({pageToDisplay, loggedIn, pageToSignup, signUpCancel, logIn, sig
   }
 
    if (loggedIn) {
-    return (<Main {...selfInfo} updateLocation={updateLocation} friendsList={friendsList} notFriendsList={notFriendsList} getMidpoint={getMidpoint} midpoint={midpoint}/>)
+    return (<Main {...selfInfo} updateLocation={updateLocation} friendsList={friendsList} notFriendsList={notFriendsList} getMidpoint={getMidpoint} currentUserID={currentUserID} addFriend={addFriend} midpoint={midpoint}/>)
   }
 
   // Log In Page
