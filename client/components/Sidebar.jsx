@@ -60,15 +60,19 @@ const Sidebar = (props) => {
 
         {/* when clicked, triggers action to get that friend's location and use it to find the midpoint */}
       </div>
-      {/* eventual functionality to add a friend to user's friend list by name search */}
+      <div id="friend-list" className='center'>
+        <p>Add New Friends:</p>
+        {/* dropdown populated with users from friends list */}
+        {console.log('Props not friends list', props.notFriendsList)} {/* array of objects with user_id, username, and coordinates properties*/}
 
-      <div className='inputStyles' className='center'>{props.notFriendsList.map((notFriend, i) => {
+
+        <div className='inputStyles' className='center'>{props.notFriendsList.map((notFriend, i) => {
         return (<div id={notFriend.user_id} key={notFriend.user_id} value={notFriend.username}>
           <button onClick={() => props.addFriend(props.currentUserID, notFriend.user_id)}>
             Add Friend
           </button> {notFriend.username} </div>)
       })}
-
+        </div>
       </div>
     </div>
   )

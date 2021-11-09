@@ -208,7 +208,7 @@ dbController.addFriend = async (req, res, next) => {
     const values = [user1_id, user2_id];
     const query = `
       INSERT INTO friends (user1_id, user2_id) VALUES($1, $2)
-      RETURNING *
+      RETURNING user1_id as user_id
     `;
     const insert = await db.query(query, values);
     res.locals.user = insert.rows[0];
