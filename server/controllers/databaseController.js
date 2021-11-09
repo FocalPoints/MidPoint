@@ -64,8 +64,12 @@ dbController.verifyUser = async (req, res, next) => {
 
 // post/create a new user (encrypt password)
 /*
-Expects: req.body = { username: string, password: string, address: string }
+Expects: 
+  req.body = { username: string, password: string, address: string }
 Returns: 
+  res.locals.verified = boolean,
+  res.locals.message = string,
+  res.locals.user = userObj
 */
 dbController.addUser = async (req, res, next) => {
   try {
@@ -73,7 +77,7 @@ dbController.addUser = async (req, res, next) => {
     // turns address into coordinates
     const geoData = await geocoder.geocode(address);
     const coordinates = { lat: geoData[0].latitude, lng: geoData[0].longitude };
-    if (typeof username === 'string' && typeof password === 'string' && username.length && password.length ) {
+    if (typeof username === 'string' && typeof password === 'string' && username.length && password.length) {
       // encrypt the password
       const encrypted = await bcrypt.hash(password, 10);
       const query = `INSERT INTO users(username, password, coordinates) VALUES($1, $2, $3) RETURNING *`;
@@ -102,16 +106,19 @@ dbController.addUser = async (req, res, next) => {
 // TODO! FINISH THIS METHOD
 // PUT / update a user's data
 /*
-Expects:
+Expects: 
+  req.body = { user_id, newCoordinates }
 Returns: 
+  res.locals.user = user;
 */
 dbController.updateUser = async (req, res, next) => {
-  const { userID, newCoordinates } = req.body;
-  const query = `UPDATE users SET user.coordinates = $2 WHERE user.user_id = $1`
-  const values = [newCoordinates];
+  const { user_id, newCoordinates } = req.body;
+  const query = `UPDATE users SET users.coordinates = $2 WHERE users.user_id = $1`
+  const values = [user_id, newCoordinates];
   try {
     const response = await db.query(query, values);
     res.locals.user = response;
+    return next();
   } catch (err) {
     return next(err);
   }
@@ -120,7 +127,9 @@ dbController.updateUser = async (req, res, next) => {
 // get list of all users on the current users friend list
 /*
 Expects:
+  res.locals.user = { user_id: int }
 Returns: 
+  res.locals.friendList = [ userObj ]
 */
 dbController.getFriendList = async (req, res, next) => {
   try {
@@ -145,7 +154,9 @@ dbController.getFriendList = async (req, res, next) => {
 // get list of all users NOT on current user's friends list
 /*
 Expects:
+  res.locals.user = { user_id: int }
 Returns: 
+  res.locals.notFriendList = [ userObj ]
 */
 dbController.getNotFriendList = async (req, res, next) => {
   try {
@@ -187,7 +198,9 @@ dbController.getCoords = async (req, res, next) => {
 // adds a new friend to the current users friend list
 /*
 Expects:
+  req.body = { user1_id: int, user2_id: int }
 Returns: 
+  res.locals.insert = [userObj]
 */
 dbController.addFriend = async (req, res, next) => {
   try {

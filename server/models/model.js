@@ -7,12 +7,6 @@ const pool = new Pool({
   connectionString: PG_URI
 });
 
-/* 
-get the username, and the friends name
-from every column where the user_id is in column 1
-OR the user_id is in column 2
-*/
-
 // We export an object that contains a property called query,
 // which is a function that returns the invocation of pool.query() after logging the query
 // This will be required in the controllers to be the access point to the database
