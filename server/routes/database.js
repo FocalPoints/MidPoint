@@ -14,7 +14,7 @@ Returns: {
     notFriendList: [ userObject ]
   }
 
-  userObject: { user_id: int, username: string, password: string, coordinates: { lat: num, lng: num } }Returns: 
+  userObject: { user_id: int, username: string, password: string, coordinates: { lat: num, lng: num } }
 */
 router.get('/login', dbController.verifyUser, dbController.getFriendList, dbController.getNotFriendList, (req, res) => {
   return res.json(res.locals);
