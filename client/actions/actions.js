@@ -2,7 +2,6 @@ import * as types from '../constants/actionTypes';
 import axios from 'axios';
 
 export const logIn = (username, password) => (dispatch) => {
-
   const request = {
     method: 'GET',
     url: '/database/login',
@@ -16,10 +15,6 @@ export const logIn = (username, password) => (dispatch) => {
     });
   }).catch(console.error);
 };
-
-
-
-
 
 export const pageToSignup = () => ({
   type: types.PAGE_TO_SIGN_UP,

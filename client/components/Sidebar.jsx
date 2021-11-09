@@ -47,11 +47,7 @@ const Sidebar = (props) => {
       </div>
       <div id="friend-list" className='center'>
       <p>Friends:</p>
-        {/* dropdown populated with users from friends list */}
-        {console.log('Props friends list', props.friendsList)} {/* array of objects with user_id, username, and coordinates properties*/}
-
-
-        <div className='inputStyles'>{props.friendsList.map((friend) => {return(<div id={friend.user_id} key={friend.user_id} value={friend.username}> 
+        <div >{props.friendsList.map((friend) => {return(<div id={friend.user_id} key={friend.user_id} value={friend.username}> 
         <button onClick={() => props.getMidpoint(props.address, friend.coordinates)}>
           Meet with {friend.username}
         </button> </div>)})}</div>
@@ -63,7 +59,7 @@ const Sidebar = (props) => {
       <p>Add a friend:</p>
         <div className='center scrollContainer'>{props.notFriendsList.map((notFriend, i ) => {return(<div id={notFriend.user_id} key={notFriend.user_id} value={notFriend.username}> 
         <button onClick={() => props.getMidpoint(props.address, props.friendsList[i].coordinates)}>
-          Add Friend {notFriend.username}
+          Add {notFriend.username}
         </button> </div>)})}
 
         </div>
