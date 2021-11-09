@@ -109,15 +109,15 @@ dbController.addUser = async (req, res, next) => {
 Expects: 
   req.body = { user_id, newCoordinates }
 Returns: 
-  res.locals.user = user;
+  res.locals.user = userObj;
 */
 dbController.updateUser = async (req, res, next) => {
   const { user_id, newCoordinates } = req.body;
-  const query = `UPDATE users SET users.coordinates = $2 WHERE users.user_id = $1`
+  const query = `UPDATE users SET users.coordinates = $2 WHERE users.user_id = $1 RETURNING *`
   const values = [user_id, newCoordinates];
   try {
     const response = await db.query(query, values);
-    res.locals.user = response;
+    res.locals.user = response.rows[0];
     return next();
   } catch (err) {
     return next(err);
@@ -200,19 +200,18 @@ dbController.getCoords = async (req, res, next) => {
 Expects:
   req.body = { user1_id: int, user2_id: int }
 Returns: 
-  res.locals.insert = [userObj]
+  res.locals.insert = userObj
 */
 dbController.addFriend = async (req, res, next) => {
   try {
     const { user1_id, user2_id } = req.body;
-    res.locals.user = { user_id: user1_id };
     const values = [user1_id, user2_id];
     const query = `
       INSERT INTO friends (user1_id, user2_id) VALUES($1, $2)
       RETURNING *
     `;
     const insert = await db.query(query, values);
-    res.locals.insert = insert.rows;
+    res.locals.user = insert.rows[0];
     return next();
   }
   catch (err) {
