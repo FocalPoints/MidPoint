@@ -10,27 +10,22 @@ const options = {
 }
 
 const geocoder = NodeGeocoder(options);
-// get / verify current user
+
+// verify an existing user
 /*
-Expects: req.body = {username, password}
-Returns: {verified: bool, message: string, user: userObject}
-User Object: {
-  user_id: int,
-  username: string,
-  password: string,
-  created_on: timestamp,
-  coordinate: {
-    lat: num,
-    lng: num
-  }
-}
+Expects: 
+  req.query = { username: string, password: string }
+Returns: 
+  res.locals.verified: boolean
+  res.locals. message: string
+  res.locals.user: userObject
+
+  userObject: { user_id: int, username: string, password: string, coordinates: { lat: num, lng: num } }
 */
 dbController.verifyUser = async (req, res, next) => {
   const { username, password } = req.query;
-  // if username / password is empty string / not a string throw error
   const query = `SELECT * FROM users WHERE users.username = $1`
   const values = [username];
-  console.log('Query', req.query);
   try {
     // await query response
     const response = await db.query(query, values);
@@ -52,7 +47,6 @@ dbController.verifyUser = async (req, res, next) => {
       res.locals.verified = false;
       res.locals.message = 'Invalid password';
       res.locals.user = {};
-      res.locals.friends = [];
       return next();
     }
     // send object upon successful log-in
@@ -69,29 +63,24 @@ dbController.verifyUser = async (req, res, next) => {
 }
 
 // post/create a new user (encrypt password)
-/* 
-Expects: req.body: { username, password, coordinates }
-Returns: [{ user_id: int,
-  username: string,
-  password: string,
-  created_on: timestamp,
-  coordinate: {
-    lat: num,
-    lng: num }]
+/*
+Expects: req.body = { username: string, password: string, address: string }
+Returns: 
 */
 dbController.addUser = async (req, res, next) => {
   try {
-    // declare a new user object with name, password, coords
     const { username, password, address } = req.body;
+    // turns address into coordinates
     const geoData = await geocoder.geocode(address);
     const coordinates = { lat: geoData[0].latitude, lng: geoData[0].longitude };
-    if (typeof username === 'string' && typeof password === 'string') {
+    if (typeof username === 'string' && typeof password === 'string' && username.length && password.length ) {
+      // encrypt the password
       const encrypted = await bcrypt.hash(password, 10);
       const query = `INSERT INTO users(username, password, coordinates) VALUES($1, $2, $3) RETURNING *`;
       const values = [username, encrypted, JSON.stringify(coordinates)];
       const response = await db.query(query, values);
       const user = response.rows[0];
-      
+
       res.locals.verified = true;
       res.locals.message = 'User created!'
       res.locals.user = user;
@@ -112,6 +101,10 @@ dbController.addUser = async (req, res, next) => {
 
 // TODO! FINISH THIS METHOD
 // PUT / update a user's data
+/*
+Expects:
+Returns: 
+*/
 dbController.updateUser = async (req, res, next) => {
   const { userID, newCoordinates } = req.body;
   const query = `UPDATE users SET user.coordinates = $2 WHERE user.user_id = $1`
@@ -124,12 +117,15 @@ dbController.updateUser = async (req, res, next) => {
   }
 }
 
-// get list of all users EXCEPT current user
+// get list of all users on the current users friend list
+/*
+Expects:
+Returns: 
+*/
 dbController.getFriendList = async (req, res, next) => {
-  // declare a var to store our search query
-  // not equal ->  <> OR !=
-  const { user_id } = res.locals.user;
-  const query = `
+  try {
+    const { user_id } = res.locals.user;
+    const query = `
     SELECT u2.user_id, u2.username, u2.coordinates 
     FROM users u1 JOIN friends 
     ON u1.user_id = friends.user1_id
@@ -137,9 +133,7 @@ dbController.getFriendList = async (req, res, next) => {
     ON u2.user_id = friends.user2_id
     WHERE u1.user_id = $1
   `;
-  const values = [user_id];
-  try {
-    // send data via res locals
+    const values = [user_id];
     const response = await db.query(query, values);
     res.locals.friendList = response.rows;
     return next();
@@ -148,19 +142,21 @@ dbController.getFriendList = async (req, res, next) => {
   }
 }
 
-// get list of all users not on current user's friends list
+// get list of all users NOT on current user's friends list
+/*
+Expects:
+Returns: 
+*/
 dbController.getNotFriendList = async (req, res, next) => {
-  // declare a var to store our search query
-  // not equal ->  <> OR !=
-  const { user_id } = res.locals.user;
-  const query = `
+  try {
+    const { user_id } = res.locals.user;
+    const query = `
     SELECT * FROM users WHERE
     user_id != $1 AND
     user_id NOT IN (SELECT user2_id from users JOIN friends ON users.user_id = friends.user1_id
     WHERE users.user_id = $1)
   `;
-  const values = [user_id];
-  try {
+    const values = [user_id];
     // send data via res locals
     const response = await db.query(query, values);
     res.locals.notFriendList = response.rows;
@@ -171,6 +167,10 @@ dbController.getNotFriendList = async (req, res, next) => {
 }
 
 // given an address as a string return the coordinates
+/*
+Expects:
+Returns: 
+*/
 dbController.getCoords = async (req, res, next) => {
   try {
     const { address } = req.body
@@ -185,14 +185,14 @@ dbController.getCoords = async (req, res, next) => {
 }
 
 // adds a new friend to the current users friend list
-/* 
-expect:
-req.body: { user1_id, user2_id }
+/*
+Expects:
+Returns: 
 */
 dbController.addFriend = async (req, res, next) => {
   try {
     const { user1_id, user2_id } = req.body;
-    res.locals.user = { user_id: user1_id};
+    res.locals.user = { user_id: user1_id };
     const values = [user1_id, user2_id];
     const query = `
       INSERT INTO friends (user1_id, user2_id) VALUES($1, $2)
@@ -202,23 +202,12 @@ dbController.addFriend = async (req, res, next) => {
     res.locals.insert = insert.rows;
     return next();
   }
-  catch(err) {
+  catch (err) {
     return next(err);
   }
 }
 
 // TODOS //
 // DELETE user from friend list
-
-// post to friends table with user1_id: current user, user2_id, selected user
-// dbController.addFriends = async (req, res, next) => {
-//   try {
-
-//   }
-//   catch(err) {
-
-//   }
-// }
-
 
 module.exports = dbController;
