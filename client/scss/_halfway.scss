@@ -1,0 +1,144 @@
+#app {
+  display: flex;
+  background: $DarkBlueBG;
+  height: 100%;
+  align-items: top;
+  justify-content: center;
+}
+
+.loginStyles {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  img {
+    margin-bottom: 1em;
+  };
+
+  button {
+    background-color: $Olive;
+    color: $DarkBlue;
+    font-size: 2em;
+    height: 3rem;
+    border-radius: 15px;
+    border-style: none;
+    box-shadow: 1px 2px 5px 1px lightcoral;
+    margin-bottom: 0.5em;
+    min-width: 150px;
+  
+    &:hover {
+      background-color: $DarkBlue;
+      color: $Olive;
+    }
+  }
+  
+  input {
+    font-size: 2em;
+    height: 3rem;
+    margin-bottom: 0.5em;
+    border-radius: 15px;
+    padding-left: 15px;
+  }
+
+  h1 {
+    font-size: 5rem;
+    color: $Olive;
+  }
+}
+
+
+.mainStyles {
+  display: flex;
+  flex-direction: row;
+  color: $DarkBlue;
+  height: 100%;
+  font-size: 1.5em;
+}
+
+.mapStyles {
+  border: 1px solid gray;
+  height: 600px;
+  width: 1000px;
+  margin: 12px 0px;
+}
+
+.mapContainer {
+  display: flex;
+  flex-direction: column;
+  margin: 0px 0px 0px 20px;
+}
+
+.flexAlignCenter {
+  display: flex;
+  align-items: center;
+}
+
+.sidebarStyles {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  background-color: $Olive;
+  width: 21%;
+  height: 100%;
+  border: 1px solid black;
+  border-radius: 6px;
+  margin: 10px 0px 0px 6px;
+  padding-left: 0.5em;
+
+  input {
+    font-size: .8em;
+    height: 2rem;
+    margin-bottom: 0.5em;
+    border-radius: 15px;
+    padding-left: 15px;
+    background-color: $DarkBlue;
+    color: $Olive;
+  }
+
+  button {
+    background-color: $DarkBlue;
+    color: $Olive;
+    font-size: 1em;
+    height: 2rem;
+    border-radius: 15px;
+    border-style: none;
+    box-shadow: 1px 2px 5px 1px lightcoral;
+    margin-bottom: 0.5em;
+    min-width: 150px;
+  
+    &:hover {
+      background-color: $Olive;
+      color: $DarkBlue;
+      border: 3px solid;
+    }
+  }
+}
+
+.scrollContainer {
+  overflow: scroll;
+  height: 350px;
+}
+
+.center {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.picStyles {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  margin: 10px 16px
+}
+
+.inputStyles {
+  background-color: 9db2cf;
+  margin: 0px 6px
+}
+
+.pStyles {
+  margin-top: 24px
+}
