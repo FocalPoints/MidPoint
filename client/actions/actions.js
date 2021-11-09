@@ -17,10 +17,6 @@ export const logIn = (username, password) => (dispatch) => {
   }).catch(console.error);
 };
 
-
-
-
-
 export const pageToSignup = () => ({
   type: types.PAGE_TO_SIGN_UP,
 });
@@ -61,6 +57,21 @@ export const getMidpoint = (userCoords, friendCoords) => {
     type: types.GET_MIDPOINT,
     payload:  {'lat': lat, 'lng': lng}
   })
+}
+
+export const addFriend = (user1_id, user2_id) => (dispatch) => {
+  const request = {
+    method: 'POST',
+    url: 'database/friend',
+    data: {user1_id, user2_id}
+  }
+
+  axios.request(request).then((response) => {
+    if(response.status = 201) dispatch({
+      type: types.ADD_FRIEND,
+      payload: response.data,
+    });
+  }).catch(console.error);
 }
 
 
