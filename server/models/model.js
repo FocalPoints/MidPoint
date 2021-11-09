@@ -1,17 +1,11 @@
 const { Pool } = require('pg');
 
-const PG_URI = 'POST-GRES-KEY-HERE'
+const PG_URI = `postgres://gwzelhay:bpQW0XH3OXZFr34fAp1-Bj8x1997cnXS@fanny.db.elephantsql.com/gwzelhay`
 
 // create a new pool here using the connection string above
 const pool = new Pool({
   connectionString: PG_URI
 });
-
-/* 
-get the username, and the friends name
-from every column where the user_id is in column 1
-OR the user_id is in column 2
-*/
 
 // We export an object that contains a property called query,
 // which is a function that returns the invocation of pool.query() after logging the query
