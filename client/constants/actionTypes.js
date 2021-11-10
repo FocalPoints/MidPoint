@@ -5,4 +5,5 @@ export const SIGN_UP_CANCEL = 'SIGN_UP_CANCEL';
 export const UPDATE_LOCATION = 'UPDATE_LOCATION';
 export const GET_MIDPOINT = 'GET_MIDPOINT';
 export const ADD_FRIEND = 'ADD_FRIEND';
+export const ADD_SELECTED = 'ADD_SELECTED';
 

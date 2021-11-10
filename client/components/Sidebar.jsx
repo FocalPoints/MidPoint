@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Avatar from 'react-avatar';
 
 const Sidebar = (props) => {
 
@@ -19,15 +20,16 @@ const Sidebar = (props) => {
         <div className='flexAlignCenter'>
 
           {/* shows avatar photo and user greeting */}
-          <img src={props.avatar} className='picStyles' />
-          <p className='pStyles'>Welcome back, {props.name}!</p>
+          <Avatar className="avatar" size='30px' name={props.username} />
+
+          <p className='pStyles'>Welcome back, {props.username}!</p>
 
         </div>
         <div className='flexAlignCenter'>
 
           {/* shows location icon and user location */}
           <img src={imgUrl} className='picStyles' />
-          <p className='pStyles'>{JSON.stringify(props.address)}</p>
+          <p className='pStyles'>{JSON.stringify(props.coordinates)}</p>
 
         </div>
         <div className='center'>
@@ -48,30 +50,38 @@ const Sidebar = (props) => {
       <div id="friend-list" className='center'>
         <p>Friends:</p>
         {/* dropdown populated with users from friends list */}
-        {console.log('Props friends list', props.friendsList)} {/* array of objects with user_id, username, and coordinates properties*/}
-
 
         <div className='inputStyles'>{props.friendsList.map((friend) => {
-          return (<div id={friend.user_id} key={friend.user_id} value={friend.username}>
-            <button onClick={() => props.getMidpoint(props.address, friend.coordinates)}>
-              Meet in the Middle
-            </button> {friend.username} </div>)
-        })}</div>
+          return (
+            <div key={friend.user_id}>
+              <input type="checkbox" id={friend.user_id} name={friend.username} onChange={(e) => props.addSelected(friend, e.target.checked)} />
+              <label htmlFor={friend.username}>{friend.username}</label>
+            </div>
+            // {/* <div id={friend.user_id} key={friend.user_id} value={friend.username}>
+            //   <button onClick={() => props.getMidpoint(props.coordinates, friend.coordinates)}>
+            //     Meet in the Middle
+            //   </button> {friend.username}
+            // </div> */}
+
+          )
+        })
+        }
+        </div>
 
         {/* when clicked, triggers action to get that friend's location and use it to find the midpoint */}
       </div>
       <div id="friend-list" className='center'>
         <p>Add New Friends:</p>
         {/* dropdown populated with users from friends list */}
-        {console.log('Props not friends list', props.notFriendsList)} {/* array of objects with user_id, username, and coordinates properties*/}
+
 
 
         <div className='inputStyles' className='center'>{props.notFriendsList.map((notFriend, i) => {
-        return (<div id={notFriend.user_id} key={notFriend.user_id} value={notFriend.username}>
-          <button onClick={() => props.addFriend(props.currentUserID, notFriend.user_id)}>
-            Add Friend
-          </button> {notFriend.username} </div>)
-      })}
+          return (<div id={notFriend.user_id} key={notFriend.user_id} value={notFriend.username}>
+            <button onClick={() => props.addFriend(props.user_id, notFriend.user_id)}>
+              Add Friend
+            </button> {notFriend.username} </div>)
+        })}
         </div>
       </div>
     </div>
