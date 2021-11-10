@@ -6,6 +6,15 @@ import { updateLocation } from '../actions/actions';
 const initialState = {
   pageToDisplay: 'login',
   currentUserID: '',
+  // currentUser: {
+  //  id: null,
+  //  avatar: 'https://www.mindenpictures.com/cache/pcache2/90392052.jpg',
+  //  name: '',
+  //  coordinates: {
+  //    lat: 40,
+  //    lng: -74
+  //  }
+  // }
   loggedIn: false,
   selfInfo: { avatar: 'https://www.mindenpictures.com/cache/pcache2/90392052.jpg', name: 'Wunderpus Photogenicus', address: { lat: 40, lng: -74 } },
   friendsList: [],
