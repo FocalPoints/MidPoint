@@ -6,7 +6,7 @@ const dbController = {};
 
 const options = {
   provider: 'google',
-  apiKey: 'API-KEY-HERE',
+  apiKey: 'AIzaSyDFChrEvcCz_8xYMlri1GsNKyh2AbsEV1I',
 }
 
 const geocoder = NodeGeocoder(options);
@@ -85,13 +85,15 @@ dbController.addUser = async (req, res, next) => {
     const { username, password, address } = req.body;
     const geoData = await geocoder.geocode(address);
     const coordinates = { lat: geoData[0].latitude, lng: geoData[0].longitude };
+    //getting all the right data + data types before next line runs
     if (typeof username === 'string' && typeof password === 'string') {
       const encrypted = await bcrypt.hash(password, 10);
+      console.log(encrypted);
       const query = `INSERT INTO users(username, password, coordinates) VALUES($1, $2, $3) RETURNING *`;
       const values = [username, encrypted, JSON.stringify(coordinates)];
       const response = await db.query(query, values);
       const user = response.rows[0];
-      
+      console.log(user)
       res.locals.verified = true;
       res.locals.message = 'User created!'
       res.locals.user = user;
