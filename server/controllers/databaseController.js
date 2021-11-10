@@ -109,15 +109,16 @@ dbController.addUser = async (req, res, next) => {
   }
 }
 
-// TODO! FINISH THIS METHOD
-// PUT / update a user's data
 dbController.updateUser = async (req, res, next) => {
-  const { userID, newCoordinates } = req.body;
-  const query = `UPDATE users SET user.coordinates = $2 WHERE user.user_id = $1`
-  const values = [newCoordinates];
+  const { address, id } = req.body;
+  let newCoordinates = await geocoder.geocode(address);
+  newCoordinates = { lat: newCoordinates[0].latitude, lng: newCoordinates[0].longitude };
+  const query = `UPDATE users SET coordinates = $1 WHERE user_id = $2 RETURNING *`
+  const values = [newCoordinates, id];
   try {
     const response = await db.query(query, values);
-    res.locals.user = response;
+    res.locals.user = response.rows[0];
+    return next();
   } catch (err) {
     return next(err);
   }
