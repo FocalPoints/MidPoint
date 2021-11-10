@@ -22,6 +22,7 @@
   "dependencies": {
     "@babel/plugin-transform-async-to-generator": "^7.16.0",
     "@babel/runtime": "^7.16.0",
+    "@react-google-maps/api": "^2.5.0",
     "axios": "^0.24.0",
     "bcryptjs": "^2.4.3",
     "eslint": "^8.1.0",
