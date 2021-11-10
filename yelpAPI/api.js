@@ -21,10 +21,10 @@ const getYelp = (path, queryParams) => {
   return yelpData;
 }
 
-const searchBusinesses = (term, location) => {
+const searchBusinesses = (latitude, longitude) => {
   const [businesses, setBusinesses] = useState([]);
   const [totalBusinesses, setTotalBusinesses] = useState();
-  const [searchParams, setSearchParams] = useState(term, location);
+  const [searchParams, setSearchParams] = useState(latitude, longitude);
 
   useEffect(() => {
     const fetchData = async () => {
