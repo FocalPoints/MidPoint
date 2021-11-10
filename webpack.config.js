@@ -30,7 +30,7 @@ module.exports = {
         loader: 'babel-loader',
         options: {
           presets: ['@babel/preset-env', '@babel/preset-react'],
-          plugins: ['@babel/plugin-transform-runtime', '@babel/transform-async-to-generator'],
+          plugins: ['@babel/plugin-transform-runtime', '@babel/transform-async-to-generator', '@babel/plugin-syntax-jsx'],
         }
       },
     },
