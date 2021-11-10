@@ -5,12 +5,12 @@ import { updateLocation } from '../actions/actions';
 
 const initialState = {
   pageToDisplay: 'login',
-  currentUserID: '',
   loggedIn: false,
-  selfInfo: { avatar: 'https://www.mindenpictures.com/cache/pcache2/90392052.jpg', name: 'Wunderpus Photogenicus', address: { lat: 40, lng: -74 } },
+  midpoint: { lat: 40.7142700, lng: -74.0059700 },
+  currentUser: {},
+  selectedLocations: [],
   friendsList: [],
   notFriendsList: [],
-  midpoint: { lat: 40.7142700, lng: -74.0059700 },
 };
 
 const mainPageReducer = (state = initialState, action) => {
@@ -27,66 +27,101 @@ const mainPageReducer = (state = initialState, action) => {
         pageToDisplay: 'login',
       };
 
-    case types.LOG_IN:
-      if (action.payload.verified) {
+    case types.LOG_IN: {
+      const { verified, message, user, friendList, notFriendList } = action.payload;
+      if (verified) {
         const tempObj = { ...state.selfInfo };
         tempObj.name = action.payload.user.username;
-        tempObj.address = {lat: Number(action.payload.user.coordinates.lat), lng: Number(action.payload.user.coordinates.lng)}
+        tempObj.address = user.coordinates;
+        const newLocationList = state.selectedLocations.slice();
+        newLocationList.push(user);
 
         return {
           ...state,
-          currentUserID: action.payload.user.user_id,
+          currentUserID: user.user_id,
+          currentUser: user,
           selfInfo: tempObj,
-          friendsList: action.payload.friendList,
-          notFriendsList: action.payload.notFriendList,
+          friendsList: friendList,
+          selectedLocations: newLocationList,
+          notFriendsList: notFriendList,
+          midpoint: tempObj.address,
           loggedIn: true,
         };
       }
+    }
+    case types.SIGN_UP_USER: {
+      const { verified, message, user, friendList, notFriendList } = action.payload;
+      if (verified) {
+        const tempObj = { ...state.selfInfo };
+        tempObj.name = user.username;
+        tempObj.address = user.coordinates;
 
-      case types.SIGN_UP_USER:
+        const newLocationList = state.selectedLocations.slice();
+        newLocationList.push(user);
 
-        if(action.payload.verified === true) {
-          const tempObj = {...state.selfInfo};
-          tempObj.name = action.payload.user.username;
-          tempObj.address = `{lat: ${action.payload.user.coordinates.lat}, lng: ${action.payload.user.coordinates.lng}}`;
-         
-          return {
-            ...state,
-            currentUserID: action.payload.user.user_id,
-            selfInfo: tempObj,
-            loggedIn: true,
-            pageToDisplay: 'login',
-          };    
-        }
-         return {
-          ...state,
-          pageToDisplay: 'signup',
-         };
-
-
-      case types.UPDATE_LOCATION:
-        const tempObj = Object.assign({}, state.selfInfo);
-        tempObj.address = action.payload.address;
         return {
           ...state,
+          currentUserID: user.user_id,
+          currentUser: user,
           selfInfo: tempObj,
-        }
-        
-      case types.GET_MIDPOINT:
-        return {
-          ...state,
-          midpoint: action.payload
-        }
+          loggedIn: true,
+          pageToDisplay: 'login',
+          friendsList: friendList,
+          selectedLocations: newLocationList,
+          notFriendsList: notFriendList,
+          midpoint: user.coordinates,
+        };
+      }
+      return {
+        ...state,
+        pageToDisplay: 'signup',
+      };
+    }
+
+    case types.UPDATE_LOCATION:
+      const tempObj = Object.assign({}, state.selfInfo);
+      tempObj.address = action.payload.address;
+      return {
+        ...state,
+        selfInfo: tempObj,
+      }
+
+    case types.GET_MIDPOINT:
+      return {
+        ...state,
+        midpoint: action.payload
+      }
 
 
     case types.ADD_FRIEND:
-      console.log("add friend triggered")
 
       return {
         ...state,
         friendsList: action.payload.friendList,
         notFriendsList: action.payload.notFriendList,
       }
+
+    case types.ADD_SELECTED: {
+      const { user, boolean } = action.payload;
+      console.log('user, boolean:', user, boolean);
+      let newLocationList = state.selectedLocations.slice();
+      if (boolean) {
+        newLocationList.push(user);
+      }
+      else {
+        newLocationList = newLocationList.filter(friend => {
+          return friend.user_id !== user.user_id;
+        })
+        console.log(newLocationList);
+      }
+
+      return {
+        ...state,
+        selectedLocations: newLocationList,
+      }
+    }
+
+
 
     default:
       return state;
