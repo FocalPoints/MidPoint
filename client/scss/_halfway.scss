@@ -154,9 +154,12 @@
 }
 .inputStyles {
   background-color: 9db2cf;
-  margin: 0px 6px
+  margin: 0px 6px;
+  height: 180px;
+  overflow: scroll;
 }
 
 .pStyles {
-  margin-top: 24px
+  margin-top: 24px;
 }
+

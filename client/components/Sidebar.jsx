@@ -76,7 +76,7 @@ const Sidebar = (props) => {
 
 
 
-        <div className='inputStyles' className='center'>{props.notFriendsList.map((notFriend, i) => {
+        <div className='inputStyles'>{props.notFriendsList.map((notFriend, i) => {
           return (<div id={notFriend.user_id} key={notFriend.user_id} value={notFriend.username}>
             <button onClick={() => props.addFriend(props.user_id, notFriend.user_id)}>
               Add Friend
