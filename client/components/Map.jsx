@@ -21,6 +21,7 @@ const Map = (props) => {
         // address={obj.address}
       />
     });
+    console.log(cafeCards);
   }, [cafes]);
 
     return (
@@ -37,12 +38,12 @@ const Map = (props) => {
               defaultZoom={15}>
               {/* do markers go in here? */}
               {/* <Marker lat={midpoint.lat} lng = {midpoint.lng} text='midpoint' icon={imgUrl} /> */}
-              <Marker
-                lat={props.address.lat}
-                lng={props.address.lng}
-                name="My Marker"
-                color="blue"
-              />
+          <Marker
+            lat={props.address.lat}
+            lng={props.address.lng}
+            name="My Marker"
+            color="blue"
+          />
 
           <Marker
             lat={props.midpoint.lat}
@@ -53,7 +54,8 @@ const Map = (props) => {
 
           { cafeCards }
 
-          <YelpButton cafes = {cafes} lat={props.midpoint.lat} lng={props.midpoint.lng} setCafes={setCafes}/>
+          <YelpButton lat={props.midpoint.lat} lng={props.midpoint.lng} setCafes={setCafes} cafes={cafes} />
+            
           </GoogleMapReact>
           </div>
         </div>

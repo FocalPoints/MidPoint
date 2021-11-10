@@ -3,7 +3,7 @@ import '../scss/yelpbutton.scss';
 
 function YelpButton(props) {
   // grabbing lat, lng of current midpoint as well as 'setCafe' method from parent
-  const { lat, lng, setCafes } = props;
+  const { lat, lng, setCafes, cafes } = props;
 
   const getCafes = () => {
     const body = {latitude : lat, longitude: lng};
@@ -18,8 +18,9 @@ function YelpButton(props) {
     .then(data => {
       // setting 'cafes' state with the new data returned from server
       setCafes(data);
+      console.log(cafes);
     })
-    .catch(err => console.log('ERROR FETCHING FROM FRONT END'));
+    .catch(err => console.log('ERROR FETCHING FROM FRONT END', err));
   }
 
   return (

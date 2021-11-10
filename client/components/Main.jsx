@@ -1,7 +1,6 @@
 import React from 'react';
 import Map from './Map'
 import Sidebar from './Sidebar'
-import queryString from 'query-string';
 
 const Main = (props) => {
 
