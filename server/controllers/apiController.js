@@ -1,3 +1,4 @@
+const queryString = require('query-string');
 const fetch = require('node-fetch');
 const apiController = {};
 
@@ -9,25 +10,25 @@ const BEARER_TOKEN = 'txLO3bBnTwEQyijGIc16dCPLup1BOLnVZB-Vv-tqNkfdQFdK8Q5dSZ9JUS
 
 
 apiController.getYelp = (req, res, next) => {
-  console.log('REQUEST BODY', req.body);
-  const { latitude, longitude } = req.body;
-  console.log('LATITUDE', latitude);
-  console.log('LONGITUDE', longitude);
+  // console.log('REQUEST BODY', req.body);
+  // console.log('stringified REQBODY: ', queryString.stringify(req.body));
+  const stringQuery = queryString.stringify(req.body);
+
   const queryParams = 'categories=cafes&radius=1000&sort_by=rating&limit=3';
 
-  fetch(`${yelpBaseEndpoint}/businesses/search?latitude=${latitude}&longitude=${longitude}&${queryParams}`, {
+  fetch(`${yelpBaseEndpoint}/businesses/search?${stringQuery}&${queryParams}`, {
     headers: {
-      Authorization: `Bearer ${BEARER_TOKEN}`
-      // Origin: 'localhost',
-      // withCredentials: true
+      Authorization: `Bearer ${BEARER_TOKEN}`,
+      Origin: 'localhost',
+      withCredentials: true
     }
   })
     .then((res) => res.json())
     .then((data) => {
       // console.log('RETURNED DATA FROM CONTROLLER: ', data);
-      console.log('ENTERED FETCH THEN BLOCK');
+      // console.log('ENTERED FETCH THEN BLOCK');
       const cafesArray = [];
-      console.log('RETURNED DATA FROM CONTROLLER: ', data);
+      // console.log('RETURNED DATA FROM CONTROLLER: ', data);
       data.businesses.forEach((cafe) => {
         const tempDetails = {};
         tempDetails.name = cafe.name;

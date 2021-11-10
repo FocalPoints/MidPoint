@@ -52,7 +52,7 @@ const Access = ({pageToDisplay, currentUserID, addFriend, loggedIn, pageToSignup
 
   const testFetch = () => {
     const body = {latitude : 37.786882, longitude: -122.399972};
-    fetch('/api', {
+    fetch('/api/yelp', {
       method: 'POST',
       body: JSON.stringify(body),
       headers: {
