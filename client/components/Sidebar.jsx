@@ -104,7 +104,7 @@ const Sidebar = (props) => {
           <button onClick={() => {
             const user2_id = props.currentUserID;
             console.log('Current user ID from update location', props.currentUserID);
-              props.addOutsideFriend(2, 'doubledoop', '659 S Ogden St, Denver, CO 80209');
+              props.addOutsideFriend(props.currentUserID, username, friendAddress);
               console.log('clicked')
             }}>
               {/* 659 S Ogden St, Denver, CO 80209 */}
