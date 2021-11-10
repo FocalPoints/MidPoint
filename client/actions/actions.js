@@ -42,15 +42,48 @@ export const signUpCancel = () => ({
   type: types.SIGN_UP_CANCEL,
 });
 
-export const updateLocation = (address) => ({
-  type: types.UPDATE_LOCATION,
-  payload: {address},
-})
+export const updateLocation = (address, id) => (dispatch) => {
+  console.log(address, id);
+
+  const request = {
+    method: 'PATCH',
+    url: 'database/newaddress',
+    data: { address, id }
+  }
+
+  // get back coordinates from address
+  axios.request(request).then((response) => {
+      const address = response.data.coordinates;
+      if (response.status == 201) dispatch({
+        type: types.UPDATE_LOCATION,
+        payload: {address},
+      })
+    }).catch(console.error);
+}
 
 export const getMidpoint = (userCoords, friendCoords) => {
 
-  const lat = (userCoords.lat + friendCoords.lat) / 2;
-  const lng = (userCoords.lng + friendCoords.lng) / 2;
+  // const lat = (userCoords.lat + friendCoords.lat) / 2;
+  // const lng = (userCoords.lng + friendCoords.lng) / 2;
+  console.log(userCoords, friendCoords)
+  // longitudinal difference
+  let dLng = friendCoords.lng - userCoords.lng;
+  dLng = dLng * Math.PI / 180;
+
+  // Convert to Radians
+  let lat1 = userCoords.lat * Math.PI / 180;
+  let lng1 = userCoords.lng * Math.PI / 180;
+  let lat2 = friendCoords.lat * Math.PI / 180;
+
+  let bX = Math.cos(lat2) * Math.cos(dLng);
+  let bY = Math.cos(lat2) * Math.sin(dLng);
+  let lat = Math.atan2(Math.sin(lat1) + Math.sin(lat2), Math.sqrt((Math.cos(lat1) + bX) * (Math.cos(lat1) + bX) + bY * bY));
+  let lng = lng1 + Math.atan2(bY, Math.cos(lat1) + bX);
+
+  lat = lat * (180 / Math.PI);
+  lng = lng * (180 / Math.PI);
+
+  console.log(lat, lng);
   
   return ({
     type: types.GET_MIDPOINT,
@@ -73,6 +106,21 @@ export const addFriend = (user1_id, user2_id) => (dispatch) => {
   }).catch(console.error);
 }
 
+//Add outside friend route to backend
+export const addOutsideFriend = (user2_id, username, coordinates ) => (dispatch) => {
+  const request = {
+    method: 'POST',
+    url: 'database/outsidefriend',
+    data: {user2_id, username, coordinates }
+  }
+
+  axios.request(request).then((response) => {
+    if(response.status = 201) dispatch({
+      type: types.ADD_OUTSIDE_FRIEND,
+      payload: response.data,
+    });
+  }).catch(console.error);
+}
 
 
 // export const deleteCard = id => (dispatch, getState) => {

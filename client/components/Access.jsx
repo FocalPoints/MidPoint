@@ -22,9 +22,10 @@ const mapDispatchToProps = dispatch => ({
   signUpCancel: () => dispatch(actions.signUpCancel()),
   logIn: (user,pass) => dispatch(actions.logIn(user,pass)),
   signUpUser: (user,pass,address) => dispatch(actions.signUpUser(user,pass,address)),
-  updateLocation: (address) => dispatch(actions.updateLocation(address)),
+  updateLocation: (address, id) => dispatch(actions.updateLocation(address, id)),
   getMidpoint: (user, friendUser) => dispatch(actions.getMidpoint(user, friendUser)),
   addFriend: (user1_id, user2_id) => dispatch(actions.addFriend(user1_id, user2_id)),
+  addOutsideFriend: (user2_id, username, coordinates) => dispatch(actions.addFriend(user2_id, username, coordinates)),
 });
 
 
@@ -48,7 +49,7 @@ const Access = ({pageToDisplay, currentUserID, addFriend, loggedIn, pageToSignup
    if (loggedIn) {
     return (<Main {...selfInfo} updateLocation={updateLocation} friendsList={friendsList} notFriendsList={notFriendsList} getMidpoint={getMidpoint} currentUserID={currentUserID} addFriend={addFriend} midpoint={midpoint}/>)
   }
-
+ 
   // Log In Page
   if (pageToDisplay === 'login') return (
     <div className='loginStyles'>
@@ -69,9 +70,10 @@ const Access = ({pageToDisplay, currentUserID, addFriend, loggedIn, pageToSignup
         value={password}
         onChange={(event) => onChangeHandler(event)}
         />
-      <button onClick={() => logIn(username,password)}>Login</button> 
+      
+      <button type = "submit" id="btn" onClick={() => logIn(username,password)}>Login</button> 
       <button onClick={pageToSignup}>Sign-up</button>
-        
+    
     </div>
   );
 
