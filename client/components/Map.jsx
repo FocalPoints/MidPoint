@@ -47,15 +47,18 @@ const Map = (props) => {
     <LoadScript
       googleMapsApiKey='AIzaSyA0cGzN3OzHoQxpXyz9ZqqDK1psI8eTg44'
     >
+      <div id="right-side-content" className='mapContainer'>
 
-      <GoogleMap
-        mapContainerStyle={containerStyle}
-        center={center}
-        zoom={10}
-        onLoad={onLoad}>
-
-      </GoogleMap>
-    </LoadScript>
+        <div id="map-container" className='mapStyles'>
+          <GoogleMap
+            mapContainerStyle={containerStyle}
+            center={center}
+            zoom={10}
+            onLoad={onLoad}>
+          </GoogleMap >
+        </div>
+      </div>
+    </LoadScript >
   )
 
 }
