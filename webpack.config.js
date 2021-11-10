@@ -15,7 +15,7 @@ module.exports = {
       directory: path.resolve(__dirname, 'build'),
       publicPath: './build',
     },
-    proxy: {
+    proxy: { 
       '/': 'http://localhost:3000'
     },
   },

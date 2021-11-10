@@ -1,5 +1,4 @@
 // import for converting query params
-import { tsNamespaceExportDeclaration } from '@babel/types';
 import queryString from 'query-string';
 
 // import for frontend
@@ -7,7 +6,7 @@ import { useState, useEffect } from 'react';
 
 const yelpBaseEndpoint = 'https://api.yelp.com/v3';
 const BEARER_TOKEN = 'txLO3bBnTwEQyijGIc16dCPLup1BOLnVZB-Vv-tqNkfdQFdK8Q5dSZ9JUSl_XjqZxVOCof3jqaeD7oA0YqWYriXzq-Jsn7dIdlZRV7ya9stnRcDIVk-VkSCI5N2KYXYx';
-z
+
 
 // sample fetch url  :  https://api.yelp.com/v3/businesses/search?latitude=37.786882&longitude=-122.399972
 
@@ -100,7 +99,7 @@ app.get('/api', async (req, res, next) => {
   try {
     console.log('TRY BLOCK ENTERED');
     terminal.write('TRY BLOCK ENTERED');
-    const rawData = await fetch('https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?latitude=37.786882&longitude=-122.399972', {
+    const rawData = await fetch('https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?latitude=37.786882&longitude=-122.399972&categories=cafes&radius=1000&sort_by=rating', {
       headers: {
         Authorization: `Bearer ${BEARER_TOKEN}`,
         Origin: 'localhost',
