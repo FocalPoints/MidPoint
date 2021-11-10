@@ -1,0 +1,6 @@
+List of stuff to test:
+
+server/controllers/databaseController.js:
+- line 40: expect returned 404 if user info is not sent to the
+- line 40: expect 404 if user info is inaccurate or cannot be processed correctly
+- line 40: expect 200 response if correct user info is is retrieved on login
