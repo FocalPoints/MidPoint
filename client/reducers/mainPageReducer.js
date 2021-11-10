@@ -91,11 +91,18 @@ const mainPageReducer = (state = initialState, action) => {
 
     case types.ADD_OUTSIDE_FRIEND:
       console.log("add outside friend triggered")
+      const newFriend = {
+        username: action.payload.username,
+        user_id: action.payload.user_id,
+        coordinates: action.payload.coordinates
+      };
+
+      const newFriendsList = [...state.friendsList];
+      newFriendsList.push(newFriend);
   
       return {
         ...state,
-        friendsList: action.payload.friendList,
-        notFriendsList: action.payload.notFriendList,
+        friendsList: newFriendsList
       }
   
 
