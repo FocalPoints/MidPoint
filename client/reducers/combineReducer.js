@@ -1,5 +1,5 @@
-import { combineReducers } from 'redux';
-import mainPageReducer from './mainPageReducer';
+import { combineReducers } from "redux";
+import mainPageReducer from "./mainPageReducer";
 
 export default combineReducers({
   mainPage: mainPageReducer,
