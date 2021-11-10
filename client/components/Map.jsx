@@ -58,6 +58,7 @@ const Map = (props) => {
                 </Marker>
               )
             })}
+            {<Marker key={'midpoint'} position={props.midpoint}/>}
           </GoogleMap >
         </div>
       </div>
