@@ -1,7 +1,7 @@
 import React from 'react';
 import GoogleMapReact from 'google-map-react';
 
-const imgUrl = 'https://i.imgur.com/WTHBUgm.png';
+const imgUrl = 'https://uxwing.com/wp-content/themes/uxwing/download/02-arrow-direction/direction-corner-top-left.png';
 const Marker = ({ icon }) => <img height={'100px'} width={'100px'} src={imgUrl}></img>;
 
 const Map = ({midpoint}) => {
@@ -14,7 +14,7 @@ const Map = ({midpoint}) => {
   
           <div id="map-container" className='mapStyles'>
             <GoogleMapReact 
-              bootstrapURLKeys={{key: 'YOUR-API-KEY-HERE'}}
+              bootstrapURLKeys={{key: 'GOOGLE-MAPS-API-KEY'}} //GOOGLE-MAPS-API-KEY
               defaultCenter={midpoint}
               defaultZoom={12}>
               {/* do markers go in here? */}
