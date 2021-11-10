@@ -1,25 +1,18 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import GoogleMapReact from 'google-map-react';
 import Avatar from 'react-avatar';
-import { GoogleMap, LoadScript } from '@react-google-maps/api'
+import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api'
 
 
 const imgUrl = 'https://i.imgur.com/WTHBUgm.png';
-// const Marker = ({ url }) => <div className="marker"><img src={url} /></div>
-const Marker = ({ url, name }) => <div className="marker"><Avatar className="avatar" size='30px' name={name} /></div>
+// // const Marker = ({ url }) => <div className="marker"><img src={url} /></div>
+// const Marker = (props) => <div className="marker"><Avatar className="avatar" size='30px' name={props.name} /></div>
 
 
-// const places = selectedLocations.map(friend => {
-//   const { user_id, username, coordinates } = friend;
-//   const { lat, lng } = coordinates;
-//   return (
-//     <Marker key={user_id} text={user_id} lat={lat} lng={lng} url={imgUrl} name={username}></Marker>
-//   );
-// })
 
 const containerStyle = {
-  width: '400px',
-  height: '400px'
+  width: '1000px',
+  height: '600px'
 };
 
 const center = {
@@ -28,6 +21,8 @@ const center = {
 };
 
 const Map = (props) => {
+  // const url = "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"
+
   const [map, setMap] = useState(null);
   const onLoad = useCallback((map) => setMap(map), []);
   useEffect(() => {
@@ -42,19 +37,25 @@ const Map = (props) => {
       });
       map.fitBounds(bounds);
     }
-  }, [map, props.markers]);
+  }, [map, props.selectedLocations]);
   return (
     <LoadScript
       googleMapsApiKey='AIzaSyA0cGzN3OzHoQxpXyz9ZqqDK1psI8eTg44'
     >
       <div id="right-side-content" className='mapContainer'>
-
         <div id="map-container" className='mapStyles'>
           <GoogleMap
             mapContainerStyle={containerStyle}
             center={center}
-            zoom={10}
+            zoom={12}
             onLoad={onLoad}>
+            {props.selectedLocations.map(friend => {
+              const { user_id, username, coordinates } = friend;
+              const { lat, lng } = coordinates;
+              return (
+                <Marker key={user_id} postition={{ lat: lat, lng: lng }} />
+              )
+            })}
           </GoogleMap >
         </div>
       </div>
