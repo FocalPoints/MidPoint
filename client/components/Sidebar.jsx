@@ -20,7 +20,7 @@ const Sidebar = (props) => {
         <div className='flexAlignCenter'>
 
           {/* shows avatar photo and user greeting */}
-          <Avatar className="avatar" size='30px' name={props.username} />
+          <Avatar className="avatar" size='30px' color='black' name={props.username} />
 
           <p className='pStyles'>Welcome back, {props.username}!</p>
 
