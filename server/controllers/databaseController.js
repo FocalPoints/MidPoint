@@ -109,7 +109,6 @@ dbController.addUser = async (req, res, next) => {
   }
 }
 
-// PATCH / update a user's data
 dbController.updateUser = async (req, res, next) => {
   const { address, id } = req.body;
   let newCoordinates = await geocoder.geocode(address);
@@ -197,6 +196,26 @@ dbController.addFriend = async (req, res, next) => {
     const values = [user1_id, user2_id];
     const query = `
       INSERT INTO friends (user1_id, user2_id) VALUES($1, $2)
+      RETURNING *
+    `;
+    const insert = await db.query(query, values);
+    res.locals.insert = insert.rows;
+    return next();
+  }
+  catch(err) {
+    return next(err);
+  }
+}
+
+// Adding a friend who is not a current user
+// This is a direct copy of the addFriend function with the INSERT QUERY adjusted. 
+dbController.addOutsideFriend = async (req, res, next) => {
+  try {
+    const { user2_id, username, coordinates } = req.body;
+    res.locals.user = { user_id: user2_id};
+    const values = [user2_id, username, coordinates];
+    const query = `
+      INSERT INTO outside_users (user2_id, username, coordinates) VALUES($1, $2, $3)
       RETURNING *
     `;
     const insert = await db.query(query, values);
