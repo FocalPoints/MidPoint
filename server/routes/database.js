@@ -26,6 +26,11 @@ router.post('/friend', dbController.addFriend, dbController.getFriendList, dbCon
   return res.status(201).json(res.locals)
 })
 
+//Add outside friend 
+router.post('/outsidefriend', dbController.addOutsideFriend, dbController.getFriendList, dbController.getNotFriendList, (req, res) => {
+  return res.status(201).json(res.locals)
+})
+
 router.get('/coordinates', dbController.getCoords, (req, res) => {
   return res.status(200).json(res.locals.coords);
 })
