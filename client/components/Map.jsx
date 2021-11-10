@@ -10,14 +10,15 @@ const Map = (props) => {
   const [cafes, setCafes] = useState([]);
   let cafeCards;
 
-  // creating cafe cards with data
+  // creating cafe cards every time 'cafes' changes
   useEffect(() => {
+    console.log(cafes);
     cafeCards = cafes.map(obj => {
       return <CafeCard
-        lat={obj.lat}
-        lng={obj.lng}
+        lat={obj.coordinates.lat}
+        lng={obj.coordinates.lng}
         name={obj.name}
-        address={obj.address}
+        // address={obj.address}
       />
     });
   }, [cafes]);
@@ -50,7 +51,7 @@ const Map = (props) => {
             color="red"
           />
 
-          {/* { cafeCards } */}
+          { cafeCards }
 
           <YelpButton lat={props.midpoint.lat} lng={props.midpoint.lng} setCafes={setCafes}/>
             

@@ -7,7 +7,7 @@ function YelpButton(props) {
 
   const getCafes = () => {
     const body = {latitude : lat, longitude: lng};
-    fetch('/api', {
+    fetch('/api/yelp', {
       method: 'POST',
       body: JSON.stringify(body),
       headers: {

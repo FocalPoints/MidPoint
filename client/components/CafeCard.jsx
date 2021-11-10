@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import '../scss/cafecard.scss';
 
 const CafeCard = (props) => {
-    const { name } = props;
+    const { name, address } = props;
     const [isShown, setIsShown] = useState(false);
 
     return (
@@ -15,7 +15,8 @@ const CafeCard = (props) => {
       >
         {isShown && (
           <div id='cafetext'>
-            CAFE NAME + ADDRESS
+            <h1>{name}</h1>
+            {/* <h4>{address}</h4> */}
           </div>
         )}
       </div>
