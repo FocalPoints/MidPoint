@@ -86,7 +86,7 @@ const Sidebar = (props) => {
       <div className='center'>
 
           {/* input field where users can elect to update their current location */}
-          Enter a non-registered friend: 
+          {/* Enter a non-registered friend:  */}
           <input className='inputStyles'
             name="username" id="username" 
             value={username} type="text" 
@@ -102,10 +102,13 @@ const Sidebar = (props) => {
           </input>
 
           <button onClick={() => {
-              const user2_id = props.currentUserID;
-              props.addOutsideFriend(user2_id, username, friendAddress)
+            const user2_id = props.currentUserID;
+            console.log('Current user ID from update location', props.currentUserID);
+              props.addOutsideFriend(user2_id, username, '659 S Ogden St, Denver, CO 80209')
+              console.log('clicked')
             }}>
-            Add New Friend
+              {/* 659 S Ogden St, Denver, CO 80209 */}
+            {/* Add New Friend */}
           </button> 
 
           

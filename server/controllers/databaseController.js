@@ -129,6 +129,9 @@ dbController.getFriendList = async (req, res, next) => {
   // declare a var to store our search query
   // not equal ->  <> OR !=
   const { user_id } = res.locals.user;
+
+  console.log('REACHED GET FRIEND LIST, CURR USER ID: ', user_id);
+
   const query = `
     SELECT u2.user_id, u2.username, u2.coordinates 
     FROM users u1 JOIN friends 
@@ -213,8 +216,10 @@ dbController.addOutsideFriend = async (req, res, next) => {
   try {
     console.log('addOutsideFriend');
     const { user2_id, username, friendAddress } = req.body;
-    res.locals.user = { user_id: user2_id};
-    const geoData = await geocoder.geocode(address);
+    console.log('FRIEND ADDRESS', friendAddress);
+    res.locals.user = { user_id: user2_id };
+    const geoData = await geocoder.geocode(friendAddress);
+    console.log('PAST GEO DATA', geoData);
     const coordinates = { lat: geoData[0].latitude, lng: geoData[0].longitude };
     const values = [user2_id, username, coordinates];
     const query = `
@@ -222,6 +227,7 @@ dbController.addOutsideFriend = async (req, res, next) => {
       RETURNING *
     `;
     const insert = await db.query(query, values);
+    console.log('PAST DATABASE QUERY', insert);
     res.locals.insert = insert.rows;
     return next();
   }
