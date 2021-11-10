@@ -7,16 +7,17 @@ const CafeCard = (props) => {
 
     return (
       <div 
+        className='cafecard'
         onMouseEnter={() => setIsShown(true)}
         onMouseLeave={() => setIsShown(false)} 
-        className="cafecard"
         style={{ cursor: 'pointer'}}
         title={name}
       >
         {isShown && (
           <div id='cafetext'>
             <h1>{name}</h1>
-            {/* <h4>{address}</h4> */}
+            <h4>{address[0]}</h4>
+            <h4>{address[1]}</h4>
           </div>
         )}
       </div>

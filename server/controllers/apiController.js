@@ -34,6 +34,7 @@ apiController.getYelp = (req, res, next) => {
         tempDetails.name = cafe.name;
         tempDetails.coordinates = cafe.coordinates;
         tempDetails.distance = cafe.distance;
+        tempDetails.address = cafe.location.display_address;
         cafesArray.push(tempDetails);
       })
       res.locals.cafes = cafesArray;

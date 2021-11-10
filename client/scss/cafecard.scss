@@ -5,8 +5,7 @@
   width: 18px;
   height: 18px;
   border: 2px solid #fff;
-  background-color: green;
-  // background-color: #8DA7BE;
+  background-color: #8DA7BE;
   border-radius: 100%;
   transform: translate(-50%, -50%);
   &:hover {
@@ -15,9 +14,19 @@
 }
 
 .cafecard:hover {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: 200px;
   height: 200px;
   border-radius: 0%;
   background-color: white;
   border: 5px solid #8DA7BE;
+}
+
+.cafetext {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

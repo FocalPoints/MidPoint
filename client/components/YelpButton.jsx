@@ -18,7 +18,6 @@ function YelpButton(props) {
     .then(data => {
       // setting 'cafes' state with the new data returned from server
       setCafes(data);
-      console.log(cafes);
     })
     .catch(err => console.log('ERROR FETCHING FROM FRONT END', err));
   }
