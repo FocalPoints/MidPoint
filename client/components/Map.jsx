@@ -21,6 +21,7 @@ const Map = (props) => {
         // address={obj.address}
       />
     });
+    console.log(cafeCards);
   }, [cafes]);
 
     return (
@@ -53,7 +54,7 @@ const Map = (props) => {
 
           { cafeCards }
 
-          <YelpButton lat={props.midpoint.lat} lng={props.midpoint.lng} setCafes={setCafes}/>
+          <YelpButton lat={props.midpoint.lat} lng={props.midpoint.lng} setCafes={setCafes} cafes={cafes} />
             
           </GoogleMapReact>
           </div>

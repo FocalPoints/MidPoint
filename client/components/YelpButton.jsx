@@ -3,7 +3,7 @@ import '../scss/yelpbutton.scss';
 
 function YelpButton(props) {
   // grabbing lat, lng of current midpoint as well as 'setCafe' method from parent
-  const { lat, lng, setCafes } = props;
+  const { lat, lng, setCafes, cafes } = props;
 
   const getCafes = () => {
     const body = {latitude : lat, longitude: lng};
