@@ -6,7 +6,7 @@ const dbController = {};
 
 const options = {
   provider: 'google',
-  apiKey: 'AIzaSyDFChrEvcCz_8xYMlri1GsNKyh2AbsEV1I',
+  apiKey: 'GEOCODING-API-KEY',
 }
 
 const geocoder = NodeGeocoder(options);
@@ -30,10 +30,12 @@ dbController.verifyUser = async (req, res, next) => {
   // if username / password is empty string / not a string throw error
   const query = `SELECT * FROM users WHERE users.username = $1`
   const values = [username];
-  console.log('Query', req.query);
+  console.log('Query', req.query); 
+  //TEST 'Alan', '123' - but we're just grabbing the username
   try {
     // await query response
-    const response = await db.query(query, values);
+    const response = await db.query(query, values); //this line reached
+    
     // send error if user not found
     if (!response.rows.length) {
       // TODO! - make this an error
@@ -44,7 +46,10 @@ dbController.verifyUser = async (req, res, next) => {
       return next();
     }
     const user = response.rows[0];
+    //TEST response.rows[0] = successfully equals user object at this point, filled with correct info
     const valid = await bcrypt.compare(password, user.password);
+    //TEST true for now
+
     // send error if passwords don't match
     if (!valid) {
       // TODO! - make this an error
@@ -61,6 +66,8 @@ dbController.verifyUser = async (req, res, next) => {
       res.locals.verified = true;
       res.locals.message = 'User verified!';
       res.locals.user = user;
+      console.log(res.locals.user)
+      //TEST: reached, verifyUser works :). onto getFriendsList
       return next();
     }
   } catch (err) {
@@ -84,14 +91,14 @@ dbController.addUser = async (req, res, next) => {
     // declare a new user object with name, password, coords
     const { username, password, address } = req.body;
     const geoData = await geocoder.geocode(address);
-    const coordinates = { lat: geoData[0].latitude, lng: geoData[0].longitude };
+    const coordinates = {lat:geoData[0].latitude, lng:geoData[0].longitude};
     //getting all the right data + data types before next line runs
     if (typeof username === 'string' && typeof password === 'string') {
       const encrypted = await bcrypt.hash(password, 10);
-      console.log(encrypted);
       const query = `INSERT INTO users(username, password, coordinates) VALUES($1, $2, $3) RETURNING *`;
       const values = [username, encrypted, JSON.stringify(coordinates)];
       const response = await db.query(query, values);
+      console.log(response)
       const user = response.rows[0];
       console.log(user)
       res.locals.verified = true;
@@ -109,6 +116,7 @@ dbController.addUser = async (req, res, next) => {
   } catch (err) {
     return next(err);
   }
+  //TEST successfully creates user in database with bcrypted password, returns username (but not user ID yet! TODO)
 }
 
 
@@ -130,7 +138,9 @@ dbController.updateUser = async (req, res, next) => {
 dbController.getFriendList = async (req, res, next) => {
   // declare a var to store our search query
   // not equal ->  <> OR !=
+  console.log("in getFriendList")
   const { user_id } = res.locals.user;
+  console.log(res.locals.user._id) //undefined!
   const query = `
     SELECT u2.user_id, u2.username, u2.coordinates 
     FROM users u1 JOIN friends 
