@@ -4,24 +4,25 @@ import Marker from './Marker.jsx';
 const imgUrl = 'https://i.imgur.com/WTHBUgm.png';
 // const Marker = ({ icon }) => <img height={'100px'} width={'100px'} src={imgUrl}></img>;
 
-const Map = ({midpoint}) => {
-    return(
+const Map = (props) => {
+    console.log('Map:', props);
+    return (
       
         <div id="right-side-content" className='mapContainer'>
-          {console.log('we are in maps', midpoint.lat, midpoint.lng) }
-           {console.log('is middle point an object', midpoint) }
+          {console.log('we are in maps', props.address.lat, props.address.lng) }
+           {console.log('is middle point an object', props.address) }
           
   
           <div id="map-container" className='mapStyles'>
             <GoogleMapReact 
               bootstrapURLKeys={{key: 'AIzaSyAisanRgGF25lhPR7TSu_VDRggQqwH5MVg'}}
-              defaultCenter={midpoint}
-              defaultZoom={12}>
+              center={props.address}
+              defaultZoom={5}>
               {/* do markers go in here? */}
               {/* <Marker lat={midpoint.lat} lng = {midpoint.lng} text='midpoint' icon={imgUrl} /> */}
               <Marker
-            lat={midpoint.lat}
-            lng={midpoint.lng}
+            lat={props.address.lat}
+            lng={props.address.lng}
             name="My Marker"
             color="blue"
           />

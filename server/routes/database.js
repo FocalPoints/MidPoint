@@ -18,9 +18,9 @@ router.post('/signup', dbController.addUser, (req, res) => {
 });
 
 // put/update current user's data (location, interests)
-// router.put('/', dbController.updateUser, (req, res) => {
-//   return res.status(201).json(res.locals.user);
-// })
+router.patch('/newaddress', dbController.updateUser, (req, res) => {
+  return res.status(201).json(res.locals.user);
+})
 
 router.post('/friend', dbController.addFriend, dbController.getFriendList, dbController.getNotFriendList, (req, res) => {
   return res.status(201).json(res.locals)

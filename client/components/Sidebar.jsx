@@ -35,12 +35,16 @@ const Sidebar = (props) => {
           {/* input field where users can elect to update their current location */}
           Update your address: <input className='inputStyles'
             name="address" type="text"
-            placeholder="lat/lng"
+            placeholder="enter new address"
             value={address}
             onChange={(event) => onChangeHandler(event)}>
           </input>
 
-          <button onClick={() => props.updateLocation(address)}>
+          <button onClick={() => {
+              console.log('Current user ID from update location', props.currentUserID);
+              const id = props.currentUserID;
+              props.updateLocation(address, id);
+            }}>
             Change
           </button>
         </div>

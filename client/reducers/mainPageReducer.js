@@ -69,6 +69,7 @@ const mainPageReducer = (state = initialState, action) => {
         tempObj.address = action.payload.address;
         return {
           ...state,
+          midpoint: action.payload.address,
           selfInfo: tempObj,
         }
         
