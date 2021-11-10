@@ -17,7 +17,7 @@ const Map = (props) => {
             <GoogleMapReact 
               bootstrapURLKeys={{key: 'AIzaSyAisanRgGF25lhPR7TSu_VDRggQqwH5MVg'}}
               center={props.address}
-              defaultZoom={5}>
+              defaultZoom={15}>
               {/* do markers go in here? */}
               {/* <Marker lat={midpoint.lat} lng = {midpoint.lng} text='midpoint' icon={imgUrl} /> */}
               <Marker
@@ -25,6 +25,13 @@ const Map = (props) => {
             lng={props.address.lng}
             name="My Marker"
             color="blue"
+          />
+
+          <Marker
+            lat={props.midpoint.lat}
+            lng={props.midpoint.lng}
+            name="Midpoint Market"
+            color="red"
           />
 
             
