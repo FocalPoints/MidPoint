@@ -59,7 +59,7 @@ export const updateLocation = (address, id) => (dispatch) => {
         payload: {address},
       })
     }).catch(console.error);
-}
+};
 
 export const getMidpoint = (userCoords, friendCoords) => {
 
@@ -89,7 +89,7 @@ export const getMidpoint = (userCoords, friendCoords) => {
     type: types.GET_MIDPOINT,
     payload:  {'lat': lat, 'lng': lng}
   })
-}
+};
 
 export const addFriend = (user1_id, user2_id) => (dispatch) => {
   const request = {
@@ -107,10 +107,10 @@ export const addFriend = (user1_id, user2_id) => (dispatch) => {
 }
 
 //Add outside friend route to backend
-export const addOutsideFriend = (user2_id, username, coordinates ) => (dispatch) => {
+export const addOutsideFriend = (user2_id, username, coordinates) => (dispatch) => {
   const request = {
     method: 'POST',
-    url: 'database/outsidefriend',
+    url: 'database/outsideFriend',
     data: {user2_id, username, coordinates }
   }
 
@@ -120,7 +120,7 @@ export const addOutsideFriend = (user2_id, username, coordinates ) => (dispatch)
       payload: response.data,
     });
   }).catch(console.error);
-}
+};
 
 
 // export const deleteCard = id => (dispatch, getState) => {

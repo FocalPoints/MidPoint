@@ -53,8 +53,7 @@ const Map = (props) => {
 
           { cafeCards }
 
-          <YelpButton lat={props.midpoint.lat} lng={props.midpoint.lng} setCafes={setCafes}/>
-            
+          <YelpButton cafes = {cafes} lat={props.midpoint.lat} lng={props.midpoint.lng} setCafes={setCafes}/>
           </GoogleMapReact>
           </div>
         </div>

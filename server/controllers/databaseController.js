@@ -211,8 +211,11 @@ dbController.addFriend = async (req, res, next) => {
 // This is a direct copy of the addFriend function with the INSERT QUERY adjusted. 
 dbController.addOutsideFriend = async (req, res, next) => {
   try {
-    const { user2_id, username, coordinates } = req.body;
+    console.log('addOutsideFriend');
+    const { user2_id, username, friendAddress } = req.body;
     res.locals.user = { user_id: user2_id};
+    const geoData = await geocoder.geocode(address);
+    const coordinates = { lat: geoData[0].latitude, lng: geoData[0].longitude };
     const values = [user2_id, username, coordinates];
     const query = `
       INSERT INTO outside_users (user2_id, username, coordinates) VALUES($1, $2, $3)

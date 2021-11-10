@@ -27,7 +27,8 @@ router.post('/friend', dbController.addFriend, dbController.getFriendList, dbCon
 })
 
 //Add outside friend 
-router.post('/outsidefriend', dbController.addOutsideFriend, dbController.getFriendList, dbController.getNotFriendList, (req, res) => {
+router.post('/outsideFriend', dbController.addOutsideFriend, dbController.getFriendList, dbController.getNotFriendList, (req, res) => {
+  console.log('INSIDE OUTSIDE FRIEND API ROUTE')
   return res.status(201).json(res.locals)
 })
 
