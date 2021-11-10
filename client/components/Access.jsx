@@ -53,7 +53,9 @@ const Access = ({pageToDisplay, currentUserID, addFriend, loggedIn, pageToSignup
   // Log In Page
   if (pageToDisplay === 'login') return (
     <div className='loginStyles'>
-      
+
+      <button onClick={ testFetch }>TESTING FETCH</button>
+
       <h1>Login Page</h1>
       <img src='https://i.imgur.com/YQ3shad.png'/>
       <input 
