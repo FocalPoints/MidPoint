@@ -9,6 +9,17 @@ const yelpBaseEndpoint = 'https://api.yelp.com/v3';
 
 // sample fetch url  :  https://api.yelp.com/v3/businesses/search?latitude=37.786882&longitude=-122.399972
 
+/*
+Fetch request should be made after midpoint is calculated
+Fetched data(nearby restaurants) rendered in Main component
+
+Format response file on backend to include:
+  Name
+  Address
+  Picture
+
+*/
+
 const getYelp = (path, queryParams) => {
   const query = queryString.stringify(queryParams); // converts queryParams to url format 
   const yelpData = fetch(`${yelpBaseEndpoint}${path}${query}`, {
