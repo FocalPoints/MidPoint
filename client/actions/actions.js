@@ -73,6 +73,21 @@ export const addFriend = (user1_id, user2_id) => (dispatch) => {
   }).catch(console.error);
 }
 
+//Add outside friend route to backend
+export const addOutsideFriend = (user2_id, username, coordinates ) => (dispatch) => {
+  const request = {
+    method: 'POST',
+    url: 'database/outsidefriend',
+    data: {user2_id, username, coordinates }
+  }
+
+  axios.request(request).then((response) => {
+    if(response.status = 201) dispatch({
+      type: types.ADD_OUTSIDE_FRIEND,
+      payload: response.data,
+    });
+  }).catch(console.error);
+}
 
 
 // export const deleteCard = id => (dispatch, getState) => {
