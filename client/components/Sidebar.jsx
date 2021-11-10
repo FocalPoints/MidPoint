@@ -35,12 +35,16 @@ const Sidebar = (props) => {
           {/* input field where users can elect to update their current location */}
           Update your address: <input className='inputStyles'
             name="address" type="text"
-            placeholder="lat/lng"
+            placeholder="enter new address"
             value={address}
             onChange={(event) => onChangeHandler(event)}>
           </input>
 
-          <button onClick={() => props.updateLocation(address)}>
+          <button onClick={() => {
+              console.log('Current user ID from update location', props.currentUserID);
+              const id = props.currentUserID;
+              props.updateLocation(address, id);
+            }}>
             Change
           </button>
         </div>
@@ -60,16 +64,25 @@ const Sidebar = (props) => {
 
         {/* when clicked, triggers action to get that friend's location and use it to find the midpoint */}
       </div>
-      {/* eventual functionality to add a friend to user's friend list by name search */}
-
+    
+      {/* ADD FRIEND BUTTON  */}
       <div className='inputStyles' className='center'>{props.notFriendsList.map((notFriend, i) => {
         return (<div id={notFriend.user_id} key={notFriend.user_id} value={notFriend.username}>
           <button onClick={() => props.addFriend(props.currentUserID, notFriend.user_id)}>
             Add Friend
           </button> {notFriend.username} </div>)
       })}
-
       </div>
+
+      {/* ADD OUTSIDE FRIEND BUTTON  */}
+      {/* <div className='inputStyles' className='center'>{props.notFriendsList.map((notFriend, i) => {
+        return (<div id={notFriend.user_id} key={notFriend.user_id} value={notFriend.username}>
+          <button onClick={() => props.addFriend(props.currentUserID, notFriend.user_id)}>
+            Add Non-Registered Friend
+          </button> {notFriend.username} </div>)
+      })}
+      </div> */}
+
     </div>
   )
 }

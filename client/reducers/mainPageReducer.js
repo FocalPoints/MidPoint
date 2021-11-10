@@ -69,6 +69,7 @@ const mainPageReducer = (state = initialState, action) => {
         tempObj.address = action.payload.address;
         return {
           ...state,
+          midpoint: action.payload.address,
           selfInfo: tempObj,
         }
         
@@ -87,6 +88,16 @@ const mainPageReducer = (state = initialState, action) => {
         friendsList: action.payload.friendList,
         notFriendsList: action.payload.notFriendList,
       }
+
+    case types.ADD_OUTSIDE_FRIEND:
+      console.log("add outside friend triggered")
+  
+      return {
+        ...state,
+        friendsList: action.payload.friendList,
+        notFriendsList: action.payload.notFriendList,
+      }
+  
 
     default:
       return state;
