@@ -1,6 +1,6 @@
 const { Pool } = require('pg');
 
-const PG_URI = 'POSTGRESQL-DATABASE-URL'
+const PG_URI = 'POSTGRESQL-DATABASE-URL' //POSTGRESQL-DATABASE-URL
 
 // create a new pool here using the connection string above
 const pool = new Pool({
