@@ -49,13 +49,23 @@ const Access = ({pageToDisplay, currentUserID, addFriend, loggedIn, pageToSignup
    if (loggedIn) {
     return (<Main {...selfInfo} updateLocation={updateLocation} friendsList={friendsList} notFriendsList={notFriendsList} getMidpoint={getMidpoint} currentUserID={currentUserID} addFriend={addFriend} midpoint={midpoint}/>)
   }
- 
+
+  const testFetch = () => {
+    const body = {latitude : 37.786882, longitude: -122.399972};
+    fetch('/api', {
+      method: 'POST',
+      body: JSON.stringify(body),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(res => console.log('FRONTEND FETCH', res.JSON()))
+    .catch(err => console.log('ERROR FETCHING FROM FRONT END'));
+  }
+
   // Log In Page
   if (pageToDisplay === 'login') return (
     <div className='loginStyles'>
-
-      <button onClick={ testFetch }>TESTING FETCH</button>
-
       <h1>Login Page</h1>
       <img src='https://i.imgur.com/YQ3shad.png'/>
       <input 
@@ -72,10 +82,9 @@ const Access = ({pageToDisplay, currentUserID, addFriend, loggedIn, pageToSignup
         value={password}
         onChange={(event) => onChangeHandler(event)}
         />
-      
-      <button type = "submit" id="btn" onClick={() => logIn(username,password)}>Login</button> 
+      <button onClick={() => logIn(username,password)}>Login</button> 
       <button onClick={pageToSignup}>Sign-up</button>
-    
+        
     </div>
   );
 
