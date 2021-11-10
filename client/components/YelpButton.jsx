@@ -3,7 +3,7 @@ import '../scss/yelpbutton.scss';
 
 function YelpButton(props) {
   // grabbing lat, lng of current midpoint as well as 'setCafe' method from parent
-  const { lat, lng, setCafes } = props;
+  const { lat, lng, setCafes, cafes } = props;
 
   const getCafes = () => {
     const body = {latitude : lat, longitude: lng};
@@ -20,25 +20,12 @@ function YelpButton(props) {
       setCafes(data);
       console.log(cafes);
     })
-    .catch(err => console.log('ERROR FETCHING FROM FRONT END'));
-  }
-
-  const testFetch = () => {
-    const body = {latitude : 37.786882, longitude: -122.399972};
-    fetch('/api/yelp', {
-      method: 'POST',
-      body: JSON.stringify(body),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-      .then(res => console.log('FRONTEND FETCH', res.JSON()))
-      .catch(err => console.log('ERROR FETCHING FROM FRONT END'));
+    .catch(err => console.log('ERROR FETCHING FROM FRONT END', err));
   }
 
   return (
     <div id='yelp-button-div'>
-      <button id='yelp-button' onClick={ testFetch } >Find nearby cafes</button>
+      <button id='yelp-button' onClick={ getCafes } >Find nearby cafes</button>
     </div>
   )
 }

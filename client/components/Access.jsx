@@ -50,19 +50,6 @@ const Access = ({pageToDisplay, currentUserID, addFriend, loggedIn, pageToSignup
     return (<Main {...selfInfo} updateLocation={updateLocation} friendsList={friendsList} notFriendsList={notFriendsList} getMidpoint={getMidpoint} currentUserID={currentUserID} addFriend={addFriend} midpoint={midpoint}/>)
   }
 
-  const testFetch = () => {
-    const body = {latitude : 37.786882, longitude: -122.399972};
-    fetch('/api', {
-      method: 'POST',
-      body: JSON.stringify(body),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-    .then(res => console.log('FRONTEND FETCH', res.JSON()))
-    .catch(err => console.log('ERROR FETCHING FROM FRONT END'));
-  }
-
   // Log In Page
   if (pageToDisplay === 'login') return (
     <div className='loginStyles'>
