@@ -8,19 +8,21 @@ const imgUrl = 'https://i.imgur.com/WTHBUgm.png';
 
 const Map = (props) => {
   const [cafes, setCafes] = useState([]);
-  let cafeCards;
+  const [cafeCards, setCafeCards] = useState([]);
 
   // creating cafe cards every time 'cafes' changes
   useEffect(() => {
     console.log(cafes);
-    cafeCards = cafes.map(obj => {
+    const cafeCards = cafes.map(obj => {
       return <CafeCard
-        lat={obj.coordinates.lat}
-        lng={obj.coordinates.lng}
+        lat={obj.coordinates.latitude}
+        lng={obj.coordinates.longitude}
         name={obj.name}
-        // address={obj.address}
+        address={obj.address}
+        key={obj.name}
       />
     });
+    setCafeCards(cafeCards);
     console.log(cafeCards);
   }, [cafes]);
 
@@ -52,7 +54,9 @@ const Map = (props) => {
             color="red"
           />
 
-          { cafeCards }
+          
+          {cafeCards}
+          
 
           <YelpButton lat={props.midpoint.lat} lng={props.midpoint.lng} setCafes={setCafes} cafes={cafes} />
             

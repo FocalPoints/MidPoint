@@ -9,7 +9,7 @@ export const logIn = (username, password) => (dispatch) => {
   }
  
   axios.request(request).then((response) => {
-    if(response.status = 201) dispatch({
+    if(response) dispatch({
       type: types.LOG_IN,
       payload: response.data, //will hold the user object
     });
@@ -30,7 +30,7 @@ export const signUpUser = (username, password, address) => (dispatch) => {
     }
    
     axios.request(request).then((response) => {
-      if(response.status = 201) dispatch({
+      if(response) dispatch({
         type: types.SIGN_UP_USER,
         payload: response.data,
       });
@@ -54,7 +54,7 @@ export const updateLocation = (address, id) => (dispatch) => {
   // get back coordinates from address
   axios.request(request).then((response) => {
       const address = response.data.coordinates;
-      if (response.status = 201) dispatch({
+      if (response) dispatch({
         type: types.UPDATE_LOCATION,
         payload: {address},
       })
@@ -99,7 +99,7 @@ export const addFriend = (user1_id, user2_id) => (dispatch) => {
   }
 
   axios.request(request).then((response) => {
-    if(response.status = 201) dispatch({
+    if(response) dispatch({
       type: types.ADD_FRIEND,
       payload: response.data,
     });
@@ -108,14 +108,21 @@ export const addFriend = (user1_id, user2_id) => (dispatch) => {
 
 //Add outside friend route to backend
 export const addOutsideFriend = (user2_id, username, friendAddress) => (dispatch) => {
+  const body = {
+    user2_id,
+    username,
+    friendAddress
+  }
+
   const request = {
     method: 'POST',
     url: 'database/outsideFriend',
-    body: { user2_id, username, friendAddress }
+    data: body
   }
 
   axios.request(request).then((response) => {
-    if(response.status = 201) dispatch({
+    console.log(response.data);
+    if(response.status == 201) dispatch({
       type: types.ADD_OUTSIDE_FRIEND,
       payload: response.data,
     });
