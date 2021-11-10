@@ -29,13 +29,13 @@ const Map = (props) => {
     if (map) {
       const bounds = new window.google.maps.LatLngBounds();
       props.selectedLocations.map(marker => {
-        console.log(marker)
         bounds.extend({
           lat: marker.coordinates.lat,
           lng: marker.coordinates.lng,
         });
       });
       map.fitBounds(bounds);
+
     }
   }, [map, props.selectedLocations]);
   return (
@@ -46,14 +46,16 @@ const Map = (props) => {
         <div id="map-container" className='mapStyles'>
           <GoogleMap
             mapContainerStyle={containerStyle}
-            center={center}
+            // center={center}
             zoom={12}
             onLoad={onLoad}>
             {props.selectedLocations.map(friend => {
               const { user_id, username, coordinates } = friend;
               const { lat, lng } = coordinates;
+              const arr = username.split(' ')
               return (
-                <Marker key={user_id} postition={{ lat: lat, lng: lng }} />
+                <Marker key={user_id} icon={`https://ui-avatars.com/api/?name=${arr[0]}+${arr[1]}&size=30&length=${arr.length}&rounded=true&background=OD8ABC&color=fff`} title={username} position={{ lat, lng }}>
+                </Marker>
               )
             })}
           </GoogleMap >
