@@ -10,6 +10,7 @@ const store = createStore(
   composeWithDevTools(applyMiddleware(thunk))
 );
 
+
 store.dispatch(logIn('james', 'maguire'));
 
 export default store;

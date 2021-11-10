@@ -32,7 +32,6 @@ const mainPageReducer = (state = initialState, action) => {
       if (verified) {
         const newLocationList = state.selectedLocations.slice();
         newLocationList.push(user);
-
         return {
           ...state,
           loggedIn: true,

@@ -42,7 +42,8 @@ const Sidebar = (props) => {
             onChange={(event) => onChangeHandler(event)}>
           </input>
 
-          <button onClick={() => props.updateLocation(address)}>
+          <button onClick={() => {console.log(props.user_id) 
+            props.updateLocation(props.user_id,address)}}>
             Change
           </button>
         </div>

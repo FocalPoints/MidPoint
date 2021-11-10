@@ -38,15 +38,39 @@ export const signUpUser = (username, password, address) => (dispatch) => {
   }).catch(console.error);
 };
 
+//update location
+export const updateLocation = (user_id, address) => (dispatch) => { 
+  
+  const request = {
+    method: 'PUT',
+    url: '/database', 
+    data: { user_id, address }
+  }
+
+  axios.request(request).then((response) => {
+    if (response.status = 201) dispatch({
+      type: types.UPDATE_LOCATION,
+      payload: response.data,
+    });
+  }).catch(console.error);
+};
+
+  
+
+
+
+
+
+
+
+
+
 
 export const signUpCancel = () => ({
   type: types.SIGN_UP_CANCEL,
 });
 
-export const updateLocation = (address) => ({
-  type: types.UPDATE_LOCATION,
-  payload: { address },
-})
+
 
 export const addSelected = (user, boolean) => ({
   type: types.ADD_SELECTED,
