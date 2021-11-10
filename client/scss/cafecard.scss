@@ -1,0 +1,22 @@
+.cafecard {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #fff;
+  background-color: yellow;
+  border-radius: 100%;
+  transform: translate(-50%, -50%);
+  &:hover {
+    z-index: 1;
+  }
+}
+
+.cafecard:hover {
+  width: 200px;
+  height: 200px;
+  border-radius: 0%;
+  background-color: white;
+  border: 5px solid yellow;
+}
