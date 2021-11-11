@@ -11,6 +11,7 @@ const initialState = {
   friendsList: [],
   notFriendsList: [],
   midpoint: { lat: 40.7142700, lng: -74.0059700 },
+  friendAddress: false,
 };
 
 const mainPageReducer = (state = initialState, action) => {
@@ -40,6 +41,7 @@ const mainPageReducer = (state = initialState, action) => {
           friendsList: action.payload.friendList,
           notFriendsList: action.payload.notFriendList,
           loggedIn: true,
+          midpoint: tempObj.address,
         };
       }
 
@@ -74,9 +76,18 @@ const mainPageReducer = (state = initialState, action) => {
         }
         
       case types.GET_MIDPOINT:
+        const midpointObj = {
+          lat: action.payload.lat,
+          lng: action.payload.lng,
+        }
+        const newFriendAddress = {
+          lat:action.payload.friendLat,
+          lng:action.payload.friendLng
+        }
         return {
           ...state,
-          midpoint: action.payload
+          midpoint: midpointObj,
+          friendAddress: newFriendAddress,
         }
 
 
@@ -91,11 +102,18 @@ const mainPageReducer = (state = initialState, action) => {
 
     case types.ADD_OUTSIDE_FRIEND:
       console.log("add outside friend triggered")
+      const newFriend = {
+        username: action.payload.username,
+        user_id: action.payload.user_id,
+        coordinates: action.payload.coordinates
+      };
+
+      const newFriendsList = [...state.friendsList];
+      newFriendsList.push(newFriend);
   
       return {
         ...state,
-        friendsList: action.payload.friendList,
-        notFriendsList: action.payload.notFriendList,
+        friendsList: newFriendsList
       }
   
 

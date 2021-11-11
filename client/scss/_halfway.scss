@@ -49,6 +49,7 @@
 
 .mainStyles {
   display: flex;
+  flex: 1;
   flex-direction: row;
   color: $DarkBlue;
   height: 100%;
@@ -56,10 +57,11 @@
 }
 
 .mapStyles {
-  border: 1px solid gray;
+  flex: 1;
+  border: none;
   height: 600px;
   width: 1000px;
-  margin: 12px 0px;
+  margin-left: 20px;
 }
 
 .mapContainer {
@@ -140,5 +142,7 @@
 }
 
 .pStyles {
-  margin-top: 24px
+  margin-top: 24px;
+  inline-size: 150px;
+  overflow-wrap: break-word;
 }
