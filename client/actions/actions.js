@@ -39,11 +39,11 @@ export const signUpUser = (username, password, address) => (dispatch) => {
 };
 
 //update location
-export const updateLocation = (user_id, address) => (dispatch) => { 
-  
+export const updateLocation = (user_id, address) => (dispatch) => {
+
   const request = {
     method: 'PUT',
-    url: '/database', 
+    url: '/database',
     data: { user_id, address }
   }
 
@@ -94,13 +94,13 @@ export const deleteFriend = (user1_id, user2_id) => (dispatch) => {
   const request = {
     method: 'DELETE',
     url: 'database/delete/friend',
-    data: { user1_id, user2_id}
+    data: { user1_id, user2_id }
   }
 
   axios.request(request).then((response) => {
     if (response.status = 201) dispatch({
       type: types.DELETE_FRIEND,
-      payload: response.data,
+      payload: { data: response.data, user2: user2_id }
     });
   }).catch(console.error);
 }

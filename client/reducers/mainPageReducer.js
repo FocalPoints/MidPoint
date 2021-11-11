@@ -78,7 +78,7 @@ const mainPageReducer = (state = initialState, action) => {
         acc.lat += (curr.coordinates.lat / arr.length)
         acc.lng += (curr.coordinates.lng / arr.length)
         return acc;
-      }, {lat: 0, lng: 0});
+      }, { lat: 0, lng: 0 });
 
       return {
         ...state,
@@ -102,16 +102,27 @@ const mainPageReducer = (state = initialState, action) => {
         notFriendsList: action.payload.notFriendList,
       }
 
-      case types.DELETE_FRIEND:
+    case types.DELETE_FRIEND: {
+      let newLocationList = state.selectedLocations.slice();
+  
+      newLocationList = newLocationList.filter(friend => {
+        return friend.user_id !== action.payload.user2;
+      })
 
-        return {
-          ...state,
-          friendsList: action.payload.friendList,
-          notFriendsList: action.payload.notFriendList,
-        }
-
-
-
+      const newMidpoint = newLocationList.reduce((acc, curr, i, arr) => {
+        acc.lat += (curr.coordinates.lat / arr.length)
+        acc.lng += (curr.coordinates.lng / arr.length)
+        return acc;
+      }, { lat: 0, lng: 0 });
+  
+      return {
+        ...state,
+        selectedLocations: newLocationList,
+        midpoint: newMidpoint,
+        friendsList: action.payload.data.friendList,
+        notFriendsList: action.payload.data.notFriendList,
+      }
+    }
 
 
     case types.ADD_SELECTED: {
@@ -126,12 +137,12 @@ const mainPageReducer = (state = initialState, action) => {
           return friend.user_id !== user.user_id;
         })
       }
-      
+
       const newMidpoint = newLocationList.reduce((acc, curr, i, arr) => {
         acc.lat += (curr.coordinates.lat / arr.length)
         acc.lng += (curr.coordinates.lng / arr.length)
         return acc;
-      }, {lat: 0, lng: 0});
+      }, { lat: 0, lng: 0 });
 
       return {
         ...state,
