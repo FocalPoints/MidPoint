@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Routes as Switch } from 'react-router-dom'
-import { Link } from 'react-router-dom';
+import { useSpring, animated } from 'react-spring';
 import { connect } from 'react-redux';
 import * as actions from '../actions/actions';
 import Main from './Main';
@@ -58,10 +57,15 @@ const Access = ({pageToDisplay, currentUserID, addFriend, loggedIn, pageToSignup
       midpoint={midpoint}/>)
   }
 
+  const props = useSpring({
+    from: { marginTop: -500 },
+    to: { marginTop: 0 }
+  })
+
   // Log In Page
   if (pageToDisplay === 'login') return (
     <div className='loginStyles'>
-      <h1>H A L F W A Y</h1>
+      <animated.h1 style={props}>H A L F W A Y</animated.h1>
       <h2>m e e t .  m e .  h a l f w a y</h2>
       <input 
         name="username"
