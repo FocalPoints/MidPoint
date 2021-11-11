@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Avatar from 'react-avatar';
+import { deleteFriend } from '../actions/actions';
 
 const Sidebar = (props) => {
 
@@ -67,6 +68,7 @@ const Sidebar = (props) => {
               }} /> {/* friend.username has friend info */}
 
               <label htmlFor={friend.username}>{friend.username}</label>
+              <button onClick={()=>props.deleteFriend(props.user_id, friend.user_id)}>-</button>
             </div>
           )
         })
