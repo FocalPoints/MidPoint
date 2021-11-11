@@ -33,6 +33,23 @@ const Access = ({pageToDisplay, currentUserID, addFriend, loggedIn, pageToSignup
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [address, setAddress] = useState('');
+  const h1props = useSpring({
+    from: { opacity: '0%' },
+    to: { opacity: '100%' },
+    config: {
+      duration: 900,
+      friction: 15
+    }
+  });
+
+  const h2props = useSpring({
+    from: { marginLeft: -700 },
+    to: { marginLeft: 0 },
+    config: {
+      duration: 700,
+      tension: 70,
+    }
+  });
 
   function onChangeHandler(event) {
       const { name, value } = event.currentTarget;
@@ -57,45 +74,39 @@ const Access = ({pageToDisplay, currentUserID, addFriend, loggedIn, pageToSignup
       midpoint={midpoint}/>)
   }
 
-  const props = useSpring({
-    from: { marginTop: -500 },
-    to: { marginTop: 0 }
-  })
-
   // Log In Page
   if (pageToDisplay === 'login') return (
     <div className='loginStyles'>
-      <animated.h1 style={props}>H A L F W A Y</animated.h1>
-      <h2>m e e t .  m e .  h a l f w a y</h2>
-      <input 
+      <animated.h1 style={h1props}>H A L F W A Y</animated.h1>
+      <animated.h2 style={h2props}>m e e t .  m e .  h a l f w a y</animated.h2>
+      <animated.input 
+        style={h1props}
         name="username"
         type="text"
         placeholder="Username"
         value={username}
         onChange={(event) => onChangeHandler(event)}
       />
-      <input 
+      <animated.input 
+        style={h1props}
         name="password"
         type="password"
         placeholder="Password"
         value={password}
         onChange={(event) => onChangeHandler(event)}
         />
-      <div id='button-container'>
+      <animated.div id='button-container' style={h1props}>
         <button onClick={() => logIn(username,password)}>Login</button> 
         <button onClick={pageToSignup}>Sign-up</button>
-      </div>  
+      </animated.div>  
     </div>
   );
-
- 
 
   // Sign Up Page
   return (
     <div className='loginStyles'>
 
-      <h1>Sign-up Page</h1>
-      <img src='https://i.imgur.com/YQ3shad.png'/>
+      <h1>S I G N U P</h1>
         
         <input name="username" id="username" value={username} type="text" placeholder="Username" onChange={(event) => onChangeHandler(event)}></input> 
         <input name="password" id="password" value={password} type="password" placeholder="Password" onChange={(event) => onChangeHandler(event)}></input>
