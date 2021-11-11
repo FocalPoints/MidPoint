@@ -10,26 +10,30 @@ const imgUrl = 'https://i.imgur.com/WTHBUgm.png';
 
 const Map = (props) => {
   const [cafes, setCafes] = useState([]);
-  
+  const [cafeCards, setCafeCards] = useState([]);
   //sets the center of the map to the midpoint 
   const [center, setCenter] = useState(props.address);
   //react hooks way of grabbing state from redux store
   const state = useSelector((state) => state);
-  console.log('THIS IS THE STATE INSIDE MAP', state.mainPage.friendAddress);
 
-  let cafeCards;
+
+  // let cafeCards;
   // creating cafe cards every time 'cafes' changes
   useEffect(() => {
-    console.log(cafes);
-    cafeCards = cafes.map(obj => {
+    console.log('CAFES', cafes);
+    const cafeCards = cafes.map(obj => {
       return <CafeCard
-        lat={obj.coordinates.lat}
-        lng={obj.coordinates.lng}
+        lat={obj.coordinates.latitude}
+        lng={obj.coordinates.longitude}
         name={obj.name}
-        // address={obj.address}
+        address={obj.address}
+        key={obj.name}
       />
     });
+    setCafeCards(cafeCards);
+    console.log(cafeCards);
   }, [cafes]);
+
   
   // set the center of the map to the midpoint address
   useEffect(() => {

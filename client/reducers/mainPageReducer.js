@@ -41,6 +41,7 @@ const mainPageReducer = (state = initialState, action) => {
           friendsList: action.payload.friendList,
           notFriendsList: action.payload.notFriendList,
           loggedIn: true,
+          midpoint: tempObj.address,
         };
       }
 

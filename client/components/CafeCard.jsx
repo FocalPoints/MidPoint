@@ -5,6 +5,8 @@ const CafeCard = (props) => {
     const { name, address } = props;
     const [isShown, setIsShown] = useState(false);
 
+    console.log('CAFE ADDRESS',address);
+
     return (
       <div 
         onMouseEnter={() => setIsShown(true)}
@@ -16,7 +18,8 @@ const CafeCard = (props) => {
         {isShown && (
           <div id='cafetext'>
             <h1>{name}</h1>
-            {/* <h4>{address}</h4> */}
+            <h4>{address[0]}</h4>
+            <h4>{address[1]}</h4>
           </div>
         )}
       </div>
