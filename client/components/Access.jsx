@@ -31,7 +31,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 
-export const Access = ({ addSelected, pageToDisplay, currentUser, selectedLocations, addFriend, loggedIn, pageToSignup, signUpCancel, logIn, signUpUser, updateLocation, friendsList, notFriendsList, getMidpoint, midpoint }) => {
+export const Access = ({ addSelected, pageToDisplay, currentUser, selectedLocations, addFriend, deleteFriend, loggedIn, pageToSignup, signUpCancel, logIn, signUpUser, updateLocation, friendsList, notFriendsList, getMidpoint, midpoint }) => {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -49,7 +49,7 @@ export const Access = ({ addSelected, pageToDisplay, currentUser, selectedLocati
   }
 
   if (loggedIn) {
-    return (<Main updateLocation={updateLocation} friendsList={friendsList} notFriendsList={notFriendsList} getMidpoint={getMidpoint} {...currentUser} selectedLocations={selectedLocations} addFriend={addFriend} midpoint={midpoint} addSelected={addSelected} />)
+    return (<Main updateLocation={updateLocation} friendsList={friendsList} notFriendsList={notFriendsList} getMidpoint={getMidpoint} {...currentUser} selectedLocations={selectedLocations} addFriend={addFriend} deleteFriend={deleteFriend} midpoint={midpoint} addSelected={addSelected} />)
   }
 
   // Log In Page

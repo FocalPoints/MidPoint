@@ -242,9 +242,10 @@ dbController.deleteFriend = async (req, res, next) => {
   try {
     const deletedRow = await db.query(query, values);
     res.locals.user = deletedRow.rows[0];
-    console.log(res.locals.user);
-  } catch (err) {
-    return next (err);
+    return next();
+  }
+  catch (err) {
+    return next(err);
   }
 } 
 

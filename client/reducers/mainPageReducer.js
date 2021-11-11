@@ -73,10 +73,18 @@ const mainPageReducer = (state = initialState, action) => {
     case types.UPDATE_LOCATION:
       const newLocationList = state.selectedLocations.slice();
       newLocationList[0] = action.payload;
+
+      const newMidpoint = newLocationList.reduce((acc, curr, i, arr) => {
+        acc.lat += (curr.coordinates.lat / arr.length)
+        acc.lng += (curr.coordinates.lng / arr.length)
+        return acc;
+      }, {lat: 0, lng: 0});
+
       return {
         ...state,
         selectedLocations: newLocationList, //note map updates markers based on selectedLocations property
-        currentUser: action.payload
+        currentUser: action.payload,
+        midpoint: newMidpoint
       }
 
     case types.GET_MIDPOINT:
