@@ -61,6 +61,22 @@ router.post('/friend', dbController.addFriend, dbController.getFriendList, dbCon
   return res.status(201).json(res.locals)
 })
 
+// delete user from the "friends" table, get the latest friends list of current user, get the new NOT friends list of current user
+/*
+Expects:
+  req.body = { user1_id: int, user2_id: int }
+Returns: {
+  user: userObj,
+  friendList: [ userObj ],
+  notFriendList: [ userObj ],
+}
+*/
+
+router.delete('/delete/friend', dbController.deleteFriend, dbController.getFriendList, dbController.getNotFriendList, (req, res) => {
+  return res.status(201).json(res.locals)
+})
+
+
 router.get('/coordinates', dbController.getCoords, (req, res) => {
   return res.status(200).json(res.locals.coords);
 })

@@ -55,22 +55,9 @@ export const updateLocation = (user_id, address) => (dispatch) => {
   }).catch(console.error);
 };
 
-  
-
-
-
-
-
-
-
-
-
-
 export const signUpCancel = () => ({
   type: types.SIGN_UP_CANCEL,
 });
-
-
 
 export const addSelected = (user, boolean) => ({
   type: types.ADD_SELECTED,
@@ -116,8 +103,5 @@ export const deleteFriend = (user1_id, user2_id) => (dispatch) => {
       payload: response.data,
     });
   }).catch(console.error);
-
-
-
 }
 

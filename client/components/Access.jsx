@@ -6,15 +6,13 @@ import * as actions from '../actions/actions';
 import Main from './Main';
 
 const mapStateToProps = ({
-  mainPage: { currentUserID, currentUser, selectedLocations, pageToDisplay, loggedIn, selfInfo, friendsList, notFriendsList, midpoint }
+  mainPage: { currentUser, selectedLocations, pageToDisplay, loggedIn, friendsList, notFriendsList, midpoint }
 }) => ({
   pageToDisplay,
   loggedIn,
-  selfInfo,
   friendsList,
   notFriendsList,
   midpoint,
-  currentUserID,
   currentUser,
   selectedLocations,
 });
@@ -27,11 +25,13 @@ const mapDispatchToProps = dispatch => ({
   updateLocation: (user_id, address) => dispatch(actions.updateLocation(user_id, address)),
   getMidpoint: (user, friendUser) => dispatch(actions.getMidpoint(user, friendUser)),
   addFriend: (user1_id, user2_id) => dispatch(actions.addFriend(user1_id, user2_id)),
+  //deleteFriend method added
+  deleteFriend: (user1_id, user2_id) => dispatch(actions.deleteFriend(user1_id, user2_id)),
   addSelected: (user, boolean) => dispatch(actions.addSelected(user, boolean)),
 });
 
 
-export const Access = ({ addSelected, pageToDisplay, currentUserID, currentUser, selectedLocations, addFriend, loggedIn, pageToSignup, signUpCancel, logIn, signUpUser, selfInfo, updateLocation, friendsList, notFriendsList, getMidpoint, midpoint }) => {
+export const Access = ({ addSelected, pageToDisplay, currentUser, selectedLocations, addFriend, loggedIn, pageToSignup, signUpCancel, logIn, signUpUser, updateLocation, friendsList, notFriendsList, getMidpoint, midpoint }) => {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');

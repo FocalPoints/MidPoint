@@ -94,6 +94,18 @@ const mainPageReducer = (state = initialState, action) => {
         notFriendsList: action.payload.notFriendList,
       }
 
+      case types.DELETE_FRIEND:
+
+        return {
+          ...state,
+          friendsList: action.payload.friendList,
+          notFriendsList: action.payload.notFriendList,
+        }
+
+
+
+
+
     case types.ADD_SELECTED: {
       const { user, boolean } = action.payload;
       console.log('user, boolean:', user, boolean);
@@ -119,8 +131,6 @@ const mainPageReducer = (state = initialState, action) => {
         midpoint: newMidpoint,
       }
     }
-
-
 
     default:
       return state;
