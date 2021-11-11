@@ -62,13 +62,15 @@ const Sidebar = (props) => {
 
         <div className='scrollContainer'>{props.friendsList.map((friend) => {
           return (
-            <div key={friend.user_id}>
+            <div className="user-container" key={friend.user_id}>
+              <button onClick={() => {
+                props.deleteFriend(props.user_id, friend.user_id);
+              }}>-</button>
               <input type="checkbox" id={friend.user_id} name={friend.username} onChange={(e) => {
                 props.addSelected(friend, e.target.checked)
               }} /> {/* friend.username has friend info */}
 
               <label htmlFor={friend.username}>{friend.username}</label>
-              <button onClick={()=>props.deleteFriend(props.user_id, friend.user_id)}>-</button>
             </div>
           )
         })
@@ -84,10 +86,11 @@ const Sidebar = (props) => {
 
 
         <div className='scrollContainer'>{props.notFriendsList.map((notFriend, i) => {
-          return (<div id={notFriend.user_id} key={notFriend.user_id} value={notFriend.username}>
-            <button onClick={() => props.addFriend(props.user_id, notFriend.user_id)}>
-              +
-            </button> {notFriend.username} </div>)
+          return (
+            <div className="user-container" id={notFriend.user_id} key={notFriend.user_id} value={notFriend.username}>
+              <button onClick={() => props.addFriend(props.user_id, notFriend.user_id)}>
+                +
+              </button> {notFriend.username} </div>)
         })}
         </div>
       </div>

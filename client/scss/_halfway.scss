@@ -23,9 +23,8 @@
     border-radius: 15px;
     border-style: none;
     box-shadow: 1px 2px 5px 1px lightcoral;
-    margin-bottom: 0.5em;
     min-width: 150px;
-  
+
     &:hover {
       background-color: $DarkBlue;
       color: $Olive;
@@ -90,7 +89,7 @@
   input {
     font-size: .8em;
     height: 2rem;
-    margin-bottom: 0.5em;
+    margin: 5px;
     border-radius: 15px;
     padding-left: 15px;
     background-color: $DarkBlue;
@@ -105,7 +104,7 @@
     border-radius: 15px;
     border-style: none;
     box-shadow: 1px 2px 5px 1px lightcoral;
-    margin-bottom: 0.5em;
+    margin: 5px;
     
   
     &:hover {
@@ -174,4 +173,11 @@
 .latlng {
   margin-top: 0;
   margin-bottom: 0;
+}
+
+.user-container{
+  display: flex;
+  align-items: center;
+  justify-content: auto;
+  padding: 5px;
 }
