@@ -28,7 +28,7 @@ User Object: {
 dbController.verifyUser = async (req, res, next) => {
   const { username, password } = req.query;
   // if username / password is empty string / not a string throw error
-  const query = `SELECT * FROM users WHERE users.username = $1`
+  const query = `SELECT * FROM users WHERE users.username = $1`;
   const values = [username];
   console.log('Query', req.query); 
   //TEST 'Alan', '123' - but we're just grabbing the username
@@ -39,7 +39,7 @@ dbController.verifyUser = async (req, res, next) => {
     // send error if user not found
     if (!response.rows.length) {
       // TODO! - make this an error
-      res.status(404);
+      res.status(401);
       res.locals.verified = false;
       res.locals.message = 'No user found!';
       res.locals.user = {};
@@ -71,6 +71,7 @@ dbController.verifyUser = async (req, res, next) => {
       return next();
     }
   } catch (err) {
+    console.log(err);
     return next(err);
   }
 }
@@ -106,7 +107,7 @@ dbController.addUser = async (req, res, next) => {
       res.locals.user = user;
       return next();
     } else {
-      res.status(401).send({
+      res.status(400).send({
         verified: false,
         message: 'Invalid username and/or password!',
         user: {},
@@ -156,6 +157,7 @@ dbController.getFriendList = async (req, res, next) => {
     res.locals.friendList = response.rows;
     return next();
   } catch (err) {
+    console.log("err in friendlist")
     return next(err);
   }
 }
@@ -178,6 +180,7 @@ dbController.getNotFriendList = async (req, res, next) => {
     res.locals.notFriendList = response.rows;
     return next();
   } catch (err) {
+    console.log("err in friendlist")
     return next(err);
   }
 }
