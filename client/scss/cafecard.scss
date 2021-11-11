@@ -1,5 +1,7 @@
 .cafecard {
+  
   position: absolute;
+  background-size: cover;
   top: 50%;
   left: 50%;
   width: 18px;
@@ -12,12 +14,47 @@
   &:hover {
     z-index: 1;
   }
+  transition: all 300ms ease-in;
+  
 }
 
 .cafecard:hover {
   width: 200px;
   height: 200px;
   border-radius: 0%;
-  background-color: white;
-  border: 5px solid #8DA7BE;
+  
+  opacity:1
+}
+
+.cafetext {
+  background-size: cover;
+  opacity:0;
+  transform: translate(-4%, -8%);
+  overflow: hidden;
+  width: 110%;
+  height: 110%;
+  color: white;
+  align-items: center;
+  justify-content: center;
+  border-radius: .5rem;
+  transition: 1.5s ease
+}
+.cafetext:hover {
+  opacity:1;
+
+}
+.cardShop {
+  
+  margin-top: 15px;
+  padding: 10px;
+  padding-left: 20px;
+  background-color: rgba(45, 39, 39, 0.468);
+}
+
+.addressBlock {
+  position: absolute;
+  bottom: 0;
+  padding-left: 20px;
+  padding-right: 120px;
+  background-color: rgba(45, 39, 39, 0.468);
 }
