@@ -28,6 +28,7 @@ const Map = (props) => {
         name={obj.name}
         address={obj.address}
         key={obj.name}
+        photo={obj.photo}
       />
     });
     setCafeCards(cafeCards);
