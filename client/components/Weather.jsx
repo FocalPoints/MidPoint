@@ -5,9 +5,10 @@ const Weather = (props) => {
   const [isCelsius, setIsCelsius] = useState(false);
   const [isKph, setIsKph] = useState(false);
   const [isMm, setIsMm] = useState(false);
+  const [forecastState, setForecastState] = useState([]);
+  const [showForecast, setShowForecast] = useState(false);
 
   const forecast = [];
-  const alerts = [];
 
   console.log('SUCCESSFULLY SETTING NEW STATE', weatherDetails);
 
@@ -38,6 +39,48 @@ const Weather = (props) => {
     setIsMm(!isMm);
   }
 
+
+  const populateForecast = () => {
+    let key = 0;
+
+    for (let hour of weatherDetails.forecast) {
+      if (hour.time > weatherDetails.localTime) {
+        console.log('ENTERED IF BLOCK');
+        if (isCelsius) {
+          forecast.push(
+            <div key={key} className="forecast-hour-wrapper">
+              <p><b>{ hour.time.slice(10) }</b></p>
+              <p>{ hour.temp_c } ˚C</p>
+              <p className="forecast-condition-text">Condition: { hour.condition.text }</p>
+              <img className="forecast-icon" src={ hour.condition.icon } />
+            </div>
+          )
+        }
+        if (!isCelsius) {
+          forecast.push(
+            <div key={key} className="forecast-hour-wrapper">
+              <p><b>{ hour.time.slice(10) }</b></p>
+              <p>{ hour.temp_f } ˚F</p>
+              <p className="forecast-condition-text">{ hour.condition.text }</p>
+              <img className="forecast-icon" src={ hour.condition.icon } />
+            </div>
+          )
+        }
+        key++;
+      }
+    }
+    setForecastState(forecast);
+    setShowForecast(!showForecast);
+  }
+
+
+  const populateAlerts = () => {
+
+  }
+
+
+
+
   return (
     <div className="weather-wrapper">
       <h1>
@@ -57,20 +100,17 @@ const Weather = (props) => {
         </div>
 
         <div className="weather-wind-rain">
-          {isKph && <p onClick={ changeWindFormat }>WIND: { weatherDetails.windKph }</p>}
-          {isKph || <p onClick={ changeWindFormat }>WIND: { weatherDetails.windMph }</p>}
+          {isKph && <p onClick={ changeWindFormat }>WIND: { weatherDetails.windKph } kph</p>}
+          {isKph || <p onClick={ changeWindFormat }>WIND: { weatherDetails.windMph } mph</p>}
 
-          {isMm && <p onClick={ changeRainFormat }>RAIN: { weatherDetails.precipMm }</p>}
-          {isMm || <p onClick={ changeRainFormat }>RAIN: { weatherDetails.precipIn }</p>}
+          {isMm && <p onClick={ changeRainFormat }>RAIN: { weatherDetails.precipMm } mm</p>}
+          {isMm || <p onClick={ changeRainFormat }>RAIN: { weatherDetails.precipIn } in</p>}
         </div>
       </div>
 
       <div className="weather-forecast-wrapper">
-
-      </div>
-
-      <div className="weather-alerts-wrapper">
-
+        <button onClick={ populateForecast }>See Forecast</button>
+        { showForecast && forecastState }
       </div>
     </div>
   )

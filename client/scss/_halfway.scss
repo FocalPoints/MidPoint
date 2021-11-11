@@ -250,3 +250,26 @@ body {
     padding: 0;
   }
 }
+
+.forecast-hour-wrapper {
+  font-size: 14px;
+
+  position: relative;
+  width: 85%;
+  padding: 5px 15px;
+  margin-bottom: 5px;
+
+  border: 2px solid rgb(47, 58, 68);
+  border-radius: 20px;
+}
+
+.forecast-icon {
+  position: absolute;
+  width: 75px;
+  top: 20px;
+  left: 200px;
+}
+
+.forecast-condition-text {
+  font-style: italic;
+}
