@@ -9,7 +9,9 @@ const App = () => (
   <div id="app">
     <Router>
       <Switch>
+         {/* default page: not yet logged in, route to Access */}
         <Route path='/' element={<Access/>} />
+         {/* when logged in, route to Main */}
         <Route path='/main' element={<Main />} />
       </Switch>
     </Router>

@@ -31,7 +31,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 
-const Access = ({ addSelected, pageToDisplay, currentUserID, currentUser, selectedLocations, addFriend, loggedIn, pageToSignup, signUpCancel, logIn, signUpUser, selfInfo, updateLocation, friendsList, notFriendsList, getMidpoint, midpoint }) => {
+export const Access = ({ addSelected, pageToDisplay, currentUserID, currentUser, selectedLocations, addFriend, loggedIn, pageToSignup, signUpCancel, logIn, signUpUser, selfInfo, updateLocation, friendsList, notFriendsList, getMidpoint, midpoint }) => {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
