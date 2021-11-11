@@ -12,6 +12,7 @@ const CafeCard = (props) => {
         className="cafecard"
         style={{ cursor: 'pointer'}}
         title={name}
+        id = "cafeMarker"
       >
         {isShown && (
           <div id='cafetext'>
