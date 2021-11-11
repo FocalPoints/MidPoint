@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 
 const Sidebar = (props) => {
 
-  const [address, setAddress] = useState('');
+  const [newAddress, setNewAddress] = useState('');
 
   function onChangeHandler(event) {
     const { name, value } = event.currentTarget;
-    if (name === "address") {
-      setAddress(value);
+    if (name === "newAddress") {
+      setNewAddress(value);
     }
   }
 
@@ -19,28 +19,28 @@ const Sidebar = (props) => {
         <div className='flexAlignCenter'>
 
           {/* shows avatar photo and user greeting */}
-          <img src={props.avatar} className='picStyles' />
-          <p id="welcomeText" className='pStyles'>Welcome back, {props.name}!</p>
+          <img src={props.userAvatar} className='picStyles' />
+          <p id="welcomeText" className='pStyles'>Welcome back, {props.userName}!</p>
 
         </div>
         <div className='flexAlignCenter'>
 
           {/* shows location icon and user location */}
           <img src={imgUrl} className='picStyles' />
-          <p id="locationText">{JSON.stringify(props.address)}</p>
+          <p id="locationText">{JSON.stringify(props.userAddress)}</p>
 
         </div>
         <div className='center'>
 
           {/* input field where users can elect to update their current location */}
           New address? <input className='inputStyles'
-            name="address" type="text"
+            name="newAddress" type="text"
             placeholder="lat / lng"
-            value={address}
+            value={newAddress}
             onChange={(event) => onChangeHandler(event)}>
           </input>
 
-          <button id="changeAddressButton" onClick={() => props.updateLocation(address)}>
+          <button id="changeAddressButton" onClick={() => props.updateLocation(newAddress)}>
             Change
           </button>
         </div>
@@ -52,8 +52,8 @@ const Sidebar = (props) => {
 
 
         <div className='inputStyles'>{props.friendsList.map((friend) => {
-          return (<div id={friend.user_id} key={friend.user_id} value={friend.username}>
-            <button id="findMidpointButton" onClick={() => props.getMidpoint(props.address, friend.coordinates)}>
+          return (<div id={friend.user_id} key={friend.user_id} value={friend.username}> 
+            <button id="findMidpointButton" onClick={() => props.getMidpoint(props.userCoords, friend.coordinates)}>
             {friend.username} 
             </button></div>)
         })}</div>
@@ -65,7 +65,7 @@ const Sidebar = (props) => {
         <p>Future Friends: </p>
         <div className='inputStyles' className='center'>{props.notFriendsList.map((notFriend, i) => {
           return (<div id={notFriend.user_id} key={notFriend.user_id} value={notFriend.username}>
-            <button onClick={() => props.addFriend(props.currentUserID, notFriend.user_id)}>
+            <button onClick={() => props.addFriend(props.userID, notFriend.user_id)}>
             {notFriend.username}
             </button></div>)
       })}</div>
