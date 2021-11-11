@@ -49,9 +49,9 @@ const Weather = (props) => {
         if (isCelsius) {
           forecast.push(
             <div key={key} className="forecast-hour-wrapper">
-              <p> { hour.time.slice(10) }</p>
+              <p><b>{ hour.time.slice(10) }</b></p>
               <p>{ hour.temp_c } ˚C</p>
-              <p>Condition: { hour.condition.text }</p>
+              <p className="forecast-condition-text">Condition: { hour.condition.text }</p>
               <img className="forecast-icon" src={ hour.condition.icon } />
             </div>
           )
@@ -59,9 +59,9 @@ const Weather = (props) => {
         if (!isCelsius) {
           forecast.push(
             <div key={key} className="forecast-hour-wrapper">
-              <p> { hour.time.slice(10) }</p>
+              <p><b>{ hour.time.slice(10) }</b></p>
               <p>{ hour.temp_f } ˚F</p>
-              <p>{ hour.condition.text }</p>
+              <p className="forecast-condition-text">{ hour.condition.text }</p>
               <img className="forecast-icon" src={ hour.condition.icon } />
             </div>
           )
