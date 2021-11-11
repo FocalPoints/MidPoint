@@ -56,8 +56,6 @@ const Sidebar = (props) => {
           return (
             <div key={friend.user_id}>
               <input type="checkbox" id={friend.user_id} name={friend.username} onChange={(e) => { props.addSelected(friend, e.target.checked)
-              console.log(friend.username)
-              console.log(props.friendsList)
               }} /> {/* friend.username has friend info */}
 
               <label htmlFor={friend.username}>{friend.username}</label>
