@@ -1,7 +1,10 @@
+body {
+  background: $DarkBlueBG;
+  font-family: 'Raleway', sans-serif;
+}
+
 #app {
   display: flex;
-  background: $DarkBlueBG;
-  height: 100%;
   align-items: top;
   justify-content: center;
 }
@@ -12,31 +15,41 @@
   align-items: center;
 
   img {
-    margin-bottom: 1em;
+    margin-bottom: .25em;
   };
 
   button {
     background-color: $Olive;
     color: $DarkBlue;
-    font-size: 2em;
-    height: 3rem;
-    border-radius: 15px;
+    font-size: 1.5em;
+    height: 2rem;
+    border-radius: 7px;
     border-style: none;
-    box-shadow: 1px 2px 5px 1px lightcoral;
+    box-shadow: 1px 2px 5px 1px rgb(99, 99, 99);
     margin-bottom: 0.5em;
     min-width: 150px;
-  
+
     &:hover {
-      background-color: $DarkBlue;
-      color: $Olive;
+      background-color: $LightOlive;
+      color: $DarkBlue;
+    }
+  }
+
+  #darkButton {
+    background-color: $DarkBlue;
+    color: $Olive;
+
+    &:hover {
+      background-color: $LightOlive;
+      color: $DarkBlue;
     }
   }
   
   input {
-    font-size: 2em;
-    height: 3rem;
-    margin-bottom: 0.5em;
-    border-radius: 15px;
+    font-size: 1.5rem;
+    height: 2rem;
+    margin-bottom: 0.75em;
+    border-radius: 7px;
     padding-left: 15px;
   }
 
@@ -44,21 +57,28 @@
     font-size: 5rem;
     color: $Olive;
   }
+
+  h2 {
+    font-size: 2.5rem;
+    color: $Olive;
+  }
+
 }
 
 
 .mainStyles {
   display: flex;
   flex-direction: row;
+  align-items: center;
+  font-weight: bold;
   color: $DarkBlue;
-  height: 100%;
   font-size: 1.5em;
 }
 
 .mapStyles {
   border: 1px solid gray;
-  height: 600px;
-  width: 1000px;
+  height: 50rem;
+  width: 60rem;
   margin: 12px 0px;
 }
 
@@ -78,18 +98,32 @@
   flex-direction: column;
   align-content: center;
   background-color: $Olive;
-  width: 21%;
-  height: 90%;
+  width: 20rem;
+  height: 55rem;
   border: 1px solid black;
   border-radius: 6px;
   margin: 10px 0px 0px 6px;
   padding-left: 0.5em;
 
+  #welcomeText {
+    font-size: 1.75rem;
+  }
+
+  #locationText {
+    font-size: 1rem;
+    margin-top: 24px;
+  }
+
+  #futureFriendsText {
+    align-content: center;
+  }
+
   input {
     font-size: .8em;
     height: 2rem;
-    margin-bottom: 0.5em;
-    border-radius: 15px;
+    margin-top: 0.75em;
+    margin-bottom: 0.75em;
+    border-radius: 7px;
     padding-left: 15px;
     background-color: $DarkBlue;
     color: $Olive;
@@ -100,18 +134,26 @@
     color: $Olive;
     font-size: 1em;
     height: 2rem;
-    border-radius: 15px;
+    border-radius: 7px;
     border-style: none;
-    box-shadow: 1px 2px 5px 1px lightcoral;
+    box-shadow: 1px 2px 5px 1px rgb(99, 99, 99);
     margin-bottom: 0.5em;
     min-width: 150px;
-  
+
     &:hover {
-      background-color: $Olive;
+      background-color: $LightOlive;
       color: $DarkBlue;
-      border: 3px solid;
     }
   }
+
+  #findMidpointButton {
+    margin: 7px;
+  }
+
+  #changeAddressButton {
+    margin-bottom: 30px;
+  }
+
 }
 
 .scrollContainer {
@@ -135,12 +177,7 @@
 }
 
 .inputStyles {
-  background-color: 9db2cf;
-  margin: 0px 6px
-}
-
-.pStyles {
-  margin-top: 24px
+  margin: 10px 6px
 }
 
 .logOutButton {
