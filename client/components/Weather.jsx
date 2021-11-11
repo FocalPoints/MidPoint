@@ -5,6 +5,8 @@ const Weather = (props) => {
   const [isCelsius, setIsCelsius] = useState(false);
   const [isKph, setIsKph] = useState(false);
   const [isMm, setIsMm] = useState(false);
+  const [forecastState, setForecastState] = useState([]);
+  const [showForecast, setShowForecast] = useState(false);
 
   const forecast = [];
   const alerts = [];
@@ -38,6 +40,44 @@ const Weather = (props) => {
     setIsMm(!isMm);
   }
 
+
+  const populateForecast = () => {
+    let key = 0;
+
+    for (let hour of weatherDetails.forecast) {
+      if (hour.time > weatherDetails.localTime) {
+        console.log('ENTERED IF BLOCK');
+        if (isCelsius) {
+          forecast.push(
+            <div key={key} className="forecast-hour-wrapper">
+              <p>{ hour.temp_c } ˚C</p>
+              <p>Condition: { hour.condition.text } <img src={ hour.condition.icon } /></p>
+            </div>
+          )
+        }
+        if (!isCelsius) {
+          forecast.push(
+            <div key={key} className="forecast-hour-wrapper">
+              <p>{ hour.temp_f } ˚F</p>
+              <p>Condition: { hour.condition.text } <img src={ hour.condition.icon } /></p>
+            </div>
+          )
+        }
+        key++;
+      }
+    }
+    setForecastState(forecast);
+    setShowForecast(!showForecast);
+  }
+
+
+  const populateAlerts = () => {
+
+  }
+
+
+
+
   return (
     <div className="weather-wrapper">
       <h1>
@@ -57,20 +97,22 @@ const Weather = (props) => {
         </div>
 
         <div className="weather-wind-rain">
-          {isKph && <p onClick={ changeWindFormat }>{ weatherDetails.windKph }</p>}
-          {isKph || <p onClick={ changeWindFormat }>{ weatherDetails.windMph }</p>}
+          {isKph && <p onClick={ changeWindFormat }>{ weatherDetails.windKph } kph</p>}
+          {isKph || <p onClick={ changeWindFormat }>{ weatherDetails.windMph } mph</p>}
 
-          {isMm && <p onClick={ changeRainFormat }>{ weatherDetails.precipMm }</p>}
-          {isMm || <p onClick={ changeRainFormat }>{ weatherDetails.precipIn }</p>}
+          {isMm && <p onClick={ changeRainFormat }>{ weatherDetails.precipMm } mm</p>}
+          {isMm || <p onClick={ changeRainFormat }>{ weatherDetails.precipIn } in</p>}
         </div>
       </div>
 
       <div className="weather-forecast-wrapper">
-
+        <button onClick={ populateForecast }>See Forecast</button>
+        { showForecast && forecastState }
       </div>
 
       <div className="weather-alerts-wrapper">
-
+        {/* <button onClick={ populateAlerts }>See Alerts</button>
+        { showAlerts && alertState } */}
       </div>
     </div>
   )

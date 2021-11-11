@@ -64,7 +64,6 @@ apiController.getWeather = (req, res, next) => {
   fetch(`${weatherBaseUrl}${keyString}${queryParams}`)
     .then(res => res.json())
     .then(data => {
-      console.log('RETRIEVED FROM API CALL: ', data);
       const weatherDetails = {};
       weatherDetails.name = data.location.name;
       weatherDetails.region = data.location.region;
@@ -78,7 +77,7 @@ apiController.getWeather = (req, res, next) => {
       weatherDetails.windKph = data.current.wind_kph;
       weatherDetails.precipMm =data.current.precip_mm;
       weatherDetails.precipIn =data.current.precip_in;
-      weatherDetails.forecast = data.forecast.forecastday.hour;
+      weatherDetails.forecast = data.forecast.forecastday[0].hour;
       weatherDetails.alerts = data.alerts.alert;
       res.locals.weather = weatherDetails;
 
