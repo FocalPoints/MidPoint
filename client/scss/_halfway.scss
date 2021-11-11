@@ -30,24 +30,26 @@ body {
   };
 
   button {
-    background-color: $Olive;
+    background-color: #8DA7BE;
     color: $DarkBlue;
     font-size: 2em;
     height: 3rem;
     border-radius: 15px;
     border-style: none;
-    box-shadow: 1px 2px 5px 1px lightcoral;
     margin-bottom: 0.5em;
-    min-width: 150px;
+    font-size: 1.2em;
+    margin-top: 30px;
+    width: 45%;
   
     &:hover {
       background-color: $DarkBlue;
-      color: $Olive;
+      color: white;
     }
   }
   
   input {
-    font-size: 2em;
+  font-size: 1.5em;
+    width: 35vw;
     height: 3rem;
     margin-bottom: 0.5em;
     border-radius: 15px;
@@ -55,8 +57,20 @@ body {
   }
 
   h1 {
-    font-size: 5rem;
-    color: $Olive;
+    font-size: 10vw;
+    color: white;
+    margin: 0;
+  }
+
+  h2 {
+    color: #8DA7BE;
+    margin-bottom: 50px;
+  }
+
+  #button-container {
+    display: flex;
+    width: 35vw;
+    justify-content: space-between;
   }
 }
 
@@ -155,7 +169,6 @@ body {
 }
 
 .inputStyles {
-  background-color: 9db2cf;
   width: 90%;
   margin: 5px 0;
 }
@@ -205,4 +218,35 @@ body {
 
 #friends {
   margin-bottom: 10px;
+}
+
+.weather-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-left: 30px;
+  font-size: .8em;
+  margin-bottom: 30px;
+
+  h1, h2, h3 {
+    margin: 0
+  }
+
+  h2, h3 {
+    color: white;
+  }
+
+  .weather-temperature {
+    background-color: white;
+    width: 20%;
+    padding: 10px;
+    border-radius: 20px;
+  }
+
+  .weather-condition {
+    display: flex;
+  }
+
+  img {
+    padding: 0;
+  }
 }

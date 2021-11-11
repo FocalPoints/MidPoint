@@ -55,14 +55,16 @@ const Map = (props) => {
             lat={props.address.lat}
             lng={props.address.lng}
             name="My Marker"
-            color="blue"
+            id = "myMarker"
+            // color="blue"
           />
 
           <Marker
             lat={props.midpoint.lat}
             lng={props.midpoint.lng}
             name="Midpoint Marker"
-            color="red"
+            id = "midpointMarker"
+            // color="red"
           />
 
           {
@@ -72,7 +74,8 @@ const Map = (props) => {
             lat={state.mainPage.friendAddress.lat}
             lng={state.mainPage.friendAddress.lng}
             name="Friend Marker"
-            color="yellow"
+            id = "friendMarker"
+            // color="yellow"
           />
           }
           
