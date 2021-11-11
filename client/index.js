@@ -6,7 +6,7 @@ import store from './store';
 import styles from './scss/application.scss';
 
 render(
-  // wrap the App in the Provider Component and pass in the store
+  // Set up Redux store - wrap the App in the Provider Component and pass in the store
   <Provider store = {store}>
     <App />
   </Provider>

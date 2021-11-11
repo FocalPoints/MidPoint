@@ -11,6 +11,23 @@
     "gulp-dev": "node_modules/.bin/gulp dev",
     "test": "jest"
   },
+  "jest": {
+    "verbose": true,
+    "modulePaths": [
+      "<rootDir>/node_modules/"
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "jsx"
+    ],
+    "moduleDirectories": [
+      "node_modules"
+    ],
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js"
+    }
+  },
   "nodemonConfig": {
     "ignore": [
       "build",
@@ -22,6 +39,7 @@
   "dependencies": {
     "@babel/plugin-transform-async-to-generator": "^7.16.0",
     "@babel/runtime": "^7.16.0",
+    "@react-google-maps/api": "^2.5.0",
     "axios": "^0.24.0",
     "bcryptjs": "^2.4.3",
     "eslint": "^8.1.0",
@@ -43,14 +61,19 @@
   },
   "devDependencies": {
     "@babel/core": "^7.16.0",
+    "@babel/plugin-syntax-jsx": "^7.16.0",
     "@babel/plugin-transform-runtime": "^7.16.0",
     "@babel/preset-env": "^7.16.0",
     "@babel/preset-react": "^7.16.0",
+    "@wojtekmaj/enzyme-adapter-react-17": "^0.6.5",
     "babel-core": "^6.26.3",
+    "babel-jest": "^27.3.1",
     "babel-loader": "^8.2.3",
     "concurrently": "^6.0.2",
     "cross-env": "^7.0.3",
     "css-loader": "^6.5.0",
+    "enzyme": "^3.11.0",
+    "enzyme-to-json": "^3.6.2",
     "html-webpack-plugin": "^5.5.0",
     "isomorphic-fetch": "^3.0.0",
     "jest": "^27.3.1",
@@ -59,9 +82,12 @@
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.6",
     "react-router-dom": "^6.0.1",
+    "react-test-renderer": "^17.0.2",
+    "redux-mock-store": "^1.5.4",
     "sass": "^1.43.4",
     "sass-loader": "^12.3.0",
     "style-loader": "^3.3.1",
+    "supertest": "^6.1.6",
     "webpack": "^5.61.0",
     "webpack-cli": "^4.8.0",
     "webpack-dev-server": "^4.4.0"

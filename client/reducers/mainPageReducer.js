@@ -104,12 +104,18 @@ const mainPageReducer = (state = initialState, action) => {
         newLocationList = newLocationList.filter(friend => {
           return friend.user_id !== user.user_id;
         })
-        console.log(newLocationList);
       }
+      
+      const newMidpoint = newLocationList.reduce((acc, curr, i, arr) => {
+        acc.lat += (curr.coordinates.lat / arr.length)
+        acc.lng += (curr.coordinates.lng / arr.length)
+        return acc;
+      }, {lat: 0, lng: 0});
 
       return {
         ...state,
         selectedLocations: newLocationList,
+        midpoint: newMidpoint,
       }
     }
 
