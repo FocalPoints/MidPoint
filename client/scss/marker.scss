@@ -1,16 +1,64 @@
-.marker {
+
+#myMarker{
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 18px;
-  height: 18px;
-  background-color: #000;
-  border: 2px solid #fff;
-  border-radius: 100%;
+  width: 64px;
+  height: 64px;
+  background-image: url(cat.png);
+  background-repeat: no-repeat;
   user-select: none;
   transform: translate(-50%, -50%);
   &:hover {
     z-index: 1;
-    color:red
+    
   }
 }
+
+#midpointMarker{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 64px;
+  height: 64px;
+  background-image: url(midpoint.png);
+  background-repeat: no-repeat;
+  user-select: none;
+  transform: translate(-50%, -50%);
+  &:hover {
+    z-index: 1;
+    
+  }
+}
+
+#friendMarker{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 64px;
+  height: 64px;
+  background-image: url(fox.png);
+  background-repeat: no-repeat;
+  user-select: none;
+  transform: translate(-50%, -50%);
+  &:hover {
+    z-index: 1;
+    
+  }
+}
+
+// #cafeMarker{
+//   position: absolute;
+//   top: 50%;
+//   left: 50%;
+//   width: 64px;
+//   height: 64px;
+//   background-image: url(coffee.png);
+//   background-repeat: no-repeat;
+//   user-select: none;
+//   transform: translate(-50%, -50%);
+//   &:hover {
+//     z-index: 1;
+    
+//   }
+// }
