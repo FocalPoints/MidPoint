@@ -11,7 +11,7 @@ const store = createStore(
 );
 
 
-store.dispatch(logIn());
+store.dispatch(logIn('Alex', 'B'));
 
 
 export default store;
