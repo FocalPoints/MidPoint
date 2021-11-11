@@ -42,7 +42,8 @@ const Sidebar = (props) => {
             onChange={(event) => onChangeHandler(event)}>
           </input>
 
-          <button onClick={() => props.updateLocation(address)}>
+          <button onClick={() => {console.log(props.user_id) 
+            props.updateLocation(props.user_id,address)}}>
             Change
           </button>
         </div>
@@ -54,15 +55,11 @@ const Sidebar = (props) => {
         <div className='inputStyles'>{props.friendsList.map((friend) => {
           return (
             <div key={friend.user_id}>
-              <input type="checkbox" id={friend.user_id} name={friend.username} onChange={(e) => props.addSelected(friend, e.target.checked)} />
+              <input type="checkbox" id={friend.user_id} name={friend.username} onChange={(e) => { props.addSelected(friend, e.target.checked)
+              }} /> {/* friend.username has friend info */}
+
               <label htmlFor={friend.username}>{friend.username}</label>
             </div>
-            // {/* <div id={friend.user_id} key={friend.user_id} value={friend.username}>
-            //   <button onClick={() => props.getMidpoint(props.coordinates, friend.coordinates)}>
-            //     Meet in the Middle
-            //   </button> {friend.username}
-            // </div> */}
-
           )
         })
         }

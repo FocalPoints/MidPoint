@@ -43,7 +43,7 @@ Expects:
 Returns: 
   userObj;
 */
-router.put('/', dbController.updateUser, (req, res) => {
+router.put('/', dbController.getCoords, dbController.updateUser, (req, res) => {
   return res.status(201).json(res.locals.user);
 })
 

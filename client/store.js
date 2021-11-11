@@ -10,6 +10,8 @@ const store = createStore(
   composeWithDevTools(applyMiddleware(thunk))
 );
 
-store.dispatch(logIn('Alison P', 'hello'));
+
+store.dispatch(logIn('james', 'maguire'));
+
 
 export default store;

@@ -30,22 +30,16 @@ const mainPageReducer = (state = initialState, action) => {
     case types.LOG_IN: {
       const { verified, message, user, friendList, notFriendList } = action.payload;
       if (verified) {
-        const tempObj = { ...state.selfInfo };
-        tempObj.name = action.payload.user.username;
-        tempObj.address = user.coordinates;
         const newLocationList = state.selectedLocations.slice();
         newLocationList.push(user);
-
         return {
           ...state,
-          currentUserID: user.user_id,
-          currentUser: user,
-          selfInfo: tempObj,
-          friendsList: friendList,
-          selectedLocations: newLocationList,
-          notFriendsList: notFriendList,
-          midpoint: tempObj.address,
           loggedIn: true,
+          midpoint: user.coordinates,
+          currentUser: user,
+          selectedLocations: newLocationList,
+          friendsList: friendList,
+          notFriendsList: notFriendList
         };
       }
     }
@@ -58,18 +52,16 @@ const mainPageReducer = (state = initialState, action) => {
 
         const newLocationList = state.selectedLocations.slice();
         newLocationList.push(user);
-
+        console.log(tempObj)
         return {
           ...state,
-          currentUserID: user.user_id,
-          currentUser: user,
-          selfInfo: tempObj,
-          loggedIn: true,
           pageToDisplay: 'login',
-          friendsList: friendList,
-          selectedLocations: newLocationList,
-          notFriendsList: notFriendList,
+          loggedIn: true,
           midpoint: user.coordinates,
+          currentUser: user,
+          selectedLocations: newLocationList,
+          friendsList: friendList,
+          notFriendsList: notFriendList,
         };
       }
       return {

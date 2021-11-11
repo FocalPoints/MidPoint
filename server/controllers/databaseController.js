@@ -112,11 +112,20 @@ Returns:
   res.locals.user = userObj;
 */
 dbController.updateUser = async (req, res, next) => {
-  const { user_id, newCoordinates } = req.body;
-  const query = `UPDATE users SET users.coordinates = $2 WHERE users.user_id = $1 RETURNING *`
-  const values = [user_id, newCoordinates];
+  //const { user_id, newCoordinates } = req.body;
+  //const values = [user_id, newCoordinates];
+  const {user_id} = req.body;
+  console.log(user_id)
+  console.log(res.locals.coords)
+  const coordinates = res.locals.coords;
+  //console.log(coordinates)
+  const values = [user_id, JSON.stringify(res.locals.coords)];
+  const query = `UPDATE users SET coordinates = $2 WHERE user_id = $1 RETURNING *`
+  //console.log("hello")
   try {
+    //console.log("hello")
     const response = await db.query(query, values);
+    console.log(response)
     res.locals.user = response.rows[0];
     return next();
   } catch (err) {
@@ -188,6 +197,7 @@ dbController.getCoords = async (req, res, next) => {
     const geoData = await geocoder.geocode(address);
     const coordinates = { lat: geoData[0].latitude, lng: geoData[0].longitude };
     res.locals.coords = coordinates;
+    console.log(coordinates)
     return next();
   }
   catch (err) {
