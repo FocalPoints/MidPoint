@@ -6,10 +6,16 @@ const router = express.Router();
 
 router.post('/yelp', apiController.getYelp, (req, res) => {
   // console.log('api route hit');
-  console.log('FORMATTED DATA: ', res.locals.cafes);
+  console.log('YELP FORMATTED DATA: ', res.locals.cafes);
   return res.status(200).json(res.locals.cafes);
 })
 
+
+router.post('/weather', apiController.getWeather, (req, res) => {
+  console.log('REACHED END OF WEATHER ROUTER');
+  console.log('WEATHER DATA: ', res.locals.weather);
+  return res.status(200).json(res.locals.weather);
+});
 
 
 module.exports = router;

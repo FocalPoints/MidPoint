@@ -47,7 +47,15 @@ const Access = ({pageToDisplay, currentUserID, addFriend, loggedIn, pageToSignup
   }
 
    if (loggedIn) {
-    return (<Main {...selfInfo} updateLocation={updateLocation} friendsList={friendsList} notFriendsList={notFriendsList} getMidpoint={getMidpoint} currentUserID={currentUserID} addFriend={addFriend} addOutsideFriend={addOutsideFriend} midpoint={midpoint}/>)
+    return (<Main {...selfInfo} 
+      updateLocation={updateLocation} 
+      friendsList={friendsList} 
+      notFriendsList={notFriendsList} 
+      getMidpoint={getMidpoint} 
+      currentUserID={currentUserID} 
+      addFriend={addFriend} 
+      addOutsideFriend={addOutsideFriend} 
+      midpoint={midpoint}/>)
   }
 
   // Log In Page
