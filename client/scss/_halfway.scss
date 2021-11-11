@@ -49,6 +49,7 @@
 
 .mainStyles {
   display: flex;
+  flex: 1;
   flex-direction: row;
   color: $DarkBlue;
   height: 100%;
@@ -56,6 +57,7 @@
 }
 
 .mapStyles {
+  flex: 1;
   border: none;
   height: 600px;
   width: 1000px;
