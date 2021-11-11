@@ -13,17 +13,17 @@ app.use(express.urlencoded({extended: true}));
 app.use('/database', databaseRouter);
 
 //takes in google places api call here, must be done on backend because cors
-// app.post('/nearbysearch', async (req, res) => {
-//   try {
-//     const {lat, lng, radius, type, keyword} = req.body;
-//     //example google gave in docs
-//     const {data} = await axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat}%2C${lng}&radius=${radius}&type=${type}&keyword=${keyword}&key=AIzaSyD3ffU-AJuJVW1AB3do_AOV2hi1mwYavTU`);
-//     console.log('we got places data!!!', data);
-//     res.send(data); //can put this in action.payload, filter or process
-//   } catch (err) {
-//     console.log('still cant get data from google places :(', err);
-//   }
-// });
+app.post('/nearbysearch', async (req, res) => {
+  try {
+    const {lat, lng, radius, type} = req.body;
+    //example google gave in docs
+    const {data} = await axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat}%2C${lng}&radius=${radius}&type=${type}&key=AIzaSyD3ffU-AJuJVW1AB3do_AOV2hi1mwYavTU`);
+    console.log('we got places data!!!', data);
+    res.send(data); //can put this in action.payload, filter or process
+  } catch (err) {
+    console.log('still cant get data from google places :(', err);
+  }
+});
 
 // serve static HTML
 

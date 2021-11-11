@@ -32,7 +32,9 @@ const mapDispatchToProps = dispatch => ({
 });
 
 
-const Access = ({ loggedIn, pageToDisplay, userID, userAvatar, userName, userAddress, userCoords, friendsList, notFriendsList, midpoint, pageToSignup, signUpCancel, logOut, logIn, signUpUser, updateLocation, getMidpoint, addFriend }) => {
+const Access = ({ loggedIn, pageToDisplay, userID, userAvatar, userName, userAddress,
+   userCoords, friendsList, notFriendsList, midpoint, pageToSignup, signUpCancel, 
+   logOut, logIn, signUpUser, updateLocation, getMidpoint, addFriend }) => {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -51,8 +53,8 @@ const Access = ({ loggedIn, pageToDisplay, userID, userAvatar, userName, userAdd
 
    if (loggedIn) {
     return (<Main loggedIn={loggedIn} pageToDisplay={pageToDisplay} 
-      userID={userID} userAvatar={userAvatar} userName={userName} userAddress={userAddress} userCoords={userCoords} 
-      friendsList={friendsList} notFriendsList={notFriendsList} midpoint={midpoint}
+      userID={userID} userAvatar={userAvatar} userName={userName} userAddress={userAddress} 
+      userCoords={userCoords} friendsList={friendsList} notFriendsList={notFriendsList} midpoint={midpoint}
       updateLocation={updateLocation} getMidpoint={getMidpoint} addFriend={addFriend} logOut={logOut}/>)
   }
 
@@ -92,9 +94,12 @@ const Access = ({ loggedIn, pageToDisplay, userID, userAvatar, userName, userAdd
       <h1>MIDPOINT</h1>
       <img src='https://i.imgur.com/YQ3shad.png'/>
       <h2>sign-up</h2>
-        <input name="username" id="username" value={username} type="text" placeholder="Username" onChange={(event) => onChangeHandler(event)}></input> 
-        <input name="password" id="password" value={password} type="password" placeholder="Password" onChange={(event) => onChangeHandler(event)}></input>
-        <input name="address" id="address" value={address} type="text" placeholder="29 Park Place" onChange={(event) => onChangeHandler(event)}></input>
+        <input name="username" id="username" value={username} type="text" placeholder="Username" 
+        onChange={(event) => onChangeHandler(event)}></input> 
+        <input name="password" id="password" value={password} type="password" placeholder="Password" 
+        onChange={(event) => onChangeHandler(event)}></input>
+        <input name="address" id="address" value={address} type="text" placeholder="29 Park Place" 
+        onChange={(event) => onChangeHandler(event)}></input>
 
         <button id="darkButton" onClick={() => {if((username || password || address) !== '') signUpUser(username, password, address)}}>Create an account</button>
         <button id="lightButton" onClick={signUpCancel}>Cancel</button>  

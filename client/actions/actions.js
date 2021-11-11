@@ -70,27 +70,25 @@ export const addFriend = (user1_id, user2_id) => (dispatch) => {
 
 export const getMidpoint = (userCoords, friendCoords) => {
 
-  // const request = {
-  //   method: 'POST',
-  //   url: 'nearbysearch',
-  //   //url: 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522%2C151.1957362&radius=1500&type=restaurant&keyword=cruise&key=AIzaSyD3ffU-AJuJVW1AB3do_AOV2hi1mwYavTU',
-  //   data: {lat: -33.8670522, lng: 151.1957362, radius: 1500, type: 'restaurant', keyword: 'cruise'}
-  // };
-
-  // axios(request)
-  // .then(function (response) {
-  //   console.log('in .then')
-  //   console.log(JSON.stringify(response.data));
-  // })
-  // .catch(function (error) {
-  //   console.log(error);
-  // });
-
-
-
-
   const lat = (userCoords.lat + friendCoords.lat) / 2;
   const lng = (userCoords.lng + friendCoords.lng) / 2;
+
+  const request = {
+    method: 'POST',
+    url: 'nearbysearch',
+    //url: 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522%2C151.1957362&radius=1500&type=restaurant&keyword=cruise&key=AIzaSyD3ffU-AJuJVW1AB3do_AOV2hi1mwYavTU',
+    data: {lat: lat, lng: lng, radius: 1500, type: 'restaurant', keyword: ''}
+  };
+
+  axios(request)
+  .then(function (response) {
+    console.log('in .then')
+    console.log(JSON.stringify(response.data));
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+
   
   return ({
     type: types.GET_MIDPOINT,
