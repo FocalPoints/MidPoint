@@ -67,24 +67,42 @@ const Sidebar = (props) => {
           return (<div id={friend.user_id} key={friend.user_id} value={friend.username}>
             <button onClick={() => props.getMidpoint(props.address, friend.coordinates)}>
               Meet in the Middle
-            </button> {friend.username} </div>)
+            </button> {(friend.username).toUpperCase()} </div>)
         })}</div>
 
         {/* when clicked, triggers action to get that friend's location and use it to find the midpoint */}
       </div>
 
       {/* ADD FRIEND BUTTON  */}
-      <div className='inputStyles' className='center'>{props.notFriendsList.map((notFriend, i) => {
+      { props.notFriendsList.length == 0 ? 
+      <div className='inputStyles' className='center'>All users added!</div>
+      :<div className='inputStyles' className='center'>{props.notFriendsList.map((notFriend, i) => {
         return (<div id={notFriend.user_id} key={notFriend.user_id} value={notFriend.username}>
           <button onClick={() => props.addFriend(props.currentUserID, notFriend.user_id)}>
             Add Friend
           </button> {notFriend.username} </div>)
       })}
       </div>
+      }
+      {/* <div className='inputStyles' className='center'>{props.notFriendsList.map((notFriend, i) => {
+        return (<div id={notFriend.user_id} key={notFriend.user_id} value={notFriend.username}>
+          <button onClick={() => props.addFriend(props.currentUserID, notFriend.user_id)}>
+            Add Friend
+          </button> {notFriend.username} </div>)
+      })}
+      </div> */}
 
       {/* ADD OUTSIDE FRIEND BUTTON  */}
       <div className='center'>
 
+          {/* input field where users can elect to update their current location */}
+          <p id='friends'>Add Non-User Friend:</p>
+          <input className='inputStyles'
+            name="username" id="username" 
+            value={username} type="text" 
+            placeholder="Friend's Full Name" 
+            onChange={(event) => onChangeHandler(event)}>
+          </input>
         {/* input field where users can elect to update their current location */}
         {/* Enter a non-registered friend:  */}
         <input className='inputStyles'
@@ -101,17 +119,15 @@ const Sidebar = (props) => {
           onChange={(event) => onChangeHandler(event)}>
         </input>
 
-        <button onClick={() => {
-          const user2_id = props.currentUserID;
-          console.log('Current user ID from update location', props.currentUserID);
-          props.addOutsideFriend(props.currentUserID, username, friendAddress);
-          console.log('clicked')
-        }}>
-          {/* 659 S Ogden St, Denver, CO 80209 */}
-          {/* Add New Friend */}
-        </button>
-
-
+          <button onClick={() => {
+            const user2_id = props.currentUserID;
+            console.log('Current user ID from update location', props.currentUserID);
+              props.addOutsideFriend(props.currentUserID, username, friendAddress);
+              console.log('clicked')
+            }}>
+              {/* 659 S Ogden St, Denver, CO 80209 */}
+            Add New Friend
+          </button> 
 
       </div>
 

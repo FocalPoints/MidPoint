@@ -97,11 +97,11 @@ const Weather = (props) => {
         </div>
 
         <div className="weather-wind-rain">
-          {isKph && <p onClick={ changeWindFormat }>{ weatherDetails.windKph } kph</p>}
-          {isKph || <p onClick={ changeWindFormat }>{ weatherDetails.windMph } mph</p>}
+          {isKph && <p onClick={ changeWindFormat }>WIND: { weatherDetails.windKph }</p>}
+          {isKph || <p onClick={ changeWindFormat }>WIND: { weatherDetails.windMph }</p>}
 
-          {isMm && <p onClick={ changeRainFormat }>{ weatherDetails.precipMm } mm</p>}
-          {isMm || <p onClick={ changeRainFormat }>{ weatherDetails.precipIn } in</p>}
+          {isMm && <p onClick={ changeRainFormat }>RAIN: { weatherDetails.precipMm }</p>}
+          {isMm || <p onClick={ changeRainFormat }>RAIN: { weatherDetails.precipIn }</p>}
         </div>
       </div>
 

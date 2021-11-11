@@ -5,8 +5,6 @@ const CafeCard = (props) => {
     const { name, address } = props;
     const [isShown, setIsShown] = useState(false);
 
-    console.log('CAFE ADDRESS',address);
-
     return (
       <div 
         onMouseEnter={() => setIsShown(true)}
@@ -14,6 +12,7 @@ const CafeCard = (props) => {
         className="cafecard"
         style={{ cursor: 'pointer'}}
         title={name}
+        id = "cafeMarker"
       >
         {isShown && (
           <div id='cafetext'>
