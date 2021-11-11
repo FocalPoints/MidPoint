@@ -66,7 +66,7 @@ const Sidebar = (props) => {
           return (<div id={friend.user_id} key={friend.user_id} value={friend.username}>
             <button onClick={() => props.getMidpoint(props.address, friend.coordinates)}>
               Meet in the Middle
-            </button> {friend.username} </div>)
+            </button> {(friend.username).toUpperCase()} </div>)
         })}</div>
 
         {/* when clicked, triggers action to get that friend's location and use it to find the midpoint */}
@@ -85,11 +85,11 @@ const Sidebar = (props) => {
       <div className='center'>
 
           {/* input field where users can elect to update their current location */}
-          {/* Enter a non-registered friend:  */}
+          <p id='friends'>Add Non-User Friend:</p>
           <input className='inputStyles'
             name="username" id="username" 
             value={username} type="text" 
-            placeholder="Friend" 
+            placeholder="Friend's Full Name" 
             onChange={(event) => onChangeHandler(event)}>
           </input>
 
@@ -107,7 +107,7 @@ const Sidebar = (props) => {
               console.log('clicked')
             }}>
               {/* 659 S Ogden St, Denver, CO 80209 */}
-            {/* Add New Friend */}
+            Add New Friend
           </button> 
 
           
