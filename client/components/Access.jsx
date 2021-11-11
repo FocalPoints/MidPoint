@@ -49,7 +49,7 @@ export const Access = ({ addSelected, pageToDisplay, currentUserID, currentUser,
   }
 
   if (loggedIn) {
-    return (<Main {...selfInfo} updateLocation={updateLocation} friendsList={friendsList} notFriendsList={notFriendsList} getMidpoint={getMidpoint} currentUserID={currentUserID} {...currentUser} selectedLocations={selectedLocations} addFriend={addFriend} midpoint={midpoint} addSelected={addSelected} />)
+    return (<Main updateLocation={updateLocation} friendsList={friendsList} notFriendsList={notFriendsList} getMidpoint={getMidpoint} {...currentUser} selectedLocations={selectedLocations} addFriend={addFriend} midpoint={midpoint} addSelected={addSelected} />)
   }
 
   // Log In Page

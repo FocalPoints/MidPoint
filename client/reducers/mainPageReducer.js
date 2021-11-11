@@ -28,7 +28,7 @@ const mainPageReducer = (state = initialState, action) => {
       };
 
     case types.LOG_IN: {
-      const { verified, message, user, friendList, notFriendList } = action.payload;
+      const { verified, user, friendList, notFriendList } = action.payload;
       if (verified) {
         const newLocationList = state.selectedLocations.slice();
         newLocationList.push(user);
@@ -71,11 +71,12 @@ const mainPageReducer = (state = initialState, action) => {
     }
 
     case types.UPDATE_LOCATION:
-      const tempObj = Object.assign({}, state.selfInfo);
-      tempObj.address = action.payload.address;
+      const newLocationList = state.selectedLocations.slice();
+      newLocationList[0] = action.payload;
       return {
         ...state,
-        selfInfo: tempObj,
+        selectedLocations: newLocationList, //note map updates markers based on selectedLocations property
+        currentUser: action.payload
       }
 
     case types.GET_MIDPOINT:

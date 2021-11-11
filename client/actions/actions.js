@@ -103,4 +103,21 @@ export const addFriend = (user1_id, user2_id) => (dispatch) => {
   }).catch(console.error);
 }
 
+export const deleteFriend = (user1_id, user2_id) => (dispatch) => {
+  const request = {
+    method: 'DELETE',
+    url: 'database/delete/friend',
+    data: { user1_id, user2_id}
+  }
+
+  axios.request(request).then((response) => {
+    if (response.status = 201) dispatch({
+      type: types.DELETE_FRIEND,
+      payload: response.data,
+    });
+  }).catch(console.error);
+
+
+
+}
 
