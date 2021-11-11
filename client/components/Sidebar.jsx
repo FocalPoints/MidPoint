@@ -20,27 +20,27 @@ const Sidebar = (props) => {
 
           {/* shows avatar photo and user greeting */}
           <img src={props.avatar} className='picStyles' />
-          <p className='pStyles'>Welcome back, {props.name}!</p>
+          <p id="welcomeText" className='pStyles'>Welcome back, {props.name}!</p>
 
         </div>
         <div className='flexAlignCenter'>
 
           {/* shows location icon and user location */}
           <img src={imgUrl} className='picStyles' />
-          <p className='pStyles'>{JSON.stringify(props.address)}</p>
+          <p id="locationText">{JSON.stringify(props.address)}</p>
 
         </div>
         <div className='center'>
 
           {/* input field where users can elect to update their current location */}
-          Update your address: <input className='inputStyles'
+          New address? <input className='inputStyles'
             name="address" type="text"
-            placeholder="lat/lng"
+            placeholder="lat / lng"
             value={address}
             onChange={(event) => onChangeHandler(event)}>
           </input>
 
-          <button onClick={() => props.updateLocation(address)}>
+          <button id="changeAddressButton" onClick={() => props.updateLocation(address)}>
             Change
           </button>
         </div>
@@ -53,21 +53,22 @@ const Sidebar = (props) => {
 
         <div className='inputStyles'>{props.friendsList.map((friend) => {
           return (<div id={friend.user_id} key={friend.user_id} value={friend.username}>
-            <button onClick={() => props.getMidpoint(props.address, friend.coordinates)}>
-              Meet in the Middle
-            </button> {friend.username} </div>)
+            <button id="findMidpointButton" onClick={() => props.getMidpoint(props.address, friend.coordinates)}>
+            {friend.username} 
+            </button></div>)
         })}</div>
 
         {/* when clicked, triggers action to get that friend's location and use it to find the midpoint */}
       </div>
       {/* eventual functionality to add a friend to user's friend list by name search */}
-
-      <div className='inputStyles' className='center'>{props.notFriendsList.map((notFriend, i) => {
-        return (<div id={notFriend.user_id} key={notFriend.user_id} value={notFriend.username}>
-          <button onClick={() => props.addFriend(props.currentUserID, notFriend.user_id)}>
-            Add Friend
-          </button> {notFriend.username} </div>)
-      })}
+      <div id="futureFriendsList" className='center'>
+        <p>Future Friends: </p>
+        <div className='inputStyles' className='center'>{props.notFriendsList.map((notFriend, i) => {
+          return (<div id={notFriend.user_id} key={notFriend.user_id} value={notFriend.username}>
+            <button onClick={() => props.addFriend(props.currentUserID, notFriend.user_id)}>
+            {notFriend.username}
+            </button></div>)
+      })}</div>
 
       </div>
     </div>

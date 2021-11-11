@@ -14,7 +14,7 @@ const Map = ({midpoint}) => {
   
           <div id="map-container" className='mapStyles'>
             <GoogleMapReact 
-              bootstrapURLKeys={{key: 'GOOGLE-MAPS-API-KEY'}} //GOOGLE-MAPS-API-KEY
+              bootstrapURLKeys={{key: 'AIzaSyCr3-1_OEv0MkdH_0p31AiCI0IL7EGNh-4'}} //GOOGLE-MAPS-API-KEY
               defaultCenter={midpoint}
               defaultZoom={12}>
               {/* do markers go in here? */}
