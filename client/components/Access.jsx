@@ -33,7 +33,6 @@ const Access = ({pageToDisplay, currentUserID, addFriend, loggedIn, pageToSignup
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [address, setAddress] = useState('');
-  
   const h1props = useSpring({
     from: { opacity: '0%' },
     to: { opacity: '100%' },
@@ -44,8 +43,17 @@ const Access = ({pageToDisplay, currentUserID, addFriend, loggedIn, pageToSignup
   });
 
   const h2props = useSpring({
-    from: { marginLeft: -700 },
-    to: { marginLeft: 0 },
+    from: { marginLeft: '-5vw' },
+    to: { marginLeft: '48vw' },
+    config: {
+      duration: 700,
+      tension: 70,
+    }
+  });
+
+  const h2props2 = useSpring({
+    from: { marginRight: '-5vw' },
+    to: { marginRight: '48vw' },
     config: {
       duration: 700,
       tension: 70,
@@ -79,7 +87,11 @@ const Access = ({pageToDisplay, currentUserID, addFriend, loggedIn, pageToSignup
   if (pageToDisplay === 'login') return (
     <div className='loginStyles'>
       <animated.h1 style={h1props}>H A L F W A Y</animated.h1>
-      <animated.h2 style={h2props}>m e e t .  m e .  h a l f w a y</animated.h2>
+      <div id='animation-container'>
+        <animated.h2 id='animation1' style={h2props}>m e e t .  m e </animated.h2>
+        <animated.h2 id='animation2' style={h2props2}>. h a l f w a y</animated.h2> 
+      </div>
+      
       <animated.input 
         style={h1props}
         name="username"
