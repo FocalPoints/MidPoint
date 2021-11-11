@@ -5,11 +5,13 @@ const CafeCard = (props) => {
     const { name, address } = props;
     const [isShown, setIsShown] = useState(false);
 
+    console.log('CAFE ADDRESS',address);
+
     return (
       <div 
-        className='cafecard'
         onMouseEnter={() => setIsShown(true)}
         onMouseLeave={() => setIsShown(false)} 
+        className="cafecard"
         style={{ cursor: 'pointer'}}
         title={name}
       >
