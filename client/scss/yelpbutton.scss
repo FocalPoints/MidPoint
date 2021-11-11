@@ -1,5 +1,4 @@
 #yelp-button {
-  position: fixed;
   height: 50px;
   width: 200px;
   border: 5px solid #8DA7BE;
@@ -11,7 +10,7 @@
 }
 
 #yelp-button:hover {
-  position: fixed;
+  position: sticky;
   height: 50px;
   width: 200px;
   border: 5px solid white;
@@ -24,6 +23,9 @@
 
 #yelp-button-div {
   position: fixed;
-  top: 210px;
-  left: -460px
+  bottom: 40vh;
+  left: -45%;
+  margin: 0;
+  width: 200px;
+  height: 50px;
 }

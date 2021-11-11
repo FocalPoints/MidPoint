@@ -28,7 +28,7 @@ apiController.getYelp = (req, res, next) => {
       // console.log('RETURNED DATA FROM CONTROLLER: ', data);
       // console.log('ENTERED FETCH THEN BLOCK');
       const cafesArray = [];
-      // console.log('RETURNED DATA FROM CONTROLLER: ', data);
+      console.log('RETURNED DATA FROM CONTROLLER: ', data);
       data.businesses.forEach((cafe) => {
         const tempDetails = {};
         tempDetails.name = cafe.name;

@@ -1,9 +1,23 @@
+body {
+  background: $DarkBlueBG;
+  height: 100vh;
+  font-family: 'JetBrains Mono', monospace;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
 #app {
   display: flex;
-  background: $DarkBlueBG;
-  height: 100%;
-  align-items: top;
+  height: 100vh;
+  width: 100vw;
+  align-items: center;
   justify-content: center;
+}
+
+#sidebar {
+  // overflow: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .loginStyles {
@@ -50,24 +64,26 @@
 .mainStyles {
   display: flex;
   flex: 1;
+  justify-content: space-between;
   flex-direction: row;
   color: $DarkBlue;
-  height: 100%;
+  height: 100vh;
+  width: 100vw;
   font-size: 1.5em;
+  margin: 0;
 }
 
 .mapStyles {
   flex: 1;
   border: none;
-  height: 600px;
-  width: 1000px;
-  margin-left: 20px;
+  height: 100vh;
+  width: 100%;
 }
 
 .mapContainer {
   display: flex;
+  flex: 1;
   flex-direction: column;
-  margin: 0px 0px 0px 20px;
 }
 
 .flexAlignCenter {
@@ -77,40 +93,40 @@
 
 .sidebarStyles {
   display: flex;
+  flex: 1;
   flex-direction: column;
   align-content: center;
-  background-color: $Olive;
-  width: 21%;
-  height: 100%;
+  background-color: #8DA7BE;
+  min-width: 350px;
+  max-width: 360px;
+  width: 20%;
+  height: 100vh;
   border: 1px solid black;
-  border-radius: 6px;
-  margin: 10px 0px 0px 6px;
-  padding-left: 0.5em;
 
   input {
+    font-family: 'JetBrains Mono', monospace;
     font-size: .8em;
     height: 2rem;
     margin-bottom: 0.5em;
     border-radius: 15px;
     padding-left: 15px;
     background-color: $DarkBlue;
-    color: $Olive;
+    color: white;
   }
 
   button {
-    background-color: $DarkBlue;
-    color: $Olive;
-    font-size: 1em;
+    background-color: white;
+    color: $DarkBlue;
+    font-size: .7em;
+    font-variant-caps: all-petite-caps;
     height: 2rem;
+    border: 3px solid $DarkBlue;
     border-radius: 15px;
-    border-style: none;
-    box-shadow: 1px 2px 5px 1px lightcoral;
-    margin-bottom: 0.5em;
+    margin-bottom: 0.8em;
     min-width: 150px;
-  
     &:hover {
-      background-color: $Olive;
-      color: $DarkBlue;
+      background-color: $DarkBlue;
+      color: white;
       border: 3px solid;
     }
   }
@@ -124,9 +140,11 @@
 .center {
   display: flex;
   flex-direction: column;
-  align-content: center;
-  justify-content: center;
-  align-items: center;
+  align-content: flex-start;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-left: 30px;
+  margin-bottom: 25px;
 }
 
 .picStyles {
@@ -138,11 +156,53 @@
 
 .inputStyles {
   background-color: 9db2cf;
-  margin: 0px 6px
+  width: 90%;
+  margin: 5px 0;
 }
 
 .pStyles {
-  margin-top: 24px;
-  inline-size: 150px;
+  margin-top: 20px;
+  inline-size: 250px;
   overflow-wrap: break-word;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: .7em;
+}
+
+#user-info {
+  justify-content: center;
+}
+
+#name-and-coords {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-top: 40px;
+  margin-bottom: 0;
+  margin-left: 30px;
+  align-items: flex-start;
+}
+
+#logo {
+  font-size: 1.5em !important;
+  margin-top: 5px;
+  margin-bottom: 0;
+}
+
+#welcome {
+  font-size: 1em !important;
+  margin-bottom: 0 !important;
+}
+
+#user-name {
+  color: white;
+  font-weight: 600;
+  margin: 0;
+  padding: 0;
+  font-size: 1.7em;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+#friends {
+  margin-bottom: 10px;
 }
