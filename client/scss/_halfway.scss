@@ -155,7 +155,6 @@ body {
 }
 
 .inputStyles {
-  background-color: 9db2cf;
   width: 90%;
   margin: 5px 0;
 }
@@ -205,4 +204,36 @@ body {
 
 #friends {
   margin-bottom: 10px;
+}
+
+.weather-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-left: 30px;
+  font-size: .8em;
+  margin-bottom: 30px;
+
+  h1, h2, h3 {
+    margin: 0
+  }
+
+  h2, h3 {
+    color: white;
+  }
+
+  .weather-temperature {
+    background-color: white;
+    width: 20%;
+    padding: 10px;
+    border-radius: 20px;
+  }
+
+  .weather-condition {
+    display: flex;
+    
+  }
+
+  img {
+    padding: 0;
+  }
 }
