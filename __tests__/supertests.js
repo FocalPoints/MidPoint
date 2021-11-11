@@ -26,11 +26,11 @@ describe('Route integration', () => {
       // Note that we return the evaluation of `request` here! It evaluates to
       // a promise, so Jest knows not to say this test passes until that
       // promise resolves. See https://jestjs.io/docs/en/asynchronous
-      it('responds with 401 if no data sent on login', () => {
+      it('responds with 200 if server connected', () => {
         return request(server)
           .get('/')
           // .send([{username: "null", password: "null"}])
-          // .expect('Content-Type', /text\/html/)
+          .expect('Content-Type', /text\/html/)
           .expect(200);
       });
     });
