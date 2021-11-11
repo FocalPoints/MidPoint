@@ -25,11 +25,10 @@ const Sidebar = (props) => {
   return (
     <div id="sidebar" className='sidebarStyles'>
       <div id="user-info" style={{ borderBottom: '1px solid black' }}>
-        <div className='flexAlignCenter'>
+        <div className='flexAlignCenter' id='name-and-coords'>
+          <h1 id='logo'>H A L F W A Y{'\n'}</h1>
 
-          {/* shows avatar photo and user greeting */}
-          <img src={props.avatar} className='picStyles' />
-          <p className='pStyles'>Welcome back, {props.name}!</p>
+          <p className='pStyles' id='welcome'>WELCOME BACK,{'\n'}<p id='user-name'>{(props.name).toUpperCase()}</p></p>
 
         </div>
         <div className='flexAlignCenter'>
@@ -59,7 +58,7 @@ const Sidebar = (props) => {
         </div>
       </div>
       <div id="friend-list" className='center'>
-        <p>Friends:</p>
+        <p id='friends'>Friends:</p>
         {/* dropdown populated with users from friends list */}
         {console.log('Props friends list', props.friendsList)} {/* array of objects with user_id, username, and coordinates properties*/}
 

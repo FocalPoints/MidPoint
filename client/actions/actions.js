@@ -9,7 +9,7 @@ export const logIn = (username, password) => (dispatch) => {
   }
  
   axios.request(request).then((response) => {
-    if(response) dispatch({
+    if(response.status = 201) dispatch({
       type: types.LOG_IN,
       payload: response.data, //will hold the user object
     });
@@ -30,7 +30,7 @@ export const signUpUser = (username, password, address) => (dispatch) => {
     }
    
     axios.request(request).then((response) => {
-      if(response) dispatch({
+      if(response.status = 201) dispatch({
         type: types.SIGN_UP_USER,
         payload: response.data,
       });
@@ -87,7 +87,12 @@ export const getMidpoint = (userCoords, friendCoords) => {
   
   return ({
     type: types.GET_MIDPOINT,
-    payload:  {'lat': lat, 'lng': lng}
+    payload:  {
+      'lat': lat,
+      'lng': lng,
+      'friendLat': friendCoords.lat,
+      'friendLng': friendCoords.lng,
+    }
   })
 };
 
@@ -99,7 +104,7 @@ export const addFriend = (user1_id, user2_id) => (dispatch) => {
   }
 
   axios.request(request).then((response) => {
-    if(response) dispatch({
+    if(response.status = 201) dispatch({
       type: types.ADD_FRIEND,
       payload: response.data,
     });
