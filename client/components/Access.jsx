@@ -33,6 +33,7 @@ const Access = ({pageToDisplay, currentUserID, addFriend, loggedIn, pageToSignup
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [address, setAddress] = useState('');
+  
   const h1props = useSpring({
     from: { opacity: '0%' },
     to: { opacity: '100%' },

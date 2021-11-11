@@ -103,14 +103,6 @@ const Sidebar = (props) => {
             placeholder="Friend's Full Name" 
             onChange={(event) => onChangeHandler(event)}>
           </input>
-        {/* input field where users can elect to update their current location */}
-        {/* Enter a non-registered friend:  */}
-        <input className='inputStyles'
-          name="username" id="username"
-          value={username} type="text"
-          placeholder="Friend"
-          onChange={(event) => onChangeHandler(event)}>
-        </input>
 
         <input className='inputStyles'
           name="friendAddress" type="text"
