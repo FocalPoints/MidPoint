@@ -114,10 +114,10 @@ const Sidebar = (props) => {
           <button onClick={() => {
             const user2_id = props.currentUserID;
             console.log('Current user ID from update location', props.currentUserID);
-              props.addOutsideFriend(props.currentUserID, username, friendAddress);
-              console.log('clicked')
+            props.addOutsideFriend(props.currentUserID, username, friendAddress);
+            setUsername('');
+            setFriendAddress('');
             }}>
-              {/* 659 S Ogden St, Denver, CO 80209 */}
             Add New Friend
           </button> 
 
