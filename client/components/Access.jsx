@@ -21,6 +21,7 @@ const mapDispatchToProps = dispatch => ({
   pageToSignup: () => dispatch(actions.pageToSignup()),
   signUpCancel: () => dispatch(actions.signUpCancel()),
   logIn: (user,pass) => dispatch(actions.logIn(user,pass)),
+  logOut: () => dispatch(actions.logOut()),
   signUpUser: (user,pass,address) => dispatch(actions.signUpUser(user,pass,address)),
   updateLocation: (address) => dispatch(actions.updateLocation(address)),
   getMidpoint: (user, friendUser) => dispatch(actions.getMidpoint(user, friendUser)),
@@ -28,7 +29,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 
-const Access = ({pageToDisplay, currentUserID, addFriend, loggedIn, pageToSignup, signUpCancel, logIn, signUpUser, selfInfo, updateLocation, friendsList, notFriendsList, getMidpoint, midpoint}) => {
+const Access = ({pageToDisplay, currentUserID, addFriend, loggedIn, pageToSignup, signUpCancel, logIn, signUpUser, selfInfo, updateLocation, friendsList, notFriendsList, getMidpoint, midpoint, logOut}) => {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -46,7 +47,7 @@ const Access = ({pageToDisplay, currentUserID, addFriend, loggedIn, pageToSignup
   }
 
    if (loggedIn) {
-    return (<Main {...selfInfo} updateLocation={updateLocation} friendsList={friendsList} notFriendsList={notFriendsList} getMidpoint={getMidpoint} currentUserID={currentUserID} addFriend={addFriend} midpoint={midpoint}/>)
+    return (<Main {...selfInfo} updateLocation={updateLocation} friendsList={friendsList} notFriendsList={notFriendsList} getMidpoint={getMidpoint} currentUserID={currentUserID} addFriend={addFriend} midpoint={midpoint} logOut={logOut}/>)
   }
 
   // Log In Page

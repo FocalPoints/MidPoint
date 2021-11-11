@@ -6,15 +6,15 @@ const Marker = ({ icon }) => <img height={'100px'} width={'100px'} src={imgUrl}>
 
 const Map = ({midpoint}) => {
     return(
-      
+      <div>
         <div id="right-side-content" className='mapContainer'>
           {console.log('we are in maps', midpoint.lat, midpoint.lng) }
            {console.log('is middle point an object', midpoint) }
           
-  
+          
           <div id="map-container" className='mapStyles'>
             <GoogleMapReact 
-              bootstrapURLKeys={{key: 'GOOGLE-MAPS-API-KEY'}} //GOOGLE-MAPS-API-KEY
+              bootstrapURLKeys={{key: 'AIzaSyCr3-1_OEv0MkdH_0p31AiCI0IL7EGNh-4'}} //GOOGLE-MAPS-API-KEY
               defaultCenter={midpoint}
               defaultZoom={12}>
               {/* do markers go in here? */}
@@ -22,6 +22,8 @@ const Map = ({midpoint}) => {
             </GoogleMapReact>
           </div>
         </div>
+        
+      </div>
       )
 }
 
