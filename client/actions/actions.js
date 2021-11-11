@@ -87,7 +87,12 @@ export const getMidpoint = (userCoords, friendCoords) => {
   
   return ({
     type: types.GET_MIDPOINT,
-    payload:  {'lat': lat, 'lng': lng}
+    payload:  {
+      'lat': lat,
+      'lng': lng,
+      'friendLat': friendCoords.lat,
+      'friendLng': friendCoords.lng,
+    }
   })
 };
 

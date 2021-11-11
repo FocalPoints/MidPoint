@@ -11,6 +11,7 @@ const initialState = {
   friendsList: [],
   notFriendsList: [],
   midpoint: { lat: 40.7142700, lng: -74.0059700 },
+  friendAddress: false,
 };
 
 const mainPageReducer = (state = initialState, action) => {
@@ -74,9 +75,18 @@ const mainPageReducer = (state = initialState, action) => {
         }
         
       case types.GET_MIDPOINT:
+        const midpointObj = {
+          lat: action.payload.lat,
+          lng: action.payload.lng,
+        }
+        const newFriendAddress = {
+          lat:action.payload.friendLat,
+          lng:action.payload.friendLng
+        }
         return {
           ...state,
-          midpoint: action.payload
+          midpoint: midpointObj,
+          friendAddress: newFriendAddress,
         }
 
 

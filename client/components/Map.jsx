@@ -3,13 +3,21 @@ import GoogleMapReact from 'google-map-react';
 import Marker from './Marker.jsx';
 import CafeCard from './CafeCard.jsx';
 import YelpButton from './YelpButton.jsx';
+import { useSelector } from 'react-redux'
+
 const imgUrl = 'https://i.imgur.com/WTHBUgm.png';
 // const Marker = ({ icon }) => <img height={'100px'} width={'100px'} src={imgUrl}></img>;
 
 const Map = (props) => {
   const [cafes, setCafes] = useState([]);
-  let cafeCards;
+  
+  //sets the center of the map to the midpoint 
+  const [center, setCenter] = useState(props.address);
+  //react hooks way of grabbing state from redux store
+  const state = useSelector((state) => state);
+  console.log('THIS IS THE STATE INSIDE MAP', state.mainPage.friendAddress);
 
+  let cafeCards;
   // creating cafe cards every time 'cafes' changes
   useEffect(() => {
     console.log(cafes);
@@ -21,20 +29,20 @@ const Map = (props) => {
         // address={obj.address}
       />
     });
-    console.log(cafeCards);
   }, [cafes]);
+  
+  // set the center of the map to the midpoint address
+  useEffect(() => {
+    setCenter(props.midpoint);
+  }, [props.midpoint]);
 
     return (
       
         <div id="right-side-content" className='mapContainer'>
-          {console.log('we are in maps', props.address.lat, props.address.lng) }
-           {console.log('is middle point an object', props.address) }
-          
-  
           <div id="map-container" className='mapStyles'>
             <GoogleMapReact 
               bootstrapURLKeys={{key: 'AIzaSyAisanRgGF25lhPR7TSu_VDRggQqwH5MVg'}}
-              center={props.address}
+              center={center}
               defaultZoom={15}>
               {/* do markers go in here? */}
               {/* <Marker lat={midpoint.lat} lng = {midpoint.lng} text='midpoint' icon={imgUrl} /> */}
@@ -52,6 +60,18 @@ const Map = (props) => {
             color="red"
           />
 
+          {
+            state.mainPage.friendAddress.lat !== false
+            && 
+            <Marker
+            lat={state.mainPage.friendAddress.lat}
+            lng={state.mainPage.friendAddress.lng}
+            name="Friend Marker"
+            color="yellow"
+          />
+          }
+          
+          
           { cafeCards }
 
           <YelpButton lat={props.midpoint.lat} lng={props.midpoint.lng} setCafes={setCafes} cafes={cafes} />
