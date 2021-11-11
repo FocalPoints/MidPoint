@@ -61,8 +61,8 @@ const Access = ({pageToDisplay, currentUserID, addFriend, loggedIn, pageToSignup
   // Log In Page
   if (pageToDisplay === 'login') return (
     <div className='loginStyles'>
-      <h1>Login Page</h1>
-      <img src='https://i.imgur.com/YQ3shad.png'/>
+      <h1>H A L F W A Y</h1>
+      <h2>m e e t .  m e .  h a l f w a y</h2>
       <input 
         name="username"
         type="text"
@@ -77,9 +77,10 @@ const Access = ({pageToDisplay, currentUserID, addFriend, loggedIn, pageToSignup
         value={password}
         onChange={(event) => onChangeHandler(event)}
         />
-      <button onClick={() => logIn(username,password)}>Login</button> 
-      <button onClick={pageToSignup}>Sign-up</button>
-        
+      <div id='button-container'>
+        <button onClick={() => logIn(username,password)}>Login</button> 
+        <button onClick={pageToSignup}>Sign-up</button>
+      </div>  
     </div>
   );
 
