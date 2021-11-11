@@ -96,8 +96,17 @@ dbController.addUser = async (req, res, next) => {
     const coordinates = { lat: geoData[0].latitude, lng: geoData[0].longitude };
     //take coordinates and return out prettified address
     // console.log("GEEEOOODAAATTAAAAA_+_+_+_+_+>", geoData)
-    const prettyAddress = `${geoData[0].streetNumber} ${geoData[0].streetName} ${geoData[0].city}, ${geoData[0].administrativelevels.level1short} ${geoData[0].zipcode}.`;
-    console.log("AINT IT PURRTY?!?!? ====>>>>", prettyAddress)
+    // const prettyStNum = `${geoData[0].streetNumber} `;
+    // const prettyStName = `${geoData[0].streetName} `;
+    // 
+    // const prettyCity =  `${geoData[0].city} `;
+    // console.log(geoData)
+    // const prettyState = `${geoData[0].administrativeLevels.level1short}`;
+    // console.log(prettyCity)
+    // console.log(prettyState)
+    // console.log(`AINT IT PURRTY?!?!? ====>>>> ${prettyCity}, ${prettyState}`)
+    const prettyAddress = geoData[0].formattedAddress;
+    // console.log(`LONG AF ====>> ${geoData[0].formattedAddress}`)
     //getting all the right data + data types before next line runs
     if (typeof username === 'string' && typeof password === 'string') {
       const encrypted = await bcrypt.hash(password, 10);
@@ -110,6 +119,7 @@ dbController.addUser = async (req, res, next) => {
       res.locals.verified = true;
       res.locals.message = 'User created!'
       res.locals.user = user;
+      res.locals.displayAddress = prettyAddress;
       return next();
     } else {
       res.status(400).send({

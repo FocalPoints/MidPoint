@@ -63,13 +63,14 @@ const mainPageReducer = (state = initialState, action) => {
         if(action.payload.verified === true) {
           const tempObj = {...state.selfInfo};
           tempObj.name = action.payload.user.username;
-          tempObj.address = `{lat: ${action.payload.user.coordinates.lat}, lng: ${action.payload.user.coordinates.lng}}`;
+          tempObj.address = action.payload.displayAddress;
          
           return {
             ...state,
             currentUserID: action.payload.user.user_id,
             selfInfo: tempObj,
             loggedIn: true,
+            notFriendsList: action.payload.notFriendList,
             pageToDisplay: 'login',
           };    
         }

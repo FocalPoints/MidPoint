@@ -13,7 +13,7 @@ router.get('/login', dbController.verifyUser, dbController.getFriendList, dbCont
 });
 
 // post/create a new user (encrypt password)
-router.post('/signup', dbController.addUser, (req, res) => { //!Test make sure response is 201
+router.post('/signup', dbController.addUser, dbController.getNotFriendList, (req, res) => { //!Test make sure response is 201
   return res.status(201).json(res.locals);
 });
 
