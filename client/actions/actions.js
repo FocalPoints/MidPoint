@@ -16,6 +16,13 @@ export const logIn = (username, password) => (dispatch) => {
   }).catch(console.error);
 };
 
+export const logOut = () => ({
+  type: types.LOG_OUT,
+});
+
+
+
+
 export const pageToSignup = () => ({
   type: types.PAGE_TO_SIGN_UP,
 });

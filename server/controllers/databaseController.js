@@ -91,8 +91,13 @@ dbController.addUser = async (req, res, next) => {
   try {
     // declare a new user object with name, password, coords
     const { username, password, address } = req.body;
+    //takes in address user typed in and geocodes it to coords
     const geoData = await geocoder.geocode(address);
-    const coordinates = {lat:geoData[0].latitude, lng:geoData[0].longitude};
+    const coordinates = { lat: geoData[0].latitude, lng: geoData[0].longitude };
+    //take coordinates and return out prettified address
+    // console.log("GEEEOOODAAATTAAAAA_+_+_+_+_+>", geoData)
+    const prettyAddress = `${geoData[0].streetNumber} ${geoData[0].streetName} ${geoData[0].city}, ${geoData[0].administrativelevels.level1short} ${geoData[0].zipcode}.`;
+    console.log("AINT IT PURRTY?!?!? ====>>>>", prettyAddress)
     //getting all the right data + data types before next line runs
     if (typeof username === 'string' && typeof password === 'string') {
       const encrypted = await bcrypt.hash(password, 10);

@@ -7,7 +7,7 @@ const initialState = {
   pageToDisplay: 'login',
   currentUserID: '',
   loggedIn: false,
-  selfInfo: { avatar: 'https://www.mindenpictures.com/cache/pcache2/90392052.jpg', name: 'Wunderpus Photogenicus', address: { lat: 40, lng: -74 } },
+  selfInfo: { avatar: 'https://st3.depositphotos.com/7863750/16862/i/1600/depositphotos_168621110-stock-photo-halloween-cat-snake-cook.jpg', name: 'CatSnake', address: { lat: 40, lng: -74 } },
   friendsList: [],
   notFriendsList: [],
   midpoint: { lat: 40.7142700, lng: -74.0059700 },
@@ -42,6 +42,21 @@ const mainPageReducer = (state = initialState, action) => {
           loggedIn: true,
         };
       }
+
+      case types.LOG_OUT: {
+        const tempObj = { ...state.selfInfo };
+        tempObj.name = 'CatSnake'
+        return {
+          ...state,
+          currentUserID: '',
+          selfInfo: tempObj,
+          friendsList: [],
+          notFriendsList: [],
+          loggedIn: false
+        }
+      }
+
+
 
       case types.SIGN_UP_USER:
 
