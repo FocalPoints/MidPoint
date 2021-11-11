@@ -72,8 +72,9 @@ Returns:
   res.locals.user = userObj
 */
 dbController.addUser = async (req, res, next) => {
+  const { username, password, address } = req.body;
+
   try {
-    const { username, password, address } = req.body;
     // turns address into coordinates
     const geoData = await geocoder.geocode(address);
     const coordinates = { lat: geoData[0].latitude, lng: geoData[0].longitude };
@@ -103,8 +104,8 @@ dbController.addUser = async (req, res, next) => {
 }
 
 
-// TODO! FINISH THIS METHOD
-// PUT / update a user's data
+
+// PUT / update a user's location 
 /*
 Expects: 
   req.body = { user_id, newCoordinates }
@@ -112,18 +113,11 @@ Returns:
   res.locals.user = userObj;
 */
 dbController.updateUser = async (req, res, next) => {
-  //const { user_id, newCoordinates } = req.body;
-  //const values = [user_id, newCoordinates];
   const {user_id} = req.body;
-  console.log(user_id)
-  console.log(res.locals.coords)
-  const coordinates = res.locals.coords;
-  //console.log(coordinates)
+  const query = `UPDATE users SET coordinates = $2 WHERE user_id = $1 RETURNING *`;
   const values = [user_id, JSON.stringify(res.locals.coords)];
-  const query = `UPDATE users SET coordinates = $2 WHERE user_id = $1 RETURNING *`
-  //console.log("hello")
+  
   try {
-    //console.log("hello")
     const response = await db.query(query, values);
     console.log(response)
     res.locals.user = response.rows[0];
@@ -230,6 +224,29 @@ dbController.addFriend = async (req, res, next) => {
 }
 
 // TODOS //
-// DELETE user from friend list
+// DELETE user from the current users' friend list
+/*
+Expects:
+  req.body = { user1_id: int, user2_id: int }
+Returns: 
+  res.locals.insert = userObj
+*/
+dbController.deleteFriend = async (req, res, next) => {
+  const {user1_id, user2_id} = req.body;
+  const values = [user1_id, user2_id];
+  const query = `
+    DELETE FROM friends WHERE user1_id = $1 and user2_id = $2
+    RETURNING user1_id as user_id  
+  `;
+
+  try {
+    const deletedRow = await db.query(query, values);
+    res.locals.user = deletedRow.rows[0];
+    return next();
+  }
+  catch (err) {
+    return next(err);
+  }
+} 
 
 module.exports = dbController;
