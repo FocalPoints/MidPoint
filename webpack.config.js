@@ -21,6 +21,10 @@ module.exports = {
   },
   plugins: [new HtmlWebpackPlugin({
     template: './index.html',
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true
+    }
   })],
   module: {
     rules: [{
